@@ -1,0 +1,607 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Account
+  description: Account API
+paths:
+  /v1/account:
+    get:
+      tags:
+      - Account
+      summary: Get My Details
+      operationId: get_me_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMyDetailsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    patch:
+      tags:
+      - Account
+      summary: Patch My Details
+      operationId: patch_my_details_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchMyDetailsPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/account/api-keys:
+    get:
+      tags:
+      - Account
+      summary: List Api Keys
+      operationId: get_api_keys_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApiKeysResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - cookie: []
+    post:
+      tags:
+      - Account
+      summary: Create Api Key
+      operationId: post_create_api_key_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCreateApiKeyPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCreateApiKeyResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - cookie: []
+  /v1/account/api-keys/{key_id}:
+    delete:
+      tags:
+      - Account
+      summary: Delete Api Key
+      operationId: delete_api_key_handler
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - cookie: []
+  /v1/account/invitations:
+    get:
+      tags:
+      - Account
+      summary: Get My Invitations
+      operationId: get_my_invitations_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInvitationsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/account/organizations:
+    get:
+      tags:
+      - Account
+      summary: Get My Organizations
+      operationId: get_my_organizations_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMyOrganizationsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/account/{name}:
+    get:
+      tags:
+      - Account
+      summary: Get Account Details
+      operationId: get_details_handler
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicUser'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    PublicBaseOrganization:
+      type: object
+      required:
+      - name
+      - display_name
+      properties:
+        display_name:
+          type: string
+        name:
+          type: string
+    Account:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - User
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Organization
+    OrganizationRole:
+      type: string
+      enum:
+      - OWNER
+      - ADMIN
+      - MEMBER
+      - VIEWER
+    GetMyDetailsResponse:
+      type: object
+      required:
+      - id
+      - username
+      - first_name
+      - last_name
+      - email
+      properties:
+        canny_token:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        first_name:
+          type: string
+        github_installment_id:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        job_role:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type: string
+        pp_consent_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        scope:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Scope'
+        tos_consent_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        username:
+          type: string
+    MemberOrganization:
+      type: object
+      required:
+      - organization
+      - role
+      - status
+      properties:
+        organization:
+          $ref: '#/components/schemas/PublicBaseOrganization'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        status:
+          $ref: '#/components/schemas/OrganizationMemberStatus'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    PublicUser:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      - following
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        last_name:
+          type: string
+        name:
+          type: string
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+    GetMyOrganizationsResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberOrganization'
+    PostCreateApiKeyPayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        scope:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Scope'
+    PublicFlow:
+      type: object
+      required:
+      - name
+      - owner_name
+      properties:
+        name:
+          type: string
+        owner_name:
+          type: string
+    User:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - external_id
+      - first_name
+      - last_name
+      - following
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        email:
+          type: string
+        external_id:
+          type: string
+        first_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        id:
+          type: string
+        job_role:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type: string
+        name:
+          type: string
+        pp_consent_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+        tos_consent_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Scope:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - USER
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - ORGANIZATION
+    PublicApiKey:
+      type: object
+      required:
+      - name
+      - key_prefix
+      - key_id
+      - created_at
+      - last_used_at
+      - scope
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        key_id:
+          type: string
+        key_prefix:
+          type: string
+        last_used_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        scope:
+          $ref: '#/components/schemas/Scope'
+    PostCreateApiKeyResponse:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+    OrganizationMemberStatus:
+      type: string
+      enum:
+      - PENDING_INVITE
+      - ACTIVE
+      - DISABLED
+    PatchMyDetailsPayload:
+      type: object
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        job_role:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        pp_consent:
+          type:
+          - boolean
+          - 'null'
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+        tos_consent:
+          type:
+          - boolean
+          - 'null'
+    GetInvitationsResponse:
+      type: object
+      required:
+      - flows
+      - organizations
+      properties:
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicFlow'
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicBaseOrganization'
+    GetApiKeysResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicApiKey'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

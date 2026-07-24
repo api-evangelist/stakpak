@@ -1,0 +1,381 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Rules (V2) API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Rules (V2)
+paths:
+  /v2/{account}/rules:
+    get:
+      tags:
+      - Rules (V2)
+      summary: List Rule Books
+      operationId: list_rule_books_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRuleBooksResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Rules (V2)
+      summary: Create or Update Rule Book
+      operationId: create_rule_book_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleBookPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRuleBookResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/rules/bulk:
+    post:
+      tags:
+      - Rules (V2)
+      summary: Create Many Rule Books
+      operationId: create_many_rule_books_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateManyRuleBooksPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateManyRuleBooksResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/rules/search:
+    get:
+      tags:
+      - Rules (V2)
+      summary: Search Rule Books
+      operationId: search_rule_books_handler
+      parameters:
+      - name: keywords
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchRuleBooksResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/rules/{uri}:
+    get:
+      tags:
+      - Rules (V2)
+      summary: Get Rule Book by URI
+      operationId: get_rule_book_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleBook'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    delete:
+      tags:
+      - Rules (V2)
+      summary: Delete Rule Book
+      operationId: delete_rule_book_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/rules/{uri}/transfer:
+    post:
+      tags:
+      - Rules (V2)
+      summary: Transfer Ownership of Rule Book
+      operationId: transfer_ownership_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferOwnershipPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    CreateManyRuleBooksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateRuleBookResponse'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    SearchRuleBooksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleBook'
+    TransferOwnershipPayload:
+      type: object
+      required:
+      - owner
+      properties:
+        owner:
+          type: string
+    ListRuleBook:
+      type: object
+      required:
+      - id
+      - uri
+      - description
+      - visibility
+      - tags
+      properties:
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+          format: uuid
+        tags:
+          type: array
+          items:
+            type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/RuleBookVisibility'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    CreateManyRuleBooksPayload:
+      type: object
+      required:
+      - books
+      properties:
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateRuleBookPayload'
+    RuleBookVisibility:
+      type: string
+      enum:
+      - PUBLIC
+      - PRIVATE
+    RuleBook:
+      type: object
+      required:
+      - id
+      - uri
+      - description
+      - content
+      - visibility
+      - tags
+      properties:
+        content:
+          type: string
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+          format: uuid
+        tags:
+          type: array
+          items:
+            type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/RuleBookVisibility'
+    CreateRuleBookResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+    ListRuleBooksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListRuleBook'
+    CreateRuleBookPayload:
+      type: object
+      required:
+      - uri
+      - description
+      - content
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        uri:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/RuleBookVisibility'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

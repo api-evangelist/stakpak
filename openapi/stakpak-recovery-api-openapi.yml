@@ -1,0 +1,247 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Recovery API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Recovery
+paths:
+  /v1/recovery/sessions/{session_id}/recoveries:
+    get:
+      tags:
+      - Recovery
+      summary: Get Recoveries
+      operationId: get_recoveries_handler
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: status
+        in: query
+        description: 'Optional status filter: "pending", "approved", "rejected", "applied"'
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecoveriesResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/recovery/sessions/{session_id}/recovery/{recovery_id}:
+    get:
+      tags:
+      - Recovery
+      summary: Get Recovery By ID
+      operationId: get_recovery_by_id_handler
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: recovery_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionRecoveryResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/recovery/sessions/{session_id}/recovery/{recovery_id}/action:
+    post:
+      tags:
+      - Recovery
+      operationId: update_recovery_action_handler
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: recovery_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRecoveryActionPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    RecoveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - APPROVED
+      - REJECTED
+      - APPLIED
+    SessionRecoveryResponse:
+      type: object
+      required:
+      - id
+      - session
+      - source_checkpoint
+      - recovery_status
+      - cooldown_counter
+      - recovery_options
+      - created_at
+      - updated_at
+      properties:
+        applied_at_checkpoint:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/CheckpointRef'
+        cooldown_counter:
+          type: integer
+          format: int32
+        created_at:
+          type: string
+        id:
+          type: string
+          format: uuid
+        recovery_options: {}
+        recovery_status:
+          $ref: '#/components/schemas/RecoveryStatus'
+        selected_recovery_option:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        session:
+          $ref: '#/components/schemas/SessionRef'
+        source_checkpoint:
+          $ref: '#/components/schemas/CheckpointRef'
+        updated_at:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    GetRecoveriesResponse:
+      type: object
+      properties:
+        result:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SessionRecoveryResponse'
+    SessionRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    UserRecoveryAction:
+      type: string
+      enum:
+      - approve
+      - reject
+    CheckpointRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    UpdateRecoveryActionPayload:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          $ref: '#/components/schemas/UserRecoveryAction'
+        selected_option_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

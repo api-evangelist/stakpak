@@ -1,0 +1,535 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Runners (V2) API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Runners (V2)
+paths:
+  /v2/{account}/runners:
+    get:
+      tags:
+      - Runners (V2)
+      summary: List Runners
+      operationId: list_runners_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRunnersResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Runners (V2)
+      summary: Create Runner
+      operationId: create_runner_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRunnerPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/runners/{machine_name}:
+    get:
+      tags:
+      - Runners (V2)
+      summary: Get Runner
+      operationId: get_runner_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Runner'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+      - Runners (V2)
+      summary: Update Runner
+      operationId: update_runner_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRunnerPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v2/{account}/runners/{machine_name}/check-upgrade:
+    get:
+      tags:
+      - Runners (V2)
+      summary: Check Runner Upgrade
+      operationId: check_runner_upgrade_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckRunnerUpgradeResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v2/{account}/runners/{machine_name}/secrets:
+    get:
+      tags:
+      - Runners (V2)
+      summary: Get Runner Secrets
+      operationId: get_runner_secrets_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRunnerSecretsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Runners (V2)
+      summary: Create Runner Secret
+      operationId: create_runner_secret_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRunnerSecretPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v2/{account}/runners/{machine_name}/trigger:
+    post:
+      tags:
+      - Runners (V2)
+      summary: Trigger Runner
+      operationId: trigger_runner_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerRunnerPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v2/{account}/runners/{machine_name}/upgrade:
+    post:
+      tags:
+      - Runners (V2)
+      summary: Upgrade Runner Version
+      operationId: upgrade_runner_handler
+      parameters:
+      - name: machine_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    RunnerSecret:
+      type: object
+      required:
+      - name
+      - created_at
+      - updated_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    GithubActionsRunnerStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      - PENDING_MERGE
+    CheckRunnerUpgradeResponse:
+      type: object
+      required:
+      - latest_version
+      - current_version
+      - is_up_to_date
+      properties:
+        current_version:
+          type: string
+        is_up_to_date:
+          type: boolean
+        latest_version:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    ListRunnersResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Runner'
+    GithubActionsRunner:
+      type: object
+      required:
+      - integration
+      - filename
+      - branch
+      - repo
+      - owner
+      - status
+      - version
+      properties:
+        branch:
+          type: string
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/GithubActionsConfig'
+        filename:
+          type: string
+        integration:
+          $ref: '#/components/schemas/GithubIntegration'
+        owner:
+          type: string
+        pull_request_html_url:
+          type:
+          - string
+          - 'null'
+        repo:
+          type: string
+        status:
+          $ref: '#/components/schemas/GithubActionsRunnerStatus'
+        version:
+          type: string
+    CloudConfiguration:
+      oneOf:
+      - type: object
+        description: AWS configuration using OIDC authentication
+        required:
+        - role_arn
+        - region
+        - provider
+        properties:
+          provider:
+            type: string
+            enum:
+            - aws
+          region:
+            type: string
+          role_arn:
+            type: string
+      - type: object
+        description: Azure configuration using OIDC authentication
+        required:
+        - client_id
+        - tenant_id
+        - subscription_id
+        - provider
+        properties:
+          client_id:
+            type: string
+          provider:
+            type: string
+            enum:
+            - azure
+          subscription_id:
+            type: string
+          tenant_id:
+            type: string
+      - type: object
+        description: GCP configuration using Workload Identity Federation
+        required:
+        - workload_identity_provider
+        - service_account
+        - project_id
+        - provider
+        properties:
+          project_id:
+            type: string
+          provider:
+            type: string
+            enum:
+            - gcp
+          service_account:
+            type: string
+          workload_identity_provider:
+            type: string
+    GithubActionsConfig:
+      type: object
+      properties:
+        providers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CloudConfiguration'
+    RunnerProvider:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/GithubActionsRunner'
+        - type: object
+          required:
+          - type
+          properties:
+            type:
+              type: string
+              enum:
+              - GithubActions
+    CreateRunnerPayload:
+      type: object
+      required:
+      - name
+      - machine_name
+      - labels
+      - owner
+      - repo
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/GithubActionsConfig'
+        create_api_key:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+        machine_name:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        repo:
+          type: string
+    CreateRunnerSecretPayload:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    UpdateRunnerPayload:
+      type: object
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/GithubActionsConfig'
+    GetRunnerSecretsResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunnerSecret'
+    TriggerRunnerPayload:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+    GithubIntegration:
+      type: object
+      required:
+      - app_id
+      - installation_id
+      properties:
+        app_id:
+          type: string
+        installation_id:
+          type: string
+    Runner:
+      type: object
+      required:
+      - id
+      - name
+      - machine_name
+      - provider
+      - labels
+      properties:
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        labels:
+          type: array
+          items:
+            type: string
+        machine_name:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/RunnerProvider'
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

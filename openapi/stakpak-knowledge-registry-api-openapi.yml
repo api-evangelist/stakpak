@@ -1,0 +1,641 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Knowledge Registry API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Knowledge Registry
+paths:
+  /v1/paks:
+    get:
+      tags:
+      - Knowledge Registry
+      summary: List Knowledge Registry Paks
+      description: List Knowledge Registry paks with sorting (trending, popular, recent), time window filtering, and pagination.
+      operationId: list_paks_handler
+      parameters:
+      - name: sort_by
+        in: query
+        description: 'Sort order: TRENDING, MOST_POPULAR, or RECENT. Defaults to TRENDING.'
+        required: false
+        schema:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PakSortBy'
+      - name: time_window
+        in: query
+        description: 'Time window for download counts: DAILY, WEEKLY, MONTHLY, or ALL_TIME. Defaults to ALL_TIME.'
+        required: false
+        schema:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PakTimeWindow'
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: offset
+        in: query
+        description: Number of results to skip for pagination.
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPaksResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - {}
+      - Api Key: []
+  /v1/paks/content/{uri}:
+    get:
+      tags:
+      - Knowledge Registry
+      summary: Get Knowledge Registry Pak Content
+      description: 'Fetch file or directory content from a pak by URI. The URI format is: owner/pak_name[@version][/path]
+
+        Returns file content for files, or a recursive directory tree for directories.'
+      operationId: get_pak_content_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PakContentResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - {}
+      - Api Key: []
+  /v1/paks/install/{uri}:
+    get:
+      tags:
+      - Knowledge Registry
+      summary: Get Knowledge Registry Pak Install Info
+      description: 'Resolves pak metadata for installation and records a download event.
+
+        The URI format is: owner/pak_name[@version]'
+      operationId: get_pak_install_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PakInstallResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - {}
+      - Api Key: []
+  /v1/paks/publish:
+    post:
+      tags:
+      - Knowledge Registry
+      summary: Publish a Pak to the Knowledge Registry
+      description: 'Publishes a pak version to the registry. Creates the pak if it doesn''t exist, otherwise creates a new version.
+
+        The CLI handles git operations (commit, tag, push), then calls this endpoint to index the pak.'
+      operationId: publish_pak_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishPakBody'
+        required: true
+      responses:
+        '200':
+          description: Pak published successfully
+        '400':
+          description: Validation error (invalid tag, missing SKILL.md, version mismatch, etc.)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not authorized to publish to this namespace
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/paks/search:
+    get:
+      tags:
+      - Knowledge Registry
+      summary: Search Knowledge Registry Paks
+      operationId: search_paks_handler
+      parameters:
+      - name: owner
+        in: query
+        description: Owner name when searching by identifier.
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: pak_name
+        in: query
+        description: Pak name when searching by identifier.
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: query
+        in: query
+        description: Freeform keyword query. Used when owner/pak_name are not provided.
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchPaksResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - {}
+      - Api Key: []
+components:
+  schemas:
+    PakContent:
+      oneOf:
+      - type: object
+        required:
+        - content
+        - type
+        properties:
+          content:
+            type: string
+          type:
+            type: string
+            enum:
+            - File
+      - type: object
+        required:
+        - items
+        - type
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/ContentItem'
+          type:
+            type: string
+            enum:
+            - Directory
+      description: Content type enum - either a file or directory
+    PakInstallDetails:
+      type: object
+      description: Install details for install response
+      required:
+      - path
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+        path:
+          type: string
+    PakInstallResponse:
+      type: object
+      description: Response type for pak install endpoint
+      required:
+      - pak
+      - version
+      - repository
+      - install
+      properties:
+        install:
+          $ref: '#/components/schemas/PakInstallDetails'
+        pak:
+          $ref: '#/components/schemas/PakInstallInfo'
+        repository:
+          $ref: '#/components/schemas/PakRepositoryInfo'
+        version:
+          $ref: '#/components/schemas/PakVersionInfo'
+    PakInstallInfo:
+      type: object
+      description: Pak metadata for install response
+      required:
+      - id
+      - owner
+      - name
+      - visibility
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/PakVisibility'
+    PakTimeWindow:
+      type: string
+      enum:
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - ALL_TIME
+    PakStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DEPRECATED
+    PublishPakBody:
+      type: object
+      description: Request body for publishing a pak (API layer with validation)
+      required:
+      - repository
+      - branch
+      - tag
+      properties:
+        branch:
+          type: string
+          description: Branch the tag was created from
+        path:
+          type:
+          - string
+          - 'null'
+          description: Path to pak within repo (`.` for root, `paks/my-pak` for monorepo). Defaults to `.`
+        repository:
+          type: string
+          description: Git clone URL (HTTPS or SSH)
+        tag:
+          type: string
+          description: Git tag name (must start with `v`)
+    SearchPaksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PakWithLatestVersion'
+    PakContentResponse:
+      type: object
+      description: Response type for pak content
+      required:
+      - uri
+      - content
+      properties:
+        content:
+          $ref: '#/components/schemas/PakContent'
+        pak_version_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The pak version ID for tracking purposes
+        uri:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    PakVersionInfo:
+      type: object
+      description: Version info for install response
+      required:
+      - version
+      - tag
+      - commit_hash
+      - published_at
+      properties:
+        commit_hash:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+        tag:
+          type: string
+        version:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    Pak:
+      type: object
+      required:
+      - id
+      - name
+      - owner_name
+      - uri
+      - full_uri
+      - repository_url
+      - visibility
+      - status
+      - download_count
+      - usage_count
+      - total_downloads
+      - total_usages
+      - created_at
+      - updated_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+        download_count:
+          type: integer
+          format: int64
+        full_uri:
+          type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        owner_name:
+          type: string
+        path:
+          type:
+          - string
+          - 'null'
+        repository_url:
+          type: string
+        status:
+          $ref: '#/components/schemas/PakStatus'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        total_downloads:
+          type: integer
+          format: int64
+        total_usages:
+          type: integer
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+        uri:
+          type: string
+        usage_count:
+          type: integer
+          format: int64
+        visibility:
+          $ref: '#/components/schemas/PakVisibility'
+    PakWithLatestVersion:
+      allOf:
+      - $ref: '#/components/schemas/Pak'
+      - type: object
+        properties:
+          latest_version:
+            oneOf:
+            - type: 'null'
+            - $ref: '#/components/schemas/PakVersion'
+    ContentItem:
+      type: object
+      description: Represents a content item from a GitHub repository (file or directory)
+      required:
+      - uri
+      - content_type
+      properties:
+        content:
+          type:
+          - string
+          - 'null'
+        content_type:
+          type: string
+        uri:
+          type: string
+    PakRepositoryInfo:
+      type: object
+      description: Repository info for install response
+      required:
+      - url
+      - clone_url
+      - ssh_url
+      - default_branch
+      properties:
+        clone_url:
+          type: string
+        default_branch:
+          type: string
+        ssh_url:
+          type: string
+        url:
+          type: string
+    ListPaksResponse:
+      type: object
+      required:
+      - items
+      - total_count
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PakWithLatestVersion'
+          description: List of paks for the current page.
+        total_count:
+          type: integer
+          format: int64
+          description: Total number of paks matching the query (before pagination).
+          minimum: 0
+    PakSortBy:
+      type: string
+      enum:
+      - TRENDING
+      - MOST_POPULAR
+      - RECENT
+    PakVersionReviewStatus:
+      type: string
+      enum:
+      - PENDING_REVIEW
+      - APPROVED
+      - REJECTED
+      - CHANGES_REQUESTED
+    PakVersion:
+      type: object
+      required:
+      - id
+      - version
+      - git_tag
+      - checksum
+      - manifest
+      - review_status
+      - downloads
+      - usages
+      - published_at
+      - created_at
+      - updated_at
+      properties:
+        checksum:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+          format: int64
+        git_tag:
+          type: string
+        id:
+          type: string
+          format: uuid
+        manifest:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+        review_comment:
+          type:
+          - string
+          - 'null'
+        review_status:
+          $ref: '#/components/schemas/PakVersionReviewStatus'
+        size_bytes:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+        usages:
+          type: integer
+          format: int64
+        version:
+          type: string
+    PakVisibility:
+      type: string
+      enum:
+      - PUBLIC
+      - UNLISTED
+      - PRIVATE
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

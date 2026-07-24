@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Telemetry API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Telemetry
+paths:
+  /v1/telemetry:
+    post:
+      tags:
+      - Telemetry
+      summary: Capture Telemetry Event
+      description: 'Publicly accessible endpoint (no authentication required) to capture anonymous telemetry events.
+
+        Rate limited to 10 requests per minute per IP address.'
+      operationId: telemetry_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelemetryRequest'
+        required: true
+      responses:
+        '200':
+          description: Event captured successfully
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+components:
+  schemas:
+    Provider:
+      type: string
+      description: Provider type for telemetry events
+      enum:
+      - Local
+      - Remote
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    TelemetryRequest:
+      type: object
+      description: Request body for telemetry endpoint
+      required:
+      - user_id
+      - machine_name
+      - provider
+      - event
+      properties:
+        event:
+          $ref: '#/components/schemas/TelemetryEventType'
+          description: Event type
+        machine_name:
+          type: string
+          description: Machine name/hostname
+        provider:
+          $ref: '#/components/schemas/Provider'
+          description: Provider type (Local or Remote)
+        user_id:
+          type: string
+          format: uuid
+          description: User ID
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    TelemetryEventType:
+      oneOf:
+      - type: string
+        enum:
+        - FirstOpen
+      - type: string
+        enum:
+        - UserPrompted
+      - type: object
+        required:
+        - CommandCalled
+        properties:
+          CommandCalled:
+            type: string
+      description: Telemetry event type
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

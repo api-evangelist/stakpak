@@ -1,0 +1,519 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Chat API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Chat
+paths:
+  /v1/chat/completions:
+    post:
+      tags:
+      - Chat
+      summary: OpenAI-compatible Chat Completion API
+      description: 'This endpoint provides OpenAI-compatible chat completions using stakai for inference.
+
+
+        Model format: `provider/model` (e.g., `anthropic/claude-sonnet-4-5-20250929`)
+
+
+        Supported providers:
+
+        - `anthropic`: Claude models
+
+        - `openai`: GPT models
+
+        - `google`: Gemini models
+
+        - `fireworks-ai`: DeepSeek, Qwen, GLM, MiniMax, ERNIE, Kimi models (via Fireworks.ai)
+
+
+        Headers:
+
+        - `Authorization`: Bearer token (required)'
+      operationId: chat_completion_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+        required: true
+      responses:
+        '200':
+          description: Chat completion response
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIErrorResponse'
+        '429':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIErrorResponse'
+      security:
+      - Api Key: []
+  /v1/chat/requests/{request_id}/cancel:
+    post:
+      tags:
+      - Chat
+      summary: Cancel a chat completion request
+      operationId: cancel_request_handler
+      parameters:
+      - name: request_id
+        in: path
+        description: Request ID to cancel
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Request cancelled
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    FunctionCall:
+      type: object
+      required:
+      - name
+      - arguments
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    OpenAIErrorResponse:
+      type: object
+      description: OpenAI-compatible error response
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/OpenAIError'
+    ChatCompletionContext:
+      type: object
+      properties:
+        flow_ref:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FlowRef'
+        scratchpad: {}
+    FunctionDefinition:
+      type: object
+      required:
+      - name
+      - parameters
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        parameters: {}
+    MessageContent:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/ContentPart'
+    ModelInfo:
+      type: object
+      description: Model information for tracking which model generated a message
+      required:
+      - provider
+      - id
+      properties:
+        id:
+          type: string
+          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
+        provider:
+          type: string
+          description: Provider name (e.g., "anthropic", "openai")
+    FunctionChoice:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    FlowRef:
+      oneOf:
+      - type: object
+        required:
+        - owner_name
+        - flow_name
+        - version_id
+        - type
+        properties:
+          flow_name:
+            type: string
+          owner_name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Version
+          version_id:
+            type: string
+      - type: object
+        required:
+        - owner_name
+        - flow_name
+        - tag_name
+        - type
+        properties:
+          flow_name:
+            type: string
+          owner_name:
+            type: string
+          tag_name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Tag
+    ContentPart:
+      type: object
+      required:
+      - type
+      properties:
+        image_url:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ImageUrl'
+        text:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+    ResponseFormat:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+    ChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        context:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ChatCompletionContext'
+        frequency_penalty:
+          type:
+          - number
+          - 'null'
+          format: float
+        logit_bias: {}
+        logprobs:
+          type:
+          - boolean
+          - 'null'
+        max_tokens:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        model:
+          type: string
+        n:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        presence_penalty:
+          type:
+          - number
+          - 'null'
+          format: float
+        response_format:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ResponseFormat'
+        seed:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        stop:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StopSequence'
+        stream:
+          type:
+          - boolean
+          - 'null'
+        temperature:
+          type:
+          - number
+          - 'null'
+          format: float
+        tool_choice:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ToolChoice'
+        tools:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tool'
+        top_p:
+          type:
+          - number
+          - 'null'
+          format: float
+        user:
+          type:
+          - string
+          - 'null'
+    ChatMessage:
+      type: object
+      required:
+      - role
+      properties:
+        completed_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when assistant finished generating
+        content:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MessageContent'
+        cost:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Cost in dollars for this message
+        created_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when message was created/sent
+        finish_reason:
+          type:
+          - string
+          - 'null'
+          description: 'Why the model stopped: "stop", "tool_calls", "length", "error"'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique message identifier
+        metadata:
+          description: Plugin extensibility - unstructured metadata
+        model:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ModelInfo'
+            description: Model that generated this message (for assistant messages)
+        name:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        tool_call_id:
+          type:
+          - string
+          - 'null'
+        tool_calls:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ToolCall'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LLMTokenUsage'
+    StopSequence:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+    Role:
+      type: string
+      enum:
+      - system
+      - developer
+      - user
+      - assistant
+      - tool
+    ToolChoiceObject:
+      type: object
+      required:
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionChoice'
+        type:
+          type: string
+    OpenAIError:
+      type: object
+      description: OpenAI error details
+      required:
+      - message
+      - type
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type: string
+        param:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+    ToolCall:
+      type: object
+      required:
+      - id
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionCall'
+        id:
+          type: string
+        type:
+          type: string
+    LLMTokenUsage:
+      type: object
+      required:
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens_details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PromptTokensDetails'
+        total_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    PromptTokensDetails:
+      type: object
+      properties:
+        cache_read_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        cache_write_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        output_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    ToolChoice:
+      oneOf:
+      - type: string
+        enum:
+        - Auto
+      - type: string
+        enum:
+        - Required
+      - type: object
+        required:
+        - Object
+        properties:
+          Object:
+            $ref: '#/components/schemas/ToolChoiceObject'
+    Tool:
+      type: object
+      required:
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionDefinition'
+        type:
+          type: string
+    ImageUrl:
+      type: object
+      required:
+      - url
+      properties:
+        detail:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

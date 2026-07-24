@@ -1,0 +1,363 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Knowledge API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Knowledge
+paths:
+  /v1/knowledge:
+    get:
+      tags:
+      - Knowledge
+      summary: List / search knowledge files.
+      operationId: search_handler
+      parameters:
+      - name: glob
+        in: query
+        description: Glob pattern filtering by path (matched against the full file path).
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: path
+        in: query
+        description: Scope the search to a subtree (directory). Empty = whole knowledge store.
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchKnowledgeResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/knowledge/{path}:
+    get:
+      tags:
+      - Knowledge
+      summary: 'Fetch the raw bytes of a knowledge file. When `peek=true`, the response
+
+        is the short preview extracted at write time'
+      operationId: read_handler
+      parameters:
+      - name: path
+        in: path
+        description: Store-relative file path
+        required: true
+        schema:
+          type: string
+      - name: peek
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Raw file bytes (or peek preview)
+          content:
+            application/octet-stream: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    put:
+      tags:
+      - Knowledge
+      summary: Create-or-overwrite a knowledge file.
+      operationId: overwrite_handler
+      parameters:
+      - name: path
+        in: path
+        description: Store-relative file path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Raw file bytes
+        content:
+          application/octet-stream: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeFile'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Knowledge
+      summary: 'Create a new knowledge file. Returns `409 Conflict` if one already
+
+        exists at the target path.'
+      operationId: create_handler
+      parameters:
+      - name: path
+        in: path
+        description: Store-relative file path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Raw file bytes
+        content:
+          application/octet-stream: {}
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeFile'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    delete:
+      tags:
+      - Knowledge
+      summary: Delete a file or directory (recursive).
+      operationId: delete_handler
+      parameters:
+      - name: path
+        in: path
+        description: Store-relative file or directory path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    head:
+      tags:
+      - Knowledge
+      summary: 'Cheap existence check. Returns `200` with an `ETag` header if the file
+
+        exists, or `404` if it does not. Does not transfer the body.'
+      operationId: head_handler
+      parameters:
+      - name: path
+        in: path
+        description: Store-relative file path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File exists
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    SearchKnowledgeResponse:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/KnowledgeFile'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    KnowledgeFile:
+      type: object
+      required:
+      - id
+      - path
+      - size_bytes
+      - content_hash
+      - scope
+      - created_at
+      - updated_at
+      properties:
+        content_hash:
+          type: string
+          description: SHA-256 hex digest of the file contents.
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        path:
+          type: string
+          description: Path relative to the account-level store root
+        peek:
+          type:
+          - string
+          - 'null'
+        s3_version_id:
+          type:
+          - string
+          - 'null'
+          description: S3 version ID for consistent reads with versioning enabled
+        scope:
+          $ref: '#/components/schemas/Scope'
+          description: Scope the file belongs to (resolved from the file's owning account).
+        size_bytes:
+          type: integer
+          format: int64
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          type: string
+          format: date-time
+    Scope:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - USER
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - ORGANIZATION
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

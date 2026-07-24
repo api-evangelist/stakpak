@@ -1,0 +1,371 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Commands API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Commands
+paths:
+  /v1/commands/build_code_index:
+    post:
+      tags:
+      - Commands
+      summary: Build Index
+      operationId: build_code_index_command_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildCodeIndexInput'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildCodeIndexOutput'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    BuildCodeIndexOutput:
+      type: object
+      required:
+      - blocks
+      - errors
+      - warnings
+      properties:
+        blocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Block'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexError'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexError'
+    IndexError:
+      type: object
+      required:
+      - uri
+      - message
+      properties:
+        details: {}
+        message:
+          type: string
+        uri:
+          type: string
+    Segment:
+      oneOf:
+      - type: string
+      - type: integer
+        minimum: 0
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    BuildCodeIndexInput:
+      type: object
+      description: Build an index of infrastructure configuration blocks from source code
+      required:
+      - documents
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          description: List of documents to analyze and build an index from
+    Block:
+      type: object
+      required:
+      - id
+      - provider
+      - provisioner
+      - language
+      - key
+      - digest
+      - references
+      - kind
+      - config
+      - document_uri
+      - code
+      - start_byte
+      - end_byte
+      - start_point
+      - end_point
+      - dependents
+      - dependencies
+      properties:
+        api_group_version:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiGroupVersion'
+        code:
+          type: string
+        config: {}
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dependency'
+        dependents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependentBlock'
+        digest:
+          type: integer
+          format: int64
+          minimum: 0
+        document_uri:
+          type: string
+        end_byte:
+          type: integer
+          minimum: 0
+        end_point:
+          $ref: '#/components/schemas/Point'
+        generated_summary:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+        key:
+          type: string
+        kind:
+          type: string
+        language:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        provider:
+          type: string
+        provisioner:
+          $ref: '#/components/schemas/ProvisionerType'
+        references:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Segment'
+        start_byte:
+          type: integer
+          minimum: 0
+        start_point:
+          $ref: '#/components/schemas/Point'
+        state: {}
+        type:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    DependencySelectorOperator:
+      type: string
+      enum:
+      - Equals
+      - NotEquals
+      - In
+      - NotIn
+      - Exists
+      - DoesNotExist
+    Point:
+      type: object
+      required:
+      - row
+      - column
+      properties:
+        column:
+          type: integer
+          minimum: 0
+        row:
+          type: integer
+          minimum: 0
+    ProvisionerType:
+      type: string
+      enum:
+      - Terraform
+      - Kubernetes
+      - Dockerfile
+      - GithubActions
+      - None
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    APIGroupVersionStatus:
+      type: string
+      enum:
+      - UNAVAILABLE
+      - PENDING
+      - AVAILABLE
+    DependentBlock:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+    ApiGroupVersion:
+      type: object
+      required:
+      - alias
+      - group
+      - version
+      - provisioner
+      - status
+      properties:
+        alias:
+          type: string
+        group:
+          type: string
+        provisioner:
+          $ref: '#/components/schemas/ProvisionerType'
+        status:
+          $ref: '#/components/schemas/APIGroupVersionStatus'
+        version:
+          type: string
+    Document:
+      type: object
+      required:
+      - uri
+      - content
+      properties:
+        content:
+          type: string
+        uri:
+          type: string
+    DependencySelector:
+      type: object
+      required:
+      - references
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/DependencySelectorOperator'
+        references:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Segment'
+    Dependency:
+      type: object
+      required:
+      - satisfied
+      properties:
+        digest:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        end_byte:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        end_point:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Point'
+        expression:
+          type:
+          - string
+          - 'null'
+        from:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        from_field:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+        from_path:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        satisfied:
+          type: boolean
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependencySelector'
+        start_byte:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        start_point:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Point'
+        to_field:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+        to_path:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

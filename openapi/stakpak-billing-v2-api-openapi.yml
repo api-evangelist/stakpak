@@ -1,0 +1,504 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Billing (V2) API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Billing (V2)
+paths:
+  /v2/{account}/billing:
+    get:
+      tags:
+      - Billing (V2)
+      summary: Get Billing Customer
+      operationId: get_billing_customer_handler
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBillingCustomerResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/billing/attach:
+    post:
+      tags:
+      - Billing (V2)
+      summary: Attach Product
+      operationId: post_attach_product_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostAttachProductPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostAttachProductResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/billing/cancel:
+    post:
+      tags:
+      - Billing (V2)
+      summary: Cancel Product
+      operationId: post_cancel_product_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCancelProductPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/billing/checkout:
+    post:
+      tags:
+      - Billing (V2)
+      summary: Create Checkout Session
+      operationId: post_checkout_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCheckoutPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCheckoutResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/billing/portal:
+    post:
+      tags:
+      - Billing (V2)
+      summary: Get Billing Portal URL
+      operationId: post_billing_portal_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBillingPortalPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBillingPortalResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/billing/products/{product_id}:
+    get:
+      tags:
+      - Billing (V2)
+      summary: Get Product
+      operationId: get_product_handler
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: account
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProductResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security: []
+components:
+  schemas:
+    PostAttachProductPayload:
+      type: object
+      required:
+      - product_id
+      properties:
+        checkout_session_params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          propertyNames:
+            type: string
+        entity_id:
+          type:
+          - string
+          - 'null'
+        force_checkout:
+          type:
+          - boolean
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          propertyNames:
+            type: string
+        options:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CheckoutOption'
+        product_id:
+          type: string
+        product_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        reward:
+          type:
+          - string
+          - 'null'
+        success_url:
+          type:
+          - string
+          - 'null'
+    PostCancelProductPayload:
+      type: object
+      required:
+      - product_id
+      properties:
+        cancel_immediately:
+          type:
+          - boolean
+          - 'null'
+        entity_id:
+          type:
+          - string
+          - 'null'
+        product_id:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    CheckoutOption:
+      type: object
+      required:
+      - feature_id
+      - quantity
+      properties:
+        feature_id:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+    PostBillingPortalPayload:
+      type: object
+      properties:
+        return_url:
+          type:
+          - string
+          - 'null'
+    PostBillingPortalResponse:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    GetBillingCustomerResponse:
+      type: object
+      required:
+      - id
+      - created_at
+      - features
+      - products
+      properties:
+        created_at:
+          type: integer
+          format: int64
+        features:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BillingFeatureInfo'
+          propertyNames:
+            type: string
+        id:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingProductInfo'
+    PostCheckoutResponse:
+      type: object
+      required:
+      - url
+      - customer_id
+      - lines
+      - product
+      properties:
+        customer_id:
+          type: string
+        lines:
+          type: array
+          items: {}
+        product: {}
+        url:
+          type: string
+    PostAttachProductResponse:
+      type: object
+      required:
+      - customer_id
+      - product_ids
+      - code
+      properties:
+        checkout_url:
+          type:
+          - string
+          - 'null'
+        code:
+          type: string
+        customer_id:
+          type: string
+        message:
+          type:
+          - string
+          - 'null'
+        product_ids:
+          type: array
+          items:
+            type: string
+        success:
+          type:
+          - boolean
+          - 'null'
+    BillingFeatureInfo:
+      type: object
+      description: Minimal feature info returned for billing
+      required:
+      - id
+      - name
+      - type
+      - balance
+      - usage
+      - included_usage
+      - unlimited
+      properties:
+        balance:
+          type: number
+          format: double
+        id:
+          type: string
+        included_usage:
+          type: number
+          format: double
+        interval:
+          type:
+          - string
+          - 'null'
+        interval_count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type: string
+        next_reset_at:
+          type:
+          - number
+          - 'null'
+          format: double
+        overage_allowed:
+          type:
+          - boolean
+          - 'null'
+        type:
+          type: string
+        unlimited:
+          type: boolean
+        usage:
+          type: number
+          format: double
+    GetProductResponse:
+      allOf:
+      - {}
+    BillingProductInfo:
+      type: object
+      description: Minimal product info returned for billing
+      required:
+      - id
+      - name
+      - status
+      - started_at
+      properties:
+        canceled_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        id:
+          type: string
+        is_add_on:
+          type:
+          - boolean
+          - 'null'
+        is_default:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type: string
+        started_at:
+          type: integer
+          format: int64
+        status:
+          type: string
+    PostCheckoutPayload:
+      type: object
+      required:
+      - product_id
+      properties:
+        checkout_session_params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          propertyNames:
+            type: string
+        entity_id:
+          type:
+          - string
+          - 'null'
+        options:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CheckoutOption'
+        product_id:
+          type: string
+        product_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        reward:
+          type:
+          - string
+          - 'null'
+        success_url:
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

@@ -1,0 +1,847 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Sessions API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Sessions
+paths:
+  /v1/sessions:
+    get:
+      tags:
+      - Sessions
+      summary: List Sessions
+      description: Returns a paginated list of sessions for the authenticated user.
+      operationId: list_sessions_handler
+      parameters:
+      - name: limit
+        in: query
+        description: 'Number of sessions to return (default: 20, max: 100)'
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: offset
+        in: query
+        description: 'Offset for pagination (default: 0)'
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: search
+        in: query
+        description: Search in session titles
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: status
+        in: query
+        description: 'Filter by status: ACTIVE, DELETED (default: ACTIVE)'
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: visibility
+        in: query
+        description: 'Filter by visibility: PRIVATE, PUBLIC'
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSessionsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Sessions
+      summary: Create Session
+      description: Creates a new session with an initial checkpoint.
+      operationId: create_session_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/sessions/checkpoints/{checkpoint_id}:
+    get:
+      tags:
+      - Sessions
+      summary: Get Checkpoint
+      description: Returns a specific checkpoint by ID.
+      operationId: get_checkpoint_handler
+      parameters:
+      - name: checkpoint_id
+        in: path
+        description: Checkpoint ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCheckpointResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/sessions/{session_id}:
+    get:
+      tags:
+      - Sessions
+      summary: Get Session
+      description: Returns a single session with its latest checkpoint.
+      operationId: get_session_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    delete:
+      tags:
+      - Sessions
+      summary: Delete Session
+      description: Soft deletes a session by setting its status to DELETED.
+      operationId: delete_session_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSessionResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    patch:
+      tags:
+      - Sessions
+      summary: Update Session
+      description: Updates session metadata (title, visibility). Does not modify checkpoints.
+      operationId: update_session_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSessionRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSessionResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/sessions/{session_id}/checkpoints:
+    get:
+      tags:
+      - Sessions
+      summary: List Checkpoints
+      description: Returns all checkpoints for a session.
+      operationId: list_checkpoints_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: limit
+        in: query
+        description: 'Number of checkpoints to return (default: 50, max: 100)'
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: offset
+        in: query
+        description: 'Offset for pagination (default: 0)'
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: include_state
+        in: query
+        description: 'Include full state in response (default: false)'
+        required: false
+        schema:
+          type:
+          - boolean
+          - 'null'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCheckpointsResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Sessions
+      summary: Create Checkpoint
+      description: Adds a checkpoint to an existing session.
+      operationId: create_checkpoint_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckpointRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCheckpointResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    ListSessionsResponse:
+      type: object
+      description: Response for listing sessions
+      required:
+      - sessions
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionSummary'
+    FunctionCall:
+      type: object
+      required:
+      - name
+      - arguments
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    CreateSessionRequest:
+      type: object
+      description: Request body for creating a new session
+      required:
+      - title
+      - state
+      properties:
+        cwd:
+          type:
+          - string
+          - 'null'
+          description: Working directory context
+        state:
+          $ref: '#/components/schemas/CheckpointState'
+          description: Initial checkpoint state with messages
+        title:
+          type: string
+          description: Title for the session (required)
+        visibility:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SessionVisibility'
+            description: 'Session visibility (default: PRIVATE)'
+    CheckpointState:
+      type: object
+      description: Checkpoint state - only messages, no workflow-specific fields
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+    UpdateSessionResponse:
+      type: object
+      description: Response for updating a session
+      required:
+      - session
+      properties:
+        session:
+          $ref: '#/components/schemas/Session'
+    CreateCheckpointRequest:
+      type: object
+      description: Request body for creating a checkpoint in an existing session
+      required:
+      - state
+      properties:
+        parent_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: 'Parent checkpoint for branching (optional).
+
+            Defaults to latest checkpoint if not provided.'
+        state:
+          $ref: '#/components/schemas/CheckpointState'
+          description: Checkpoint state with messages
+    Checkpoint:
+      type: object
+      description: Full checkpoint with state
+      required:
+      - id
+      - session_id
+      - state
+      - created_at
+      - updated_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        parent_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        state:
+          $ref: '#/components/schemas/CheckpointState'
+        updated_at:
+          type: string
+          format: date-time
+    SessionStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DELETED
+    SessionSummary:
+      type: object
+      description: Summary for listing sessions (without full checkpoint state)
+      required:
+      - id
+      - title
+      - visibility
+      - status
+      - created_at
+      - updated_at
+      - message_count
+      - active_checkpoint_id
+      properties:
+        active_checkpoint_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        cwd:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+        last_message_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        message_count:
+          type: integer
+          format: int32
+          minimum: 0
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        title:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/SessionVisibility'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    MessageContent:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/ContentPart'
+    ModelInfo:
+      type: object
+      description: Model information for tracking which model generated a message
+      required:
+      - provider
+      - id
+      properties:
+        id:
+          type: string
+          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
+        provider:
+          type: string
+          description: Provider name (e.g., "anthropic", "openai")
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    ContentPart:
+      type: object
+      required:
+      - type
+      properties:
+        image_url:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ImageUrl'
+        text:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+    GetCheckpointResponse:
+      type: object
+      description: Response for getting a single checkpoint
+      required:
+      - checkpoint
+      properties:
+        checkpoint:
+          $ref: '#/components/schemas/Checkpoint'
+    SessionVisibility:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    GetSessionResponse:
+      type: object
+      description: Response for getting a single session
+      required:
+      - session
+      properties:
+        session:
+          $ref: '#/components/schemas/Session'
+    ChatMessage:
+      type: object
+      required:
+      - role
+      properties:
+        completed_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when assistant finished generating
+        content:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MessageContent'
+        cost:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Cost in dollars for this message
+        created_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when message was created/sent
+        finish_reason:
+          type:
+          - string
+          - 'null'
+          description: 'Why the model stopped: "stop", "tool_calls", "length", "error"'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique message identifier
+        metadata:
+          description: Plugin extensibility - unstructured metadata
+        model:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ModelInfo'
+            description: Model that generated this message (for assistant messages)
+        name:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        tool_call_id:
+          type:
+          - string
+          - 'null'
+        tool_calls:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ToolCall'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LLMTokenUsage'
+    Role:
+      type: string
+      enum:
+      - system
+      - developer
+      - user
+      - assistant
+      - tool
+    UpdateSessionRequest:
+      type: object
+      description: Request body for updating a session
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+          description: New title for the session
+        visibility:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SessionVisibility'
+            description: New visibility for the session
+    ToolCall:
+      type: object
+      required:
+      - id
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionCall'
+        id:
+          type: string
+        type:
+          type: string
+    LLMTokenUsage:
+      type: object
+      required:
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens_details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PromptTokensDetails'
+        total_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    ListCheckpointsResponse:
+      type: object
+      description: Response for listing checkpoints
+      required:
+      - checkpoints
+      properties:
+        checkpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckpointSummary'
+    PromptTokensDetails:
+      type: object
+      properties:
+        cache_read_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        cache_write_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        output_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    DeleteSessionResponse:
+      type: object
+      description: Response for deleting a session
+      required:
+      - success
+      - deleted_at
+      properties:
+        deleted_at:
+          type: string
+          format: date-time
+        success:
+          type: boolean
+    Session:
+      type: object
+      description: Full session with active checkpoint
+      required:
+      - id
+      - title
+      - visibility
+      - status
+      - created_at
+      - updated_at
+      properties:
+        active_checkpoint:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Checkpoint'
+        created_at:
+          type: string
+          format: date-time
+        cwd:
+          type:
+          - string
+          - 'null'
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        title:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/SessionVisibility'
+    CheckpointSummary:
+      type: object
+      description: Summary for listing checkpoints
+      required:
+      - id
+      - session_id
+      - message_count
+      - created_at
+      - updated_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        message_count:
+          type: integer
+          format: int32
+          minimum: 0
+        parent_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        session_id:
+          type: string
+          format: uuid
+        state:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/CheckpointState'
+        updated_at:
+          type: string
+          format: date-time
+    CreateSessionResponse:
+      type: object
+      description: Response for creating a session
+      required:
+      - session_id
+      - checkpoint
+      properties:
+        checkpoint:
+          $ref: '#/components/schemas/Checkpoint'
+        session_id:
+          type: string
+          format: uuid
+    ImageUrl:
+      type: object
+      required:
+      - url
+      properties:
+        detail:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+    CreateCheckpointResponse:
+      type: object
+      description: Response for creating a checkpoint
+      required:
+      - checkpoint
+      properties:
+        checkpoint:
+          $ref: '#/components/schemas/Checkpoint'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

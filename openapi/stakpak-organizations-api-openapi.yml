@@ -1,0 +1,899 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Organizations API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Organizations
+paths:
+  /v1/organizations:
+    post:
+      tags:
+      - Organizations
+      summary: Create Organization
+      operationId: create_organization_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicOrganization'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/check-name:
+    post:
+      tags:
+      - Organizations
+      summary: Check Organization Name Availability
+      operationId: check_organization_name_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckOrganizationNamePayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckOrganizationNameResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - {}
+      - Api Key: []
+  /v1/organizations/invitations/{token}:
+    get:
+      tags:
+      - Organizations
+      summary: Validate Invitation Token
+      description: 'Public endpoint - no authentication required.
+
+        Returns invitation details including whether the user already has an account.'
+      operationId: validate_invitation_handler
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicInvitationDetails'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/organizations/invitations/{token}/accept:
+    post:
+      tags:
+      - Organizations
+      summary: Accept Invitation
+      description: 'Accepts an invitation for the authenticated user.
+
+        The user''s email must match the invitation email.'
+      operationId: accept_invitation_handler
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptInvitationResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}:
+    patch:
+      tags:
+      - Organizations
+      summary: Update Organization
+      operationId: update_organization_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}/invitation:
+    post:
+      tags:
+      - Organizations
+      summary: Update My Organization Invitation status
+      operationId: update_my_organization_invitation_status_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMyOrganizationInvitationStatusPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}/invitations:
+    get:
+      tags:
+      - Organizations
+      summary: List Pending Invitations
+      description: 'Lists all pending invitations for an organization.
+
+        Requires OWNER or ADMIN role.'
+      operationId: list_pending_invitations_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPendingInvitationsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Organizations
+      summary: Send Invitation
+      description: 'Sends an invitation email to join the organization.
+
+        Requires OWNER or ADMIN role.
+
+
+        For privacy reasons, this endpoint always returns success regardless of
+
+        whether the email exists in the system or already has a pending invitation.'
+      operationId: send_invitation_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendInvitationPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendInvitationResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}/invitations/{invitation_id}:
+    delete:
+      tags:
+      - Organizations
+      summary: Revoke Invitation
+      description: 'Revokes a pending invitation.
+
+        Requires OWNER or ADMIN role.'
+      operationId: revoke_invitation_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: invitation_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}/invitations/{invitation_id}/resend:
+    post:
+      tags:
+      - Organizations
+      summary: Resend Invitation
+      description: 'Resends an invitation email with a new token.
+
+        Requires OWNER or ADMIN role.'
+      operationId: resend_invitation_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: invitation_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendInvitationPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendInvitationResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}/members:
+    get:
+      tags:
+      - Organizations
+      summary: Get Organization Members
+      operationId: get_organization_members_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrganizationMembersResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Organizations
+      summary: Invite Organization Member
+      operationId: invite_organization_member_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteOrganizationMemberPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/organizations/{org_name}/members/{member_name}:
+    delete:
+      tags:
+      - Organizations
+      summary: Delete Organization Member
+      description: 'Removes a member from the organization.
+
+        Requires OWNER or ADMIN role.
+
+        Cannot remove yourself or the last owner.'
+      operationId: delete_organization_member_handler
+      parameters:
+      - name: org_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    PublicBaseOrganization:
+      type: object
+      required:
+      - name
+      - display_name
+      properties:
+        display_name:
+          type: string
+        name:
+          type: string
+    SendInvitationResponse:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    AcceptInvitationResponse:
+      type: object
+      required:
+      - organization
+      properties:
+        organization:
+          $ref: '#/components/schemas/PublicBaseOrganization'
+    PublicOrganizationMember:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      - status
+      - role
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        status:
+          $ref: '#/components/schemas/OrganizationMemberStatus'
+    UpdateMyOrganizationInvitationStatusPayload:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          $ref: '#/components/schemas/OrganizationMemberStatus'
+    Account:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - User
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Organization
+    OrganizationRole:
+      type: string
+      enum:
+      - OWNER
+      - ADMIN
+      - MEMBER
+      - VIEWER
+    ResendInvitationPayload:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+    CheckOrganizationNamePayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    PublicOrganizationRole:
+      type: string
+      enum:
+      - ADMIN
+      - MEMBER
+      - VIEWER
+    ListPendingInvitationsResponse:
+      type: object
+      required:
+      - invitations
+      properties:
+        invitations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingInvitation'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    PendingInvitation:
+      type: object
+      description: Invitation for listing in org admin panel
+      required:
+      - id
+      - email
+      - role
+      - invited_by
+      - expires_at
+      - created_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        invited_by:
+          $ref: '#/components/schemas/InvitedByUser'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+    CheckOrganizationNameResponse:
+      type: object
+      required:
+      - available
+      properties:
+        available:
+          type: boolean
+    PublicOrganization:
+      type: object
+      required:
+      - name
+      - display_name
+      - members
+      properties:
+        display_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicUser'
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicOrganizationMember'
+        name:
+          type: string
+    PublicInvitationDetails:
+      type: object
+      description: Public invitation details (returned when validating a token)
+      required:
+      - email
+      - role
+      - organization
+      - invited_by
+      - expires_at
+      - user_exists
+      properties:
+        email:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        invited_by:
+          $ref: '#/components/schemas/InvitedByUser'
+        organization:
+          $ref: '#/components/schemas/PublicBaseOrganization'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        user_exists:
+          type: boolean
+    CreateOrganizationPayload:
+      type: object
+      required:
+      - name
+      - display_name
+      properties:
+        display_name:
+          type: string
+        name:
+          type: string
+    PublicUser:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      - following
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        last_name:
+          type: string
+        name:
+          type: string
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+    InvitedByUser:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+    SendInvitationPayload:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+        role:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InvitableRole'
+    User:
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - external_id
+      - first_name
+      - last_name
+      - following
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        email:
+          type: string
+        external_id:
+          type: string
+        first_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        id:
+          type: string
+        job_role:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type: string
+        name:
+          type: string
+        pp_consent_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+        tos_consent_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    InvitableRole:
+      type: string
+      enum:
+      - ADMIN
+      - MEMBER
+      - VIEWER
+    OrganizationMemberStatus:
+      type: string
+      enum:
+      - PENDING_INVITE
+      - ACTIVE
+      - DISABLED
+    UpdateOrganizationPayload:
+      type: object
+      properties:
+        display_name:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+    InviteOrganizationMemberPayload:
+      type: object
+      required:
+      - username
+      properties:
+        role:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PublicOrganizationRole'
+        username:
+          type: string
+    GetOrganizationMembersResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicOrganizationMember'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

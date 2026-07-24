@@ -1,0 +1,302 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Memory (V2) API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Memory (V2)
+paths:
+  /v2/{account}/memories:
+    get:
+      tags:
+      - Memory (V2)
+      summary: List Memories
+      operationId: list_memories_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMemoriesResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    post:
+      tags:
+      - Memory (V2)
+      summary: Create or Update Memory
+      operationId: create_or_update_memory_handler
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateMemoryPayload'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrUpdateMemoryResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/memories/{uri}:
+    get:
+      tags:
+      - Memory (V2)
+      summary: Get Memory by URI
+      operationId: get_memory_by_uri_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMemoryByUriResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+    delete:
+      tags:
+      - Memory (V2)
+      summary: Delete Memory
+      operationId: delete_memory_handler
+      parameters:
+      - name: uri
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                default: null
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    MemoryBlock:
+      type: object
+      required:
+      - id
+      - uri
+      - title
+      - content
+      - mime_type
+      - tags
+      - links_to
+      - linked_from
+      properties:
+        content:
+          type: string
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        linked_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlockLink'
+        links_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlockLink'
+        mime_type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+    CreateOrUpdateMemoryResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+    ListMemoriesResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListMemoryBlock'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    MemoryBlockLinkType:
+      type: string
+      enum:
+      - NEAR
+      - LEADS_TO
+      - CONTAINS
+      - EXPRESS
+    CreateOrUpdateMemoryPayload:
+      type: object
+      required:
+      - uri
+      - title
+      - content
+      - mime_type
+      properties:
+        content:
+          type: string
+        mime_type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        uri:
+          type: string
+    MemoryBlockLink:
+      type: object
+      required:
+      - id
+      - uri
+      - title
+      properties:
+        id:
+          type: string
+          format: uuid
+        reason:
+          type:
+          - string
+          - 'null'
+        title:
+          type: string
+        type:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MemoryBlockLinkType'
+        uri:
+          type: string
+    ListMemoryBlock:
+      type: object
+      required:
+      - id
+      - uri
+      - title
+      - mime_type
+      - tags
+      properties:
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        mime_type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+    GetMemoryByUriResponse:
+      type: object
+      properties:
+        result:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MemoryBlock'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken

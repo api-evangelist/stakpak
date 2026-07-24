@@ -1,0 +1,1020 @@
+openapi: 3.1.0
+info:
+  title: Stakpak Account Agents API
+  description: API for the Stakpak platform
+  license:
+    name: ''
+  version: 1.0.0
+servers:
+- url: https://apiv2.stakpak.dev
+  description: Production server
+- url: http://localhost:4000
+  description: Local server
+tags:
+- name: Agents
+  description: Agents API
+paths:
+  /v1/agents/checkpoints/{checkpoint_id}:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent Checkpoint Details
+      operationId: get_agent_checkpoint_handler
+      parameters:
+      - name: checkpoint_id
+        in: path
+        description: Checkpoint ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunAgentOutput'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/memories:
+    get:
+      tags:
+      - Agents
+      summary: List Agent Memories
+      operationId: get_agent_memories_handler
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAgentMemoriesResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions:
+    get:
+      tags:
+      - Agents
+      summary: List Agent Sessions
+      operationId: get_agent_sessions_handler
+      parameters:
+      - name: flow_name
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: flow_version_id
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentSession'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions/checkpoints/{checkpoint_id}/extract-memory:
+    post:
+      tags:
+      - Agents
+      summary: Extract Agent Session Memory
+      operationId: post_agent_session_extract_memory_handler
+      parameters:
+      - name: checkpoint_id
+        in: path
+        description: Checkpoint ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemoryBlock'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions/stats:
+    get:
+      tags:
+      - Agents
+      summary: Get User Session Usage Statistics for Dashboard
+      operationId: get_agent_sessions_stats_handler
+      parameters:
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionUsageAnalysis'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions/{id}/visibility:
+    patch:
+      tags:
+      - Agents
+      summary: Update Agent Session Visibility
+      operationId: patch_agent_session_visibility_handler
+      parameters:
+      - name: id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSessionVisibilityPayload'
+        required: true
+      responses:
+        '200':
+          description: Session visibility updated successfully
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions/{session_id}:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent Session Details
+      operationId: get_agent_session_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunAgentOutput'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions/{session_id}/checkpoints/latest:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent Session Latest Checkpoint
+      operationId: get_agent_session_latest_checkpoint_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunAgentOutput'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v1/agents/sessions/{session_id}/stats:
+    get:
+      tags:
+      - Agents
+      summary: Get Single Session Usage Statistics
+      operationId: get_agent_session_stats_handler
+      parameters:
+      - name: session_id
+        in: path
+        description: Session ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionUsageAnalysis'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+  /v2/{account}/agents/sessions/checkpoints/{checkpoint_id}/extract-memory:
+    post:
+      tags:
+      - Agents
+      summary: Extract Agent Session Memory
+      operationId: post_agent_session_extract_memory_handler
+      parameters:
+      - name: account
+        in: path
+        description: Account name
+        required: true
+        schema:
+          type: string
+      - name: checkpoint_id
+        in: path
+        description: Checkpoint ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemoryBlock'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - Api Key: []
+components:
+  schemas:
+    RunAgentOutput:
+      type: object
+      required:
+      - checkpoint
+      - session
+      - output
+      - token_usage
+      properties:
+        checkpoint:
+          $ref: '#/components/schemas/AgentCheckpointListItem'
+        output:
+          $ref: '#/components/schemas/AgentOutput'
+        session:
+          $ref: '#/components/schemas/AgentSessionListItem'
+        token_usage:
+          $ref: '#/components/schemas/LLMTokenUsage'
+    AgentSessionListItem:
+      type: object
+      required:
+      - id
+      - title
+      - agent_id
+      - visibility
+      - created_at
+      - updated_at
+      properties:
+        agent_id:
+          $ref: '#/components/schemas/AgentID'
+        created_at:
+          type: string
+          format: date-time
+        flow_ref:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FlowRef'
+        id:
+          type: string
+          format: uuid
+        owner:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AgentSessionOwner'
+        title:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/AgentSessionVisibility'
+    FunctionCall:
+      type: object
+      required:
+      - name
+      - arguments
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    AgentStatus:
+      type: string
+      enum:
+      - RUNNING
+      - COMPLETE
+      - BLOCKED
+      - FAILED
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    AgentSessionVisibility:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    AgentCheckpointListItem:
+      type: object
+      required:
+      - id
+      - status
+      - execution_depth
+      - created_at
+      - updated_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        execution_depth:
+          type: integer
+          minimum: 0
+        id:
+          type: string
+          format: uuid
+        parent:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AgentParentCheckpoint'
+        status:
+          $ref: '#/components/schemas/AgentStatus'
+        updated_at:
+          type: string
+          format: date-time
+    MessageContent:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/ContentPart'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    ModelInfo:
+      type: object
+      description: Model information for tracking which model generated a message
+      required:
+      - provider
+      - id
+      properties:
+        id:
+          type: string
+          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
+        provider:
+          type: string
+          description: Provider name (e.g., "anthropic", "openai")
+    FlowRef:
+      oneOf:
+      - type: object
+        required:
+        - owner_name
+        - flow_name
+        - version_id
+        - type
+        properties:
+          flow_name:
+            type: string
+          owner_name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Version
+          version_id:
+            type: string
+      - type: object
+        required:
+        - owner_name
+        - flow_name
+        - tag_name
+        - type
+        properties:
+          flow_name:
+            type: string
+          owner_name:
+            type: string
+          tag_name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Tag
+    ContentPart:
+      type: object
+      required:
+      - type
+      properties:
+        image_url:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ImageUrl'
+        text:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+    AgentOutput:
+      oneOf:
+      - type: object
+        required:
+        - messages
+        - node_states
+        - agent_id
+        properties:
+          agent_id:
+            type: string
+            enum:
+            - pablo:v1
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatMessage'
+          node_states:
+            type: object
+            additionalProperties: {}
+            propertyNames:
+              type: string
+    ChatMessage:
+      type: object
+      required:
+      - role
+      properties:
+        completed_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when assistant finished generating
+        content:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MessageContent'
+        cost:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Cost in dollars for this message
+        created_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when message was created/sent
+        finish_reason:
+          type:
+          - string
+          - 'null'
+          description: 'Why the model stopped: "stop", "tool_calls", "length", "error"'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique message identifier
+        metadata:
+          description: Plugin extensibility - unstructured metadata
+        model:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ModelInfo'
+            description: Model that generated this message (for assistant messages)
+        name:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        tool_call_id:
+          type:
+          - string
+          - 'null'
+        tool_calls:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ToolCall'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LLMTokenUsage'
+    AgentSessionOwner:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    Role:
+      type: string
+      enum:
+      - system
+      - developer
+      - user
+      - assistant
+      - tool
+    AgentParentCheckpoint:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    MemoryBlockLinkType:
+      type: string
+      enum:
+      - NEAR
+      - LEADS_TO
+      - CONTAINS
+      - EXPRESS
+    MemoryBlockLink:
+      type: object
+      required:
+      - id
+      - uri
+      - title
+      properties:
+        id:
+          type: string
+          format: uuid
+        reason:
+          type:
+          - string
+          - 'null'
+        title:
+          type: string
+        type:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MemoryBlockLinkType'
+        uri:
+          type: string
+    SessionUsageAnalysis:
+      type: object
+      required:
+      - analysis_period
+      - total_sessions
+      - sessions_with_activity
+      - tools_usage
+      - total_tool_calls
+      - successful_tool_calls
+      - failed_tool_calls
+      - aborted_tool_calls
+      - total_time_saved_seconds
+      properties:
+        aborted_tool_calls:
+          type: integer
+          format: int32
+          minimum: 0
+        analysis_period:
+          type: string
+        failed_tool_calls:
+          type: integer
+          format: int32
+          minimum: 0
+        from_date:
+          type:
+          - string
+          - 'null'
+        sessions_with_activity:
+          type: integer
+          format: int32
+          minimum: 0
+        successful_tool_calls:
+          type: integer
+          format: int32
+          minimum: 0
+        to_date:
+          type:
+          - string
+          - 'null'
+        tools_usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolUsageStats'
+        total_sessions:
+          type: integer
+          format: int32
+          minimum: 0
+        total_time_saved_seconds:
+          type: integer
+          format: int32
+          minimum: 0
+        total_tool_calls:
+          type: integer
+          format: int32
+          minimum: 0
+    ToolUsageStats:
+      type: object
+      required:
+      - tool_name
+      - display_name
+      - usage_counts
+      properties:
+        display_name:
+          type: string
+        time_saved_per_call:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        time_saved_seconds:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        tool_name:
+          type: string
+        usage_counts:
+          $ref: '#/components/schemas/ToolCallCounts'
+    ToolCall:
+      type: object
+      required:
+      - id
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionCall'
+        id:
+          type: string
+        type:
+          type: string
+    LLMTokenUsage:
+      type: object
+      required:
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens_details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PromptTokensDetails'
+        total_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    MemoryBlock:
+      type: object
+      required:
+      - id
+      - uri
+      - title
+      - content
+      - mime_type
+      - tags
+      - links_to
+      - linked_from
+      properties:
+        content:
+          type: string
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        linked_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlockLink'
+        links_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlockLink'
+        mime_type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+    AgentID:
+      type: string
+      enum:
+      - pablo:v1
+    PromptTokensDetails:
+      type: object
+      properties:
+        cache_read_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        cache_write_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        output_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    ToolCallCounts:
+      type: object
+      required:
+      - successful
+      - failed
+      - aborted
+      - total
+      properties:
+        aborted:
+          type: integer
+          format: int32
+          minimum: 0
+        failed:
+          type: integer
+          format: int32
+          minimum: 0
+        successful:
+          type: integer
+          format: int32
+          minimum: 0
+        total:
+          type: integer
+          format: int32
+          minimum: 0
+    AgentSession:
+      type: object
+      required:
+      - id
+      - title
+      - agent_id
+      - visibility
+      - checkpoints
+      - created_at
+      - updated_at
+      properties:
+        agent_id:
+          $ref: '#/components/schemas/AgentID'
+        checkpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCheckpointListItem'
+        created_at:
+          type: string
+          format: date-time
+        flow_ref:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FlowRef'
+        id:
+          type: string
+          format: uuid
+        owner:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AgentSessionOwner'
+        title:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/AgentSessionVisibility'
+    ImageUrl:
+      type: object
+      required:
+      - url
+      properties:
+        detail:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+    UpdateSessionVisibilityPayload:
+      type: object
+      required:
+      - visibility
+      properties:
+        visibility:
+          $ref: '#/components/schemas/AgentSessionVisibility'
+    GetAgentMemoriesResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlock'
+  securitySchemes:
+    Api Key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: apiKey
+      in: cookie
+      name: .idToken
