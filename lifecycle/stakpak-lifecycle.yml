@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+source: github.com/stakpak/agent/releases, https://stakpak.gitbook.io/docs
+description: Versioning and release posture for Stakpak.
+versioning:
+  api_scheme: uri-path
+  api_current: v1
+  cli_scheme: semver
+  cli_current: 0.3.88
+  releases: https://github.com/stakpak/agent/releases
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation policy or RFC 8594 Sunset/Deprecation header support found; no operations marked deprecated in the OpenAPI.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Stakpak API
+  version: 1.0.0
+extends: openapi/stakpak-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: stakpak
+      x-apievangelist-categories: [DevOps, Infrastructure, AI Agents, MCP]
+      x-apievangelist-auth: bearer-jwt
+      x-apievangelist-notes: >-
+        Stakpak API (apiv2.stakpak.dev) — the hosted backend for the open-source Stakpak DevOps agent.
+        Auth is http bearer (JWT) API keys. Includes an OpenAI-compatible /v1/chat/completions endpoint
+        and an MCP endpoint at /v1/mcp.
+  - target: $.info
+    update:
+      x-apievangelist-artifacts:
+        authentication: authentication/stakpak-authentication.yml
+        conventions: conventions/stakpak-conventions.yml
+        errors: errors/stakpak-problem-types.yml
+        data-model: data-model/stakpak-data-model.yml
+        mcp: mcp/stakpak-mcp.yml
+        agentic-access: agentic-access/stakpak-agentic-access.yml

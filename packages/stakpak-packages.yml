@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: crates.io, npm, ghcr.io, github.com/stakpak/agent
+packages:
+  - language: rust
+    registry: crates.io
+    name: stakpak
+    url: https://crates.io/crates/stakpak
+    install: cargo install stakpak
+    version: 0.3.88
+    official: true
+    kind: cli
+    description: "Stakpak: Your DevOps AI Agent CLI (single binary, Rust)."
+  - language: rust
+    registry: crates.io
+    name: stakpak-api
+    url: https://crates.io/crates/stakpak-api
+    install: cargo add stakpak-api
+    version: 0.3.88
+    official: true
+    kind: sdk
+    description: Rust client library for the Stakpak API (apiv2.stakpak.dev).
+  - language: javascript
+    registry: npm
+    name: "@stakpak/mcp"
+    url: https://www.npmjs.com/package/@stakpak/mcp
+    install: npx @stakpak/mcp@latest
+    version: 0.0.4
+    official: true
+    kind: mcp-server
+    description: MCP server that connects to the Stakpak API for infrastructure code generation.
+  - language: shell
+    registry: homebrew
+    name: stakpak/stakpak
+    url: https://github.com/stakpak/homebrew-stakpak
+    install: brew tap stakpak/stakpak && brew install stakpak
+    official: true
+    kind: cli
+    description: Homebrew tap for the Stakpak CLI.
+  - language: docker
+    registry: ghcr.io
+    name: ghcr.io/stakpak/agent
+    url: https://github.com/stakpak/agent/pkgs/container/agent
+    install: docker pull ghcr.io/stakpak/agent:latest
+    official: true
+    kind: container
+    description: Container image for the Stakpak agent.
+  - language: shell
+    registry: install-script
+    name: install.sh
+    url: https://stakpak.dev/install.sh
+    install: "curl -sSL https://stakpak.dev/install.sh | sh"
+    official: true
+    kind: cli
+    description: Official install script for the Stakpak CLI (Linux/macOS).

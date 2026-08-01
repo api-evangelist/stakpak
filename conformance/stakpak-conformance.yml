@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/stakpak-openapi-original.yml
+description: >-
+  Cross-cutting standards conformance for the Stakpak API, derived from the OpenAPI security schemes,
+  paths, and conventions. No published third-party compliance certifications (SOC 2 / ISO 27001 / etc.)
+  were found, so no Compliance pointer is emitted.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 security scheme declared; auth is http bearer (JWT) API keys.
+  - id: oidc
+    conforms: false
+  - id: bearer-jwt
+    conforms: true
+    evidence: securitySchemes 'Api Key' and 'Token' are http bearer with bearerFormat JWT.
+  - id: openai-chat-completions
+    conforms: true
+    evidence: POST /v1/chat/completions is an OpenAI-compatible Chat Completion API.
+  - id: model-context-protocol
+    conforms: true
+    evidence: POST /v1/mcp exposes an MCP Server API; @stakpak/mcp and `stakpak mcp start` ship MCP servers.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Error responses use HTTP status codes; no application/problem+json bodies declared.
+  - id: pagination
+    conforms: true
+    evidence: List endpoints use offset/limit query parameters.
+  - id: fhir-r4
+    conforms: false
+  - id: scim
+    conforms: false
+  - id: fapi
+    conforms: false

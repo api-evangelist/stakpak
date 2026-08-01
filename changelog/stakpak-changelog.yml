@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/stakpak/agent/releases
+scheme: semver
+current_version: 0.3.88
+url: https://github.com/stakpak/agent/releases
+note: Changelog is published as dated GitHub Releases on stakpak/agent. Recent window captured below.
+entries:
+  - version: 0.3.88
+    date: '2026-06-10'
+    breaking: false
+    highlights: [Specify version for stakpak-api dependency.]
+  - version: 0.3.87
+    date: '2026-06-10'
+    breaking: false
+    highlights: [Artifact large tool outputs in proxy, Refactor artifact naming conventions.]
+  - version: 0.3.86
+    date: '2026-06-04'
+    breaking: false
+    highlights: []
+  - version: 0.3.85
+    date: '2026-06-04'
+    breaking: false
+    highlights: [Integrate remote backend for knowledge file management, SHA-256 ETag caching, Platform-independent path handling.]
+  - version: 0.3.82
+    date: '2026-05-19'
+    breaking: false
+    highlights: [OpenRouter provider integration, Improved parallel tool-call handling.]
+  - version: 0.3.81
+    date: '2026-05-15'
+    breaking: false
+    highlights: [Enhanced telemetry tracking, Span-aware redaction.]

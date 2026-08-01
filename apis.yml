@@ -1,8 +1,28 @@
 aid: stakpak
 name: StakPak
-description: StakPak is a company surfaced as a portfolio company of 500-global and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Stakpak is an open-source autonomous DevOps AI agent, distributed as a single Rust binary, that
+  runs 24/7 on your machines to keep applications running — performing health checks, auto-healing
+  failures, monitoring cloud cost, rotating secrets, renewing certificates, and alerting teams only
+  when human intervention is needed ("all the upside of a PaaS, none of the lock-in"). It ships as a
+  CLI with an interactive TUI, an autopilot daemon, an MCP server, and an ACP endpoint, backed by a
+  hosted REST API (apiv2.stakpak.dev) covering accounts, organizations, agent sessions and
+  checkpoints, a knowledge/memory store, rulebooks, the Paks knowledge registry, and an
+  OpenAI-compatible chat-completion endpoint. Surfaced originally as a 500 Global portfolio company.
 url: https://raw.githubusercontent.com/api-evangelist/stakpak/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://stakpak.dev/favicon.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,15 +31,429 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1
 tags:
 - Company
-apis: []
+- DevOps
+- Infrastructure
+- AI Agents
+- MCP
+- Developer Tools
+- CLI
+- Cloud
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: stakpak:stakpak-account-api
+  name: StakPak Account API
+  description: Account API
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-account-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-account-v2-api
+  name: StakPak Account (V2) API
+  description: The Account (V2) API from StakPak — 2 operation(s) for account (v2).
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Account (V2)
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-account-v2-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-agents-api
+  name: StakPak Agents API
+  description: Agents API
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-agents-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-agents-v2-api
+  name: StakPak Agents (V2) API
+  description: The Agents (V2) API from StakPak — 2 operation(s) for agents (v2).
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Agents (V2)
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-agents-v2-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-billing-v2-api
+  name: StakPak Billing (V2) API
+  description: The Billing (V2) API from StakPak — 6 operation(s) for billing (v2).
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Billing (V2)
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-billing-v2-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-chat-api
+  name: StakPak Chat API
+  description: The Chat API from StakPak — 2 operation(s) for chat.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-chat-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-commands-api
+  name: StakPak Commands API
+  description: The Commands API from StakPak — 1 operation(s) for commands.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Commands
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-commands-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-knowledge-api
+  name: StakPak Knowledge API
+  description: The Knowledge API from StakPak — 2 operation(s) for knowledge.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Knowledge
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-knowledge-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-knowledge-registry-api
+  name: StakPak Knowledge Registry API
+  description: The Knowledge Registry API from StakPak — 5 operation(s) for knowledge registry.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Knowledge Registry
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-knowledge-registry-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-mcp-api
+  name: StakPak MCP API
+  description: The MCP API from StakPak — 1 operation(s) for mcp.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - MCP
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-mcp-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-memory-api
+  name: StakPak Memory API
+  description: The Memory API from StakPak — 2 operation(s) for memory.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Memory
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-memory-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-memory-v2-api
+  name: StakPak Memory (V2) API
+  description: The Memory (V2) API from StakPak — 2 operation(s) for memory (v2).
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Memory (V2)
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-memory-v2-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-organizations-api
+  name: StakPak Organizations API
+  description: The Organizations API from StakPak — 11 operation(s) for organizations.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-organizations-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-recovery-api
+  name: StakPak Recovery API
+  description: The Recovery API from StakPak — 3 operation(s) for recovery.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Recovery
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-recovery-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-rules-api
+  name: StakPak Rules API
+  description: Rules API
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-rules-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-rules-v2-api
+  name: StakPak Rules (V2) API
+  description: The Rules (V2) API from StakPak — 5 operation(s) for rules (v2).
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Rules (V2)
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-rules-v2-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-runners-v2-api
+  name: StakPak Runners (V2) API
+  description: The Runners (V2) API from StakPak — 6 operation(s) for runners (v2).
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Runners (V2)
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-runners-v2-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-sessions-api
+  name: StakPak Sessions API
+  description: The Sessions API from StakPak — 4 operation(s) for sessions.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-sessions-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-telemetry-api
+  name: StakPak Telemetry API
+  description: The Telemetry API from StakPak — 1 operation(s) for telemetry.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Telemetry
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-telemetry-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-upload-api
+  name: StakPak Upload API
+  description: The Upload API from StakPak — 1 operation(s) for upload.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-upload-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
 common:
+- type: DeveloperPortal
+  url: https://stakpak.dev
+- type: Documentation
+  url: https://stakpak.gitbook.io/docs
+- type: APIReference
+  url: https://apiv2.stakpak.dev/docs
+- type: GettingStarted
+  url: https://stakpak.gitbook.io/docs/get-started/install-stakpak
+- type: Pricing
+  url: https://stakpak.gitbook.io/docs/get-started/oss-vs-cloud-vs-enterprise
+- type: SignUp
+  url: https://stakpak.dev
+- type: Support
+  url: https://discord.gg/QTZjETP7GB
+- type: GitHubOrganization
+  url: https://github.com/stakpak
+- type: SourceCode
+  url: https://github.com/stakpak/agent
+- type: Packages
+  url: packages/stakpak-packages.yml
+- type: SDKs
+  url: packages/stakpak-packages.yml
+- type: CLI
+  url: cli/stakpak-cli.yml
+- type: MCPServer
+  url: mcp/stakpak-mcp.yml
+- type: LLMsTxt
+  url: llms/stakpak-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ChangeLog
+  url: changelog/stakpak-changelog.yml
+- type: Lifecycle
+  url: lifecycle/stakpak-lifecycle.yml
+- type: Conformance
+  url: conformance/stakpak-conformance.yml
+- type: DomainSecurity
+  url: security/stakpak-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/stakpak-agentic-access.yml
+- type: Authentication
+  url: authentication/stakpak-authentication.yml
 - type: Website
   url: https://stakpak.dev

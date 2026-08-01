@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/stakpak-openapi-original.yml
+description: >-
+  Entity-relationship graph derived from the Stakpak OpenAPI (314 component schemas). Core resources
+  are the account/organization identity graph, agent sessions and their checkpoints/recoveries, the
+  knowledge/memory store, rule books, and the Paks knowledge registry.
+entities:
+  - name: Account
+    resource: /v1/account
+    summary: The authenticated user account (details, API keys, invitations, organizations).
+  - name: Organization
+    resource: /v1/organizations
+    summary: A team/org with members, invitations, and roles.
+  - name: AgentSession
+    resource: /v1/agents/sessions
+    summary: A run of the agent; owns checkpoints and produces memories/recoveries.
+  - name: AgentCheckpoint
+    resource: /v1/agents/checkpoints/{checkpoint_id}
+    summary: A point-in-time state of an agent session.
+  - name: Session
+    resource: /v1/sessions
+    summary: Generic session with checkpoints.
+  - name: Recovery
+    resource: /v1/recovery/sessions/{session_id}/recoveries
+    summary: Recovery/rollback records for a session.
+  - name: Memory
+    resource: /v1/memories
+    summary: Persistent agent memory entries addressed by URI.
+  - name: KnowledgeFile
+    resource: /v1/knowledge/{path}
+    summary: Files in the knowledge store addressed by path.
+  - name: RuleBook
+    resource: /v1/rules
+    summary: Rulebooks that customize agent behavior, addressed by URI.
+  - name: Pak
+    resource: /v1/paks
+    summary: A package in the Knowledge Registry ("Package Manager for Agent Skills").
+  - name: Runner
+    resource: /v1/runners
+    summary: Execution runners (e.g. GitHub Actions runners).
+relationships:
+  - {from: AgentSession, via: agent_id, to: Agent, kind: belongs_to}
+  - {from: AgentSession, via: owner, to: Owner, kind: belongs_to}
+  - {from: AgentCheckpoint, via: session, to: Session, kind: belongs_to}
+  - {from: Checkpoint, via: session_id, to: Session, kind: belongs_to}
+  - {from: Recovery, via: session_id, to: Session, kind: belongs_to}
+  - {from: Memory, via: owner, to: Owner, kind: belongs_to}
+  - {from: RuleBook, via: owner_name, to: Owner, kind: belongs_to}
+  - {from: Pak, via: owner_name, to: Owner, kind: belongs_to}
+  - {from: OrganizationInvitation, via: organization, to: Organization, kind: belongs_to}
+  - {from: MemberOrganization, via: organization, to: Organization, kind: belongs_to}
+  - {from: SlackIntegration, via: account_name, to: Account, kind: belongs_to}
+  - {from: Runner, via: owner, to: Owner, kind: belongs_to}
+  - {from: Flow, via: owner_name, to: Owner, kind: belongs_to}

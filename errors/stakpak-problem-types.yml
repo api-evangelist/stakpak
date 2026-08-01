@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/stakpak-openapi-original.yml
+format: http-status
+note: >-
+  Derived from the HTTP status responses declared across the Stakpak OpenAPI (76 paths / 98 operations).
+  The spec does not declare application/problem+json bodies, so these are HTTP-status problem types, not
+  RFC 9457 documents. Titles/remediation below are conventional interpretations of each status.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: The request was malformed or failed validation.
+    remediation: Check the request body/params against the operation schema.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid bearer token / API key.
+    remediation: Supply a valid Authorization bearer token (Stakpak API key or session token).
+  - status: 403
+    title: Forbidden
+    meaning: Authenticated but not permitted for this resource or organization.
+    remediation: Verify the account/organization membership and role.
+  - status: 404
+    title: Not Found
+    meaning: The referenced resource (session, memory, rule book, pak, account) does not exist.
+    remediation: Confirm the identifier/URI in the path.
+  - status: 409
+    title: Conflict
+    meaning: The resource already exists (e.g. creating a knowledge file at an occupied path).
+    remediation: Use the overwrite (PUT) operation or choose a different path/name.
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate limit exceeded.
+    remediation: Back off and retry; reduce request rate.
+  - status: 500
+    title: Internal Server Error
+    meaning: Unexpected server-side error.
+    remediation: Retry with backoff; contact support if it persists.

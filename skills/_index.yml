@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/stakpak-openapi-original.yml
+skills:
+  - file: stakpak-manage-agent-sessions.md
+    name: Manage Stakpak agent sessions
+    api: openapi/stakpak-openapi-original.yml
+    operations: [get_agent_sessions_handler, get_agent_session_handler, get_agent_session_latest_checkpoint_handler, get_agent_session_stats_handler]
+  - file: stakpak-knowledge-store.md
+    name: Work with the Stakpak knowledge store
+    api: openapi/stakpak-openapi-original.yml
+    operations: [search_handler, read_handler, create_handler, overwrite_handler, delete_handler]
+  - file: stakpak-generate-infrastructure-code.md
+    name: Generate infrastructure code with Stakpak
+    api: openapi/stakpak-openapi-original.yml
+    operations: [chat_completion_handler, mcp_handler, cancel_request_handler]

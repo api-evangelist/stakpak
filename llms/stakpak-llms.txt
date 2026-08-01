@@ -1,0 +1,81 @@
+# Stakpak Docs
+
+## Stakpak Docs
+
+- [Introduction](https://stakpak.gitbook.io/docs/get-started/introduction.md): Less Ops More Coding
+- [Comparison](https://stakpak.gitbook.io/docs/get-started/comparison.md)
+- [Stakpak Vs AWS DevOps Agent](https://stakpak.gitbook.io/docs/get-started/stakpak-vs-aws-devops-agent.md)
+- [Install Stakpak](https://stakpak.gitbook.io/docs/get-started/install-stakpak.md): This guide provides step-by-step instructions for installing Stakpak CLI on Linux, MacOS, and windows.
+- [Installation on Linux](https://stakpak.gitbook.io/docs/get-started/install-stakpak/installation-on-linux.md): This is a step-by-step guide to installing Stakpak CLI on Linux.
+- [Installation on MacOS](https://stakpak.gitbook.io/docs/get-started/install-stakpak/installation-on-macos.md): This is a step-by-step guide to installing Stakpak CLI on MacOS.
+- [Installation on Windows](https://stakpak.gitbook.io/docs/get-started/install-stakpak/installation-on-windows.md): This is a step-by-step guide to installing Stakpak CLI on Windows.
+- [Using Stakpak](https://stakpak.gitbook.io/docs/get-started/using-stakpak.md)
+- [OSS vs Cloud vs Enterprise](https://stakpak.gitbook.io/docs/get-started/oss-vs-cloud-vs-enterprise.md)
+- [Open Source Philosophy](https://stakpak.gitbook.io/docs/get-started/open-source-philosophy.md)
+- [Configure Stakpak](https://stakpak.gitbook.io/docs/get-started/configure-stakpak.md)
+- [FAQ](https://stakpak.gitbook.io/docs/get-started/faq.md)
+- [Knowledge Sources](https://stakpak.gitbook.io/docs/how-it-works/knowledge-sources.md)
+- [Rulebooks](https://stakpak.gitbook.io/docs/how-it-works/rulebooks.md)
+- [How to Write a Rulebook?](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/how-to-write-a-rulebook.md)
+- [Dockerization](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/dockerization.md)
+- [Infrastructure Cost Estimation](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/infrastructure-cost-estimation.md)
+- [Infrastructure Software Upgrades](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/infrastructure-software-upgrades.md)
+- [Simple Deployment On VM](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/simple-deployment-on-vm.md)
+- [Migrating Bitnami to Bitnami Legacy](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/migrating-bitnami-to-bitnami-legacy.md)
+- [Next.js AWS Deployment Options Comparison](https://stakpak.gitbook.io/docs/how-it-works/rulebooks/next.js-aws-deployment-options-comparison.md)
+- [Paks](https://stakpak.gitbook.io/docs/how-it-works/paks.md): Package Manager for Agent Skills
+- [Memory (Knoweldge Store)](https://stakpak.gitbook.io/docs/how-it-works/memory-knoweldge-store.md)
+- [Profiles](https://stakpak.gitbook.io/docs/how-it-works/profiles.md)
+- [/Init](https://stakpak.gitbook.io/docs/how-it-works/init.md): Initialize project (scan + setup)
+- [Autopilot](https://stakpak.gitbook.io/docs/how-it-works/autopilot.md): Stop watching your infrastructure and let it fix it self
+- [Agent Sessions](https://stakpak.gitbook.io/docs/how-it-works/agent-sessions.md)
+- [Shell Mode](https://stakpak.gitbook.io/docs/how-it-works/shell-mode.md)
+- [Plan Mode](https://stakpak.gitbook.io/docs/how-it-works/plan-mode.md)
+- [Browser Extension](https://stakpak.gitbook.io/docs/how-it-works/browser-extension.md)
+- [Warden Guardrails](https://stakpak.gitbook.io/docs/how-it-works/warden-guardrails.md)
+- [Handling Secrets](https://stakpak.gitbook.io/docs/how-it-works/handling-secrets.md)
+- [Productivity Dashboard](https://stakpak.gitbook.io/docs/how-it-works/productivity-dashboard.md)
+- [Integrations](https://stakpak.gitbook.io/docs/how-it-works/integrations.md)
+- [Slack Integration](https://stakpak.gitbook.io/docs/how-it-works/slack-integration.md)
+- [Agent Client Protocol (ACP)](https://stakpak.gitbook.io/docs/how-it-works/agent-client-protocol-acp.md)
+- [Slash Commands](https://stakpak.gitbook.io/docs/how-it-works/slash-commands.md)
+- [Keyboard Shortcuts](https://stakpak.gitbook.io/docs/how-it-works/keyboard-shortcuts.md)
+- [Containerize a Python App](https://stakpak.gitbook.io/docs/tutorial/containerize-a-python-app.md)
+- [Investigate Why Terraform Drifted From Production](https://stakpak.gitbook.io/docs/tutorial/investigate-why-terraform-drifted-from-production.md)
+- [Investigate Why AWS Costs Suddenly Increased](https://stakpak.gitbook.io/docs/tutorial/investigate-why-aws-costs-suddenly-increased.md)
+- [Investigate and Clean Up Unused Cloud Resources](https://stakpak.gitbook.io/docs/tutorial/investigate-and-clean-up-unused-cloud-resources.md)
+- [Debug GitHub Actions Tests That Pass Locally but Fail in CI](https://stakpak.gitbook.io/docs/tutorial/debug-github-actions-tests-that-pass-locally-but-fail-in-ci.md)
+- [Deploy Coolify on AWS & Deploy Your App](https://stakpak.gitbook.io/docs/tutorial/deploy-coolify-on-aws-and-deploy-your-app.md): Run your own application platform on AWS using Coolify, similar to Heroku or Vercel
+- [Load Test to Optimize Cloud Costs](https://stakpak.gitbook.io/docs/tutorial/load-test-to-optimize-cloud-costs.md): How to load test your app to find the sweet spot between performance and cost.
+- [Migrate PostgreSQL from Bitnami to Bitnami Legacy on Amazon EKS](https://stakpak.gitbook.io/docs/tutorial/migrate-postgresql-from-bitnami-to-bitnami-legacy-on-amazon-eks.md)
+- [Migrate a Next.js App from Vercel to AWS](https://stakpak.gitbook.io/docs/tutorial/migrate-a-next.js-app-from-vercel-to-aws.md): What Actually Breaks in Production (and How to Fix It)
+- [Free TLS with  Caddy Web Server on AWS EC2 with Let's Encrypt](https://stakpak.gitbook.io/docs/tutorial/free-tls-with-caddy-web-server-on-aws-ec2-with-lets-encrypt.md)
+- [Migrate from NGINX to Caddy](https://stakpak.gitbook.io/docs/tutorial/migrate-from-nginx-to-caddy.md)
+- [Deploy your own OpenVPN Server on AWS](https://stakpak.gitbook.io/docs/tutorial/deploy-your-own-openvpn-server-on-aws.md)
+- [Fix Kubernetes CrashLoopBackOff in Minutes](https://stakpak.gitbook.io/docs/tutorial/fix-kubernetes-crashloopbackoff-in-minutes.md): CrashLoopBackOff at 3AM? Not Anymore.
+- [Fix Kubernetes Apps That Are Running but Not Reachable](https://stakpak.gitbook.io/docs/tutorial/fix-kubernetes-apps-that-are-running-but-not-reachable.md)
+- [Fix Kubernetes Persistent Volume Issues](https://stakpak.gitbook.io/docs/tutorial/fix-kubernetes-persistent-volume-issues.md)
+- [Investigate Why an EC2 Application is Not Reachable](https://stakpak.gitbook.io/docs/tutorial/investigate-why-an-ec2-application-is-not-reachable.md)
+- [Detect and Fix Missing Backups for a PostgreSQL DB in Production](https://stakpak.gitbook.io/docs/tutorial/detect-and-fix-missing-backups-for-a-postgresql-db-in-production.md)
+- [Set Up a Local AWS Environment with MiniStack](https://stakpak.gitbook.io/docs/tutorial/set-up-a-local-aws-environment-with-ministack.md): Mini Stack is a free local stack alternative
+- [How to Run Stakpak with Local LLM Models Using Ollama](https://stakpak.gitbook.io/docs/tutorial/how-to-run-stakpak-with-local-llm-models-using-ollama.md)
+- [Set Up Stakpak with Amazon Bedrock](https://stakpak.gitbook.io/docs/tutorial/set-up-stakpak-with-amazon-bedrock.md): Use Amazon Bedrock as your LLM provider for Stakpak
+- [Install Stakpak in Zed IDE](https://stakpak.gitbook.io/docs/tutorial/install-stakpak-in-zed-ide.md)
+- [Page 1](https://stakpak.gitbook.io/docs/tutorial/page-1.md)
+- [Manage API Keys](https://stakpak.gitbook.io/docs/api/manage-api-keys.md)
+- [MCP Server](https://stakpak.gitbook.io/docs/api/mcp-server.md): A MCP server that connects to Stakpak API.
+- [Security at Stakpak](https://stakpak.gitbook.io/docs/references/security-at-stakpak.md)
+- [Migrate From RDS To Guepard](https://stakpak.gitbook.io/docs/archive/migrate-from-rds-to-guepard.md)
+- [Automate Terraform Security Scanning in CI/CD](https://stakpak.gitbook.io/docs/archive/automate-terraform-security-scanning-in-ci-cd.md)
+- [Deploy NextJS App to AWS with OpenNext](https://stakpak.gitbook.io/docs/archive/deploy-nextjs-app-to-aws-with-opennext.md)
+- [My Todo](https://stakpak.gitbook.io/docs/archive/my-todo.md)
+- [Stakpak Vs Claude Code](https://stakpak.gitbook.io/docs/archive/stakpak-vs-claude-code.md)
+- [Features](https://stakpak.gitbook.io/docs/archive/features.md): The Stakpak Web IDE empowers you with a seamless Infrastructure as Code (IaC) experience, combining AI-powered automation with robust security and visualization tools.
+- [Get Started](https://stakpak.gitbook.io/docs/archive/get-started.md): Welcome to Dev Without Ops where Stakpak abstracts away the operational burden
+- [Containerize Spring Boot Application in 30 mins](https://stakpak.gitbook.io/docs/archive/containerize-spring-boot-application-in-30-mins.md): This step-by-step guide walks you through containerizing a Spring Boot application using Stakpak’s AI DevOps agent.
+- [Containerize Next.js Application](https://stakpak.gitbook.io/docs/archive/containerize-next.js-application.md): This step-by-step guide walks you through containerizing a Next.js application using Stakpak’s AI DevOps agent.
+- [Get Started](https://stakpak.gitbook.io/docs/archive/get-started-1.md): Introducing the first DevOps AI Agent!
+- [Welcome to Stakpak! 🚀](https://stakpak.gitbook.io/docs/archive/readme.md)
+- [Get Started](https://stakpak.gitbook.io/docs/archive/get-started-2.md): Less Ops More Coding
+- [Stakpak Vs Coding Agents](https://stakpak.gitbook.io/docs/archive/stakpak-vs-coding-agents.md)
+- [Use Cases](https://stakpak.gitbook.io/docs/archive/use-cases.md)

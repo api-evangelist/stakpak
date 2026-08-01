@@ -1,0 +1,54 @@
+generated: '2026-07-21'
+method: searched
+source: github.com/stakpak/agent, https://stakpak.gitbook.io/docs
+name: stakpak
+description: >-
+  Stakpak CLI — an autonomous DevOps AI agent that runs as a single Rust binary. Operates as an
+  interactive TUI, a 24/7 autopilot daemon, an MCP server, and an ACP (Agent Client Protocol) endpoint.
+language: rust
+license: Apache-2.0
+repository: https://github.com/stakpak/agent
+docs: https://stakpak.gitbook.io/docs/get-started/using-stakpak
+install:
+  - method: homebrew
+    command: brew tap stakpak/stakpak && brew install stakpak
+  - method: cargo
+    command: cargo install stakpak
+  - method: docker
+    command: docker pull ghcr.io/stakpak/agent:latest
+  - method: script
+    command: "curl -sSL https://stakpak.dev/install.sh | sh"
+authentication:
+  env: STAKPAK_API_KEY
+  note: API key created at stakpak.dev profile; OpenAI-compatible endpoints and Anthropic/OpenAI/Gemini/Bedrock/Ollama providers also supported.
+commands:
+  - name: init
+    summary: Scan and understand your apps / initialize a project.
+  - name: up
+    summary: Start the autopilot (24/7 agent).
+  - name: down
+    summary: Stop the autopilot.
+  - name: autopilot
+    summary: Manage the autopilot daemon.
+    subcommands:
+      - {name: status, summary: Check agent status.}
+      - {name: logs, summary: View agent logs.}
+  - name: mcp
+    summary: Run Stakpak as an MCP server.
+    subcommands:
+      - {name: start, summary: "Launch the MCP server (--tool-mode local|remote|combined)."}
+  - name: acp
+    summary: Start the Agent Client Protocol endpoint (e.g. for the Zed editor).
+  - name: rb
+    summary: Manage rulebooks.
+    subcommands:
+      - {name: get, summary: List rulebooks.}
+  - name: completion
+    summary: Generate shell tab-completion (bash/zsh/fish).
+flows:
+  - name: Autopilot
+    steps: [stakpak init, stakpak up, stakpak autopilot status]
+  - name: MCP server
+    steps: ["stakpak mcp start --tool-mode combined"]
+  - name: Editor integration (ACP)
+    steps: [stakpak acp]
