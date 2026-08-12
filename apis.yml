@@ -413,6 +413,11 @@ apis:
   - type: DataModel
     url: data-model/stakpak-data-model.yml
 common:
+- type: Overlay
+  url: overlays/stakpak-openapi-overlay.yaml
+- type: License
+  name: Apache-2.0
+  url: https://github.com/stakpak/agent/blob/main/LICENSE
 - type: DeveloperPortal
   url: https://stakpak.dev
 - type: Documentation
