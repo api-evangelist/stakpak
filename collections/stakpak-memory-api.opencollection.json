@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Memory API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Memory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Memories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/memories",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Memories"
+        },
+        {
+          "info": {
+            "name": "Create or Update Memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/memories",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or Update Memory"
+        },
+        {
+          "info": {
+            "name": "Get Memory by URI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/memories/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Memory by URI"
+        },
+        {
+          "info": {
+            "name": "Delete Memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/memories/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Memory"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

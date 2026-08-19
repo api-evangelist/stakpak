@@ -1,0 +1,278 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Agents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Agent Checkpoint Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/checkpoints/:checkpoint_id",
+            "params": [
+              {
+                "name": "checkpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "Checkpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Checkpoint Details"
+        },
+        {
+          "info": {
+            "name": "List Agent Memories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/memories",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Agent Memories"
+        },
+        {
+          "info": {
+            "name": "List Agent Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions",
+            "params": [
+              {
+                "name": "flow_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flow_version_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Agent Sessions"
+        },
+        {
+          "info": {
+            "name": "Extract Agent Session Memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions/checkpoints/:checkpoint_id/extract-memory",
+            "params": [
+              {
+                "name": "checkpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "Checkpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extract Agent Session Memory"
+        },
+        {
+          "info": {
+            "name": "Get User Session Usage Statistics for Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions/stats",
+            "params": [
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get User Session Usage Statistics for Dashboard"
+        },
+        {
+          "info": {
+            "name": "Update Agent Session Visibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions/:id/visibility",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Agent Session Visibility"
+        },
+        {
+          "info": {
+            "name": "Get Agent Session Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Session Details"
+        },
+        {
+          "info": {
+            "name": "Get Agent Session Latest Checkpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions/:session_id/checkpoints/latest",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Session Latest Checkpoint"
+        },
+        {
+          "info": {
+            "name": "Get Single Session Usage Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/agents/sessions/:session_id/stats",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Single Session Usage Statistics"
+        },
+        {
+          "info": {
+            "name": "Extract Agent Session Memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/agents/sessions/checkpoints/:checkpoint_id/extract-memory",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "path",
+                "description": "Account name"
+              },
+              {
+                "name": "checkpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "Checkpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extract Agent Session Memory"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

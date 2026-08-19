@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Commands API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Commands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Build Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/commands/build_code_index",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Build Index"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

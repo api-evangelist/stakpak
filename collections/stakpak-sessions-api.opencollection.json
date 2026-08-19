@@ -1,0 +1,248 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Sessions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/sessions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of sessions to return (default: 20, max: 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination (default: 0)"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search in session titles"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status: ACTIVE, DELETED (default: ACTIVE)"
+              },
+              {
+                "name": "visibility",
+                "value": "",
+                "type": "query",
+                "description": "Filter by visibility: PRIVATE, PUBLIC"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of sessions for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new session with an initial checkpoint."
+        },
+        {
+          "info": {
+            "name": "Get Checkpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/sessions/checkpoints/:checkpoint_id",
+            "params": [
+              {
+                "name": "checkpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "Checkpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a specific checkpoint by ID."
+        },
+        {
+          "info": {
+            "name": "Get Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single session with its latest checkpoint."
+        },
+        {
+          "info": {
+            "name": "Update Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://apiv2.stakpak.dev/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates session metadata (title, visibility). Does not modify checkpoints."
+        },
+        {
+          "info": {
+            "name": "Delete Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Soft deletes a session by setting its status to DELETED."
+        },
+        {
+          "info": {
+            "name": "List Checkpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/sessions/:session_id/checkpoints",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of checkpoints to return (default: 50, max: 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination (default: 0)"
+              },
+              {
+                "name": "include_state",
+                "value": "",
+                "type": "query",
+                "description": "Include full state in response (default: false)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all checkpoints for a session."
+        },
+        {
+          "info": {
+            "name": "Create Checkpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/sessions/:session_id/checkpoints",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds a checkpoint to an existing session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Chat API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OpenAI-compatible Chat Completion API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint provides OpenAI-compatible chat completions using stakai for inference.\n\nModel format: `provider/model` (e.g., `anthropic/claude-sonnet-4-5-20250929`)\n\nSupported providers:\n- `anthropic`: Claude models\n- `openai`: GPT models\n- `google`: Gemini models\n- `fireworks-ai`: DeepSeek, Qwen, GLM, MiniMax, ERNIE, Kimi models (via Fireworks.ai)\n\nHeaders:\n- `Authorization`: Bearer token (required)"
+        },
+        {
+          "info": {
+            "name": "Cancel a chat completion request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/chat/requests/:request_id/cancel",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "Request ID to cancel"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel a chat completion request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,411 @@
+{
+  "item": [
+    {
+      "id": "22934130-38e9-4472-94a1-a2658cf6e45c",
+      "name": "Agents (V2)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "023ab277-ae83-45de-a47e-1409cbc7195a",
+          "name": "List Agent Sessions",
+          "request": {
+            "name": "List Agent Sessions",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                ":account",
+                "agents",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "flow_name",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "flow_version_id",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b436ff3f-d537-4cf7-b9be-6b6eeb733b9d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flow_name",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "flow_version_id",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"e771b046-db7c-5261-9526-cf52d82fafd4\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PUBLIC\",\n    \"checkpoints\": [\n      {\n        \"id\": \"f27d6ec4-d014-37f6-79b3-3a7caad228fd\",\n        \"status\": \"BLOCKED\",\n        \"execution_depth\": 8008,\n        \"created_at\": \"1972-10-29T18:17:09.498Z\",\n        \"updated_at\": \"1966-03-18T13:19:52.860Z\",\n        \"parent\": null\n      },\n      {\n        \"id\": \"ef44c913-4ad2-84ac-d143-4e785292c51a\",\n        \"status\": \"BLOCKED\",\n        \"execution_depth\": 3192,\n        \"created_at\": \"2010-03-31T10:39:09.742Z\",\n        \"updated_at\": \"1992-05-11T21:44:35.869Z\",\n        \"parent\": null\n      }\n    ],\n    \"created_at\": \"2010-07-01T15:37:10.015Z\",\n    \"updated_at\": \"1973-04-03T03:00:56.362Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  },\n  {\n    \"id\": \"60aa794c-de1a-ceb0-5a40-523fb004a45b\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PRIVATE\",\n    \"checkpoints\": [\n      {\n        \"id\": \"556cc35c-b8e6-caf7-ef67-343d63175d3d\",\n        \"status\": \"FAILED\",\n        \"execution_depth\": 125,\n        \"created_at\": \"1973-09-16T09:36:23.325Z\",\n        \"updated_at\": \"1998-06-21T06:50:37.564Z\",\n        \"parent\": null\n      },\n      {\n        \"id\": \"a1b60395-ab2a-65a3-eadc-62f1043e0939\",\n        \"status\": \"RUNNING\",\n        \"execution_depth\": 2811,\n        \"created_at\": \"1976-11-17T15:23:19.194Z\",\n        \"updated_at\": \"1957-12-07T02:59:25.428Z\",\n        \"parent\": null\n      }\n    ],\n    \"created_at\": \"1960-05-07T13:27:12.018Z\",\n    \"updated_at\": \"1953-02-16T04:20:59.395Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d6563e6-130a-43f0-82d4-63231b948710",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flow_name",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "flow_version_id",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c2fead4-85b5-4983-a107-c0e05d4f1cb9",
+          "name": "Get User Session Usage Statistics for Dashboard",
+          "request": {
+            "name": "Get User Session Usage Statistics for Dashboard",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                ":account",
+                "agents",
+                "sessions",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4d0b37b7-0586-43ea-b1c6-657cd0d13228",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analysis_period\": \"string\",\n  \"total_sessions\": 4475,\n  \"sessions_with_activity\": 5783,\n  \"tools_usage\": [\n    {\n      \"tool_name\": \"string\",\n      \"display_name\": \"string\",\n      \"usage_counts\": {\n        \"successful\": 7500,\n        \"failed\": 689,\n        \"aborted\": 5059,\n        \"total\": 9879\n      },\n      \"time_saved_per_call\": 6473,\n      \"time_saved_seconds\": 9322\n    },\n    {\n      \"tool_name\": \"string\",\n      \"display_name\": \"string\",\n      \"usage_counts\": {\n        \"successful\": 3750,\n        \"failed\": 9148,\n        \"aborted\": 2678,\n        \"total\": 4203\n      },\n      \"time_saved_per_call\": 3480,\n      \"time_saved_seconds\": 4592\n    }\n  ],\n  \"total_tool_calls\": 133,\n  \"successful_tool_calls\": 9991,\n  \"failed_tool_calls\": 4483,\n  \"aborted_tool_calls\": 8852,\n  \"total_time_saved_seconds\": 3165,\n  \"from_date\": \"string\",\n  \"to_date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fca6117-e24b-4eeb-a540-d2fd8a583323",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv2.stakpak.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fe51eaac-68f8-4a48-a97a-e74629df65e8",
+    "name": "Stakpak Account Agents (V2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Stakpak platform",
+      "type": "text/plain"
+    }
+  }
+}

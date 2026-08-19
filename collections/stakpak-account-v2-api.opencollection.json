@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Account (V2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account (V2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get My Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/account/integrations",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get My Integrations"
+        },
+        {
+          "info": {
+            "name": "Delete Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v2/:account/account/integrations/:integration",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Integration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

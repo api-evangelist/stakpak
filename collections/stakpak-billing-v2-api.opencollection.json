@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Billing (V2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing (V2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Billing Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/billing",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Billing Customer"
+        },
+        {
+          "info": {
+            "name": "Attach Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/billing/attach",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attach Product"
+        },
+        {
+          "info": {
+            "name": "Cancel Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/billing/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel Product"
+        },
+        {
+          "info": {
+            "name": "Create Checkout Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/billing/checkout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Checkout Session"
+        },
+        {
+          "info": {
+            "name": "Get Billing Portal URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/billing/portal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Billing Portal URL"
+        },
+        {
+          "info": {
+            "name": "Get Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/billing/products/:product_id",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Product"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

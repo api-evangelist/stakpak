@@ -1,0 +1,325 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Organizations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Organization"
+        },
+        {
+          "info": {
+            "name": "Check Organization Name Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/check-name",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check Organization Name Availability"
+        },
+        {
+          "info": {
+            "name": "Validate Invitation Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/invitations/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Public endpoint - no authentication required.\nReturns invitation details including whether the user already has an account."
+        },
+        {
+          "info": {
+            "name": "Accept Invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/invitations/:token/accept",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Accepts an invitation for the authenticated user.\nThe user's email must match the invitation email."
+        },
+        {
+          "info": {
+            "name": "Update Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Organization"
+        },
+        {
+          "info": {
+            "name": "Update My Organization Invitation status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/invitation",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update My Organization Invitation status"
+        },
+        {
+          "info": {
+            "name": "List Pending Invitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/invitations",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all pending invitations for an organization.\nRequires OWNER or ADMIN role."
+        },
+        {
+          "info": {
+            "name": "Send Invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/invitations",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sends an invitation email to join the organization.\nRequires OWNER or ADMIN role.\n\nFor privacy reasons, this endpoint always returns success regardless of\nwhether the email exists in the system or already has a pending invitation."
+        },
+        {
+          "info": {
+            "name": "Revoke Invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/invitations/:invitation_id",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "invitation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Revokes a pending invitation.\nRequires OWNER or ADMIN role."
+        },
+        {
+          "info": {
+            "name": "Resend Invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/invitations/:invitation_id/resend",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "invitation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Resends an invitation email with a new token.\nRequires OWNER or ADMIN role."
+        },
+        {
+          "info": {
+            "name": "Get Organization Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/members",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Organization Members"
+        },
+        {
+          "info": {
+            "name": "Invite Organization Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/members",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Invite Organization Member"
+        },
+        {
+          "info": {
+            "name": "Delete Organization Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/organizations/:org_name/members/:member_name",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "member_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes a member from the organization.\nRequires OWNER or ADMIN role.\nCannot remove yourself or the last owner."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

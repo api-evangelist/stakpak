@@ -1,0 +1,1055 @@
+{
+  "item": [
+    {
+      "id": "84e462b2-0de1-41be-a7c2-2008a2e262c2",
+      "name": "Knowledge Registry",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "819ced8e-973a-41e5-a76a-38050d19aa68",
+          "name": "List Knowledge Registry Paks",
+          "request": {
+            "name": "List Knowledge Registry Paks",
+            "description": {
+              "content": "List Knowledge Registry paks with sorting (trending, popular, recent), time window filtering, and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<null>",
+                  "description": "Sort order: TRENDING, MOST_POPULAR, or RECENT. Defaults to TRENDING."
+                },
+                {
+                  "disabled": false,
+                  "key": "time_window",
+                  "value": "<null>",
+                  "description": "Time window for download counts: DAILY, WEEKLY, MONTHLY, or ALL_TIME. Defaults to ALL_TIME."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>",
+                  "description": "Maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>",
+                  "description": "Number of results to skip for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "e0b2bb7a-8cad-46ea-aed9-293e2d548e09",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort_by",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "time_window",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"eaaec070-f49c-677b-74d4-dfdc699650b4\",\n      \"name\": \"string\",\n      \"owner_name\": \"string\",\n      \"uri\": \"string\",\n      \"full_uri\": \"string\",\n      \"repository_url\": \"string\",\n      \"visibility\": \"PRIVATE\",\n      \"status\": \"DEPRECATED\",\n      \"download_count\": 1516,\n      \"usage_count\": 9519,\n      \"total_downloads\": 4384,\n      \"total_usages\": 4220,\n      \"created_at\": \"2015-12-12T15:09:36.622Z\",\n      \"updated_at\": \"1959-07-20T03:25:24.186Z\",\n      \"description\": \"string\",\n      \"path\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"latest_version\": null\n    },\n    {\n      \"id\": \"e31ade9a-c3cf-ccf4-a480-fc22e241edea\",\n      \"name\": \"string\",\n      \"owner_name\": \"string\",\n      \"uri\": \"string\",\n      \"full_uri\": \"string\",\n      \"repository_url\": \"string\",\n      \"visibility\": \"PRIVATE\",\n      \"status\": \"DEPRECATED\",\n      \"download_count\": 9054,\n      \"usage_count\": 7659,\n      \"total_downloads\": 7938,\n      \"total_usages\": 6932,\n      \"created_at\": \"1984-12-06T02:28:12.205Z\",\n      \"updated_at\": \"2005-04-14T14:24:03.974Z\",\n      \"description\": \"string\",\n      \"path\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"latest_version\": null\n    }\n  ],\n  \"total_count\": 1133\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "650167e7-7983-4883-8dfb-4d8e441e3c11",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort_by",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "time_window",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7db538a6-3635-4c9a-af67-bdff1352ee5c",
+          "name": "Get Knowledge Registry Pak Content",
+          "request": {
+            "name": "Get Knowledge Registry Pak Content",
+            "description": {
+              "content": "Fetch file or directory content from a pak by URI. The URI format is: owner/pak_name[@version][/path]\nReturns file content for files, or a recursive directory tree for directories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paks",
+                "content",
+                ":uri"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uri",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "cca2ee6e-da98-4558-a981-29245d77a074",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "content",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uri\": \"string\",\n  \"content\": {\n    \"content\": \"string\",\n    \"type\": \"File\"\n  },\n  \"pak_version_id\": \"2dabe414-e2a4-d86f-b88a-baad29afcc7e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9166d08-0c3a-4ef7-a3df-976d3668c446",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "content",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad0aab98-23d8-4c39-b921-10c440f80f05",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "content",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f78262c5-1321-4a00-89a3-4c05a862631b",
+          "name": "Get Knowledge Registry Pak Install Info",
+          "request": {
+            "name": "Get Knowledge Registry Pak Install Info",
+            "description": {
+              "content": "Resolves pak metadata for installation and records a download event.\nThe URI format is: owner/pak_name[@version]",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paks",
+                "install",
+                ":uri"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uri",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "07a9c2d7-c95a-4769-b8eb-c346f6739452",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "install",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pak\": {\n    \"id\": \"string\",\n    \"owner\": \"string\",\n    \"name\": \"string\",\n    \"visibility\": \"PRIVATE\",\n    \"description\": \"string\"\n  },\n  \"version\": {\n    \"version\": \"string\",\n    \"tag\": \"string\",\n    \"commit_hash\": \"string\",\n    \"published_at\": \"1970-11-28T06:53:58.814Z\"\n  },\n  \"repository\": {\n    \"url\": \"string\",\n    \"clone_url\": \"string\",\n    \"ssh_url\": \"string\",\n    \"default_branch\": \"string\"\n  },\n  \"install\": {\n    \"path\": \"string\",\n    \"files\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cca3da3-e784-4852-b562-9557883da3c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "install",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c09769ec-d4c8-42b5-84f6-532828c6e1a3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "install",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ac4b502-0468-4bf2-b21a-a4aa6e4d4185",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "install",
+                    ":uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uri",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2641d7eb-0bff-4691-88e1-bb517b13969e",
+          "name": "Publish a Pak to the Knowledge Registry",
+          "request": {
+            "name": "Publish a Pak to the Knowledge Registry",
+            "description": {
+              "content": "Publishes a pak version to the registry. Creates the pak if it doesn't exist, otherwise creates a new version.\nThe CLI handles git operations (commit, tag, push), then calls this endpoint to index the pak.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paks",
+                "publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"repository\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"path\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1ca2183-4414-4921-bc06-947bd6df0e51",
+              "name": "Pak published successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"path\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75be0b55-cb6a-4750-9518-870398dbdd50",
+              "name": "Validation error (invalid tag, missing SKILL.md, version mismatch, etc.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"path\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57dc90c1-d872-4ed8-ac6c-ed60d8c53e10",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"path\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05afe7ee-1381-4bd5-bf9b-4c005cb3cfec",
+              "name": "Not authorized to publish to this namespace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"repository\": \"<string>\",\n  \"branch\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"path\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6ae06e0-4d98-4779-8a22-4d881823d819",
+          "name": "Search Knowledge Registry Paks",
+          "request": {
+            "name": "Search Knowledge Registry Paks",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "paks",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string,null>",
+                  "description": "Owner name when searching by identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "pak_name",
+                  "value": "<string,null>",
+                  "description": "Pak name when searching by identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string,null>",
+                  "description": "Freeform keyword query. Used when owner/pak_name are not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "35723e2a-45b7-4de7-99a9-809c9ff5a34f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "pak_name",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"a1f038b8-f449-7565-f978-2e9bd6ad408a\",\n      \"name\": \"string\",\n      \"owner_name\": \"string\",\n      \"uri\": \"string\",\n      \"full_uri\": \"string\",\n      \"repository_url\": \"string\",\n      \"visibility\": \"UNLISTED\",\n      \"status\": \"DEPRECATED\",\n      \"download_count\": 5927,\n      \"usage_count\": 676,\n      \"total_downloads\": 6994,\n      \"total_usages\": 9049,\n      \"created_at\": \"1959-09-21T03:43:25.751Z\",\n      \"updated_at\": \"2017-07-13T10:14:57.312Z\",\n      \"description\": \"string\",\n      \"path\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"latest_version\": null\n    },\n    {\n      \"id\": \"4f0110df-258c-d7d5-257f-d483b759e1ef\",\n      \"name\": \"string\",\n      \"owner_name\": \"string\",\n      \"uri\": \"string\",\n      \"full_uri\": \"string\",\n      \"repository_url\": \"string\",\n      \"visibility\": \"UNLISTED\",\n      \"status\": \"DEPRECATED\",\n      \"download_count\": 7418,\n      \"usage_count\": 8219,\n      \"total_downloads\": 3524,\n      \"total_usages\": 7885,\n      \"created_at\": \"2025-01-03T20:54:29.520Z\",\n      \"updated_at\": \"1996-05-03T07:48:54.670Z\",\n      \"description\": \"string\",\n      \"path\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"latest_version\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5bd1854-3cde-4ce4-81ab-6119fe2aad1f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "pak_name",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv2.stakpak.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "90931731-eab2-4459-9577-9afe1fb47be9",
+    "name": "Stakpak Account Knowledge Registry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Stakpak platform",
+      "type": "text/plain"
+    }
+  }
+}

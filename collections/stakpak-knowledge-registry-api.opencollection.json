@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Knowledge Registry API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge Registry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Knowledge Registry Paks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/paks",
+            "params": [
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort order: TRENDING, MOST_POPULAR, or RECENT. Defaults to TRENDING."
+              },
+              {
+                "name": "time_window",
+                "value": "",
+                "type": "query",
+                "description": "Time window for download counts: DAILY, WEEKLY, MONTHLY, or ALL_TIME. Defaults to ALL_TIME."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination."
+              }
+            ]
+          },
+          "docs": "List Knowledge Registry paks with sorting (trending, popular, recent), time window filtering, and pagination."
+        },
+        {
+          "info": {
+            "name": "Get Knowledge Registry Pak Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/paks/content/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch file or directory content from a pak by URI. The URI format is: owner/pak_name[@version][/path]\nReturns file content for files, or a recursive directory tree for directories."
+        },
+        {
+          "info": {
+            "name": "Get Knowledge Registry Pak Install Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/paks/install/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resolves pak metadata for installation and records a download event.\nThe URI format is: owner/pak_name[@version]"
+        },
+        {
+          "info": {
+            "name": "Publish a Pak to the Knowledge Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/paks/publish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Publishes a pak version to the registry. Creates the pak if it doesn't exist, otherwise creates a new version.\nThe CLI handles git operations (commit, tag, push), then calls this endpoint to index the pak."
+        },
+        {
+          "info": {
+            "name": "Search Knowledge Registry Paks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/paks/search",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query",
+                "description": "Owner name when searching by identifier."
+              },
+              {
+                "name": "pak_name",
+                "value": "",
+                "type": "query",
+                "description": "Pak name when searching by identifier."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Freeform keyword query. Used when owner/pak_name are not provided."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Knowledge Registry Paks"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get My Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/account",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get My Details"
+        },
+        {
+          "info": {
+            "name": "Patch My Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://apiv2.stakpak.dev/v1/account",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch My Details"
+        },
+        {
+          "info": {
+            "name": "List Api Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/account/api-keys",
+            "auth": {
+              "type": "apikey",
+              "key": ".idToken",
+              "value": "{{.idToken}}",
+              "placement": "query"
+            }
+          },
+          "docs": "List Api Keys"
+        },
+        {
+          "info": {
+            "name": "Create Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/account/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": ".idToken",
+              "value": "{{.idToken}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Create Api Key"
+        },
+        {
+          "info": {
+            "name": "Delete Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/account/api-keys/:key_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": ".idToken",
+              "value": "{{.idToken}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Delete Api Key"
+        },
+        {
+          "info": {
+            "name": "Get My Invitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/account/invitations",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get My Invitations"
+        },
+        {
+          "info": {
+            "name": "Get My Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/account/organizations",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get My Organizations"
+        },
+        {
+          "info": {
+            "name": "Get Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/account/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Account Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

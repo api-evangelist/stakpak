@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Agents (V2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents (V2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Agent Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/agents/sessions",
+            "params": [
+              {
+                "name": "flow_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flow_version_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Agent Sessions"
+        },
+        {
+          "info": {
+            "name": "Get User Session Usage Statistics for Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/agents/sessions/stats",
+            "params": [
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get User Session Usage Statistics for Dashboard"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

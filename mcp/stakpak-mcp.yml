@@ -2,43 +2,52 @@ generated: '2026-07-21'
 method: searched
 status: published
 source: https://github.com/stakpak/mcp, https://stakpak.gitbook.io/docs/api/mcp-server.md
-description: >-
-  Stakpak ships an official MCP surface in two forms: (1) a standalone Node MCP server package
-  (@stakpak/mcp) that connects to the Stakpak API for infrastructure-code generation, and (2) the
-  Stakpak agent CLI itself, which runs an MCP server via `stakpak mcp start` in local, remote, or
-  combined tool modes. The hosted API also exposes an MCP endpoint at POST /v1/mcp.
+description: 'Stakpak ships an official MCP surface in two forms: (1) a standalone Node MCP server package
+  (@stakpak/mcp) that connects to the Stakpak API for infrastructure-code generation, and (2) the Stakpak
+  agent CLI itself, which runs an MCP server via `stakpak mcp start` in local, remote, or combined tool
+  modes. The hosted API also exposes an MCP endpoint at POST /v1/mcp.'
 servers:
-  - name: "@stakpak/mcp"
-    transport: stdio
-    package: "@stakpak/mcp"
-    install: npx @stakpak/mcp@latest
-    repo: https://github.com/stakpak/mcp
-    env:
-      - STAKPAK_API_KEY
-    client_config: |
-      {
-        "mcpServers": {
-          "stakpak": {
-            "command": "npx",
-            "args": ["@stakpak/mcp@latest", "--output=resource"],
-            "env": { "STAKPAK_API_KEY": "<your-stakpak-api-key>" }
-          }
-        }
-      }
-    clients: [Claude Desktop, Cursor, Windsurf]
-    tools:
-      - name: generate_infrastructure_code
-        description: Generate infrastructure code (Terraform, Kubernetes, Dockerfile, GitHub Actions) via the Stakpak API.
-  - name: stakpak-agent-cli
-    transport: stdio
-    command: stakpak mcp start
-    repo: https://github.com/stakpak/agent
-    modes:
-      - {mode: local, flag: "--tool-mode local", description: File operations and command execution only.}
-      - {mode: remote, flag: "--tool-mode remote", description: AI-powered code generation and search tools.}
-      - {mode: combined, flag: "--tool-mode combined", description: All tools with full security features (default).}
-  - name: hosted-api-mcp
-    transport: http
-    url: https://apiv2.stakpak.dev/v1/mcp
-    source_operation: openapi/stakpak-openapi-original.yml#mcp_handler
-    description: MCP Server API endpoint on the hosted Stakpak API.
+- name: '@stakpak/mcp'
+  transport: stdio
+  package: '@stakpak/mcp'
+  install: npx @stakpak/mcp@latest
+  repo: https://github.com/stakpak/mcp
+  env:
+  - STAKPAK_API_KEY
+  client_config: "{\n  \"mcpServers\": {\n    \"stakpak\": {\n      \"command\": \"npx\",\n      \"args\"\
+    : [\"@stakpak/mcp@latest\", \"--output=resource\"],\n      \"env\": { \"STAKPAK_API_KEY\": \"<your-stakpak-api-key>\"\
+    \ }\n    }\n  }\n}\n"
+  clients:
+  - Claude Desktop
+  - Cursor
+  - Windsurf
+  tools:
+  - name: generate_infrastructure_code
+    description: Generate infrastructure code (Terraform, Kubernetes, Dockerfile, GitHub Actions) via
+      the Stakpak API.
+- name: stakpak-agent-cli
+  transport: stdio
+  command: stakpak mcp start
+  repo: https://github.com/stakpak/agent
+  modes:
+  - mode: local
+    flag: --tool-mode local
+    description: File operations and command execution only.
+  - mode: remote
+    flag: --tool-mode remote
+    description: AI-powered code generation and search tools.
+  - mode: combined
+    flag: --tool-mode combined
+    description: All tools with full security features (default).
+- name: hosted-api-mcp
+  transport: http
+  url: https://apiv2.stakpak.dev/v1/mcp
+  source_operation: openapi/stakpak-openapi-original.yml#mcp_handler
+  description: MCP Server API endpoint on the hosted Stakpak API.
+deployment:
+  mode: remote
+  endpoint: https://apiv2.stakpak.dev/v1/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

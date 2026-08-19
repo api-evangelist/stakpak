@@ -1,0 +1,2165 @@
+{
+  "item": [
+    {
+      "id": "6088bb20-e792-485c-b183-612cb372ba10",
+      "name": "Agents",
+      "description": {
+        "content": "Agents API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "97decb47-80a2-4351-96b4-e701eae502f9",
+          "name": "Get Agent Checkpoint Details",
+          "request": {
+            "name": "Get Agent Checkpoint Details",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "checkpoints",
+                ":checkpoint_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "checkpoint_id",
+                  "description": "(Required) Checkpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a60d9e93-f4c9-4f8f-9207-64ce9fe5effb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "checkpoints",
+                    ":checkpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkpoint\": {\n    \"id\": \"f746131c-a30e-d77b-9901-f7da237fd872\",\n    \"status\": \"COMPLETE\",\n    \"execution_depth\": 5674,\n    \"created_at\": \"1965-04-12T16:29:24.720Z\",\n    \"updated_at\": \"1982-03-01T10:54:46.690Z\",\n    \"parent\": null\n  },\n  \"session\": {\n    \"id\": \"cf568779-188c-96e8-371e-dc42f433188d\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PRIVATE\",\n    \"created_at\": \"2000-12-05T01:47:26.137Z\",\n    \"updated_at\": \"1966-11-08T07:47:00.251Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  },\n  \"output\": {\n    \"messages\": [\n      {\n        \"role\": \"assistant\",\n        \"completed_at\": 2551,\n        \"content\": null,\n        \"cost\": 6727.641256962604,\n        \"created_at\": 4137,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"tool\",\n        \"completed_at\": 4304,\n        \"content\": null,\n        \"cost\": 7559.562020730437,\n        \"created_at\": 8537,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ],\n    \"node_states\": {\n      \"key_0\": {}\n    },\n    \"agent_id\": \"pablo:v1\"\n  },\n  \"token_usage\": {\n    \"prompt_tokens\": 4443,\n    \"completion_tokens\": 5058,\n    \"total_tokens\": 7093,\n    \"prompt_tokens_details\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ce62c5b-968d-42d4-9c8a-5a15d0f6b136",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "checkpoints",
+                    ":checkpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b19364e2-dc41-4c38-83e4-c007dff891e3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "checkpoints",
+                    ":checkpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4429ab91-fc16-4441-b336-c1456dcaf2c0",
+          "name": "List Agent Memories",
+          "request": {
+            "name": "List Agent Memories",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "memories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af89c878-ce31-4ea2-978d-da8150c7bd4f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "memories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"0a0f0c4d-c343-d228-c1be-79805868a60a\",\n      \"uri\": \"string\",\n      \"title\": \"string\",\n      \"content\": \"string\",\n      \"mime_type\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"links_to\": [\n        {\n          \"id\": \"e3e6a6d8-63c6-7099-e580-13e95477e089\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        },\n        {\n          \"id\": \"810c21ff-b9b7-82ca-ea8e-509e0553c369\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        }\n      ],\n      \"linked_from\": [\n        {\n          \"id\": \"4b892b37-be09-8269-9109-f70a4a1c0fbf\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        },\n        {\n          \"id\": \"91301fb6-fd92-8a18-fa9b-a01c4d97829a\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        }\n      ],\n      \"created_at\": \"1977-08-26T03:36:12.298Z\",\n      \"updated_at\": \"2006-02-22T14:24:38.642Z\"\n    },\n    {\n      \"id\": \"3daee7dd-8ff7-87ac-bae2-3cbc1f503439\",\n      \"uri\": \"string\",\n      \"title\": \"string\",\n      \"content\": \"string\",\n      \"mime_type\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"links_to\": [\n        {\n          \"id\": \"f6472ce6-02ad-54fe-5b16-0c035a7227e3\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        },\n        {\n          \"id\": \"917184b2-2ebb-94f6-63ae-a103dc583e31\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        }\n      ],\n      \"linked_from\": [\n        {\n          \"id\": \"9c163e23-645c-d2f2-41f8-5d28f0c57395\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        },\n        {\n          \"id\": \"59cf328a-213a-f96a-f347-45c96b6b96a3\",\n          \"uri\": \"string\",\n          \"title\": \"string\",\n          \"reason\": \"string\",\n          \"type\": null\n        }\n      ],\n      \"created_at\": \"1954-06-29T02:06:17.942Z\",\n      \"updated_at\": \"2010-02-14T12:59:19.099Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08915079-cd9e-4842-a5ab-4f60df954d21",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "memories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bed2541-920b-48e7-9a05-218fe6d751d3",
+          "name": "List Agent Sessions",
+          "request": {
+            "name": "List Agent Sessions",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "flow_name",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "flow_version_id",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "69ad2b32-f6f7-413c-aeab-5d56f3ddaf4d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flow_name",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "flow_version_id",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"5a4afafa-3260-bcee-472a-464ba15b35d3\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PUBLIC\",\n    \"checkpoints\": [\n      {\n        \"id\": \"629b5c44-1734-950f-ec0b-bb178e0a8ef4\",\n        \"status\": \"RUNNING\",\n        \"execution_depth\": 9649,\n        \"created_at\": \"2008-08-17T10:19:48.797Z\",\n        \"updated_at\": \"2014-08-12T07:12:28.698Z\",\n        \"parent\": null\n      },\n      {\n        \"id\": \"18f6c100-4d1b-483b-669f-ca86c37d2443\",\n        \"status\": \"BLOCKED\",\n        \"execution_depth\": 6381,\n        \"created_at\": \"1985-10-03T22:34:17.696Z\",\n        \"updated_at\": \"2018-05-21T09:18:51.952Z\",\n        \"parent\": null\n      }\n    ],\n    \"created_at\": \"1967-10-02T14:39:55.521Z\",\n    \"updated_at\": \"2017-09-07T01:50:22.144Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  },\n  {\n    \"id\": \"e07b1221-a867-eb94-1bfe-788ccfab1117\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PUBLIC\",\n    \"checkpoints\": [\n      {\n        \"id\": \"da792958-59fb-5ec9-d1e8-31e3741bac68\",\n        \"status\": \"BLOCKED\",\n        \"execution_depth\": 2341,\n        \"created_at\": \"1971-12-10T21:26:45.691Z\",\n        \"updated_at\": \"2025-03-02T22:16:06.985Z\",\n        \"parent\": null\n      },\n      {\n        \"id\": \"f1fa36cb-3edc-da7d-c0a3-d20c78e8ca39\",\n        \"status\": \"FAILED\",\n        \"execution_depth\": 2106,\n        \"created_at\": \"2019-02-18T00:14:38.050Z\",\n        \"updated_at\": \"2023-11-07T23:29:00.729Z\",\n        \"parent\": null\n      }\n    ],\n    \"created_at\": \"2003-01-11T21:25:51.576Z\",\n    \"updated_at\": \"1968-10-29T06:02:20.319Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3b61e2b-d605-4085-9de2-ddd81964671f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flow_name",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "flow_version_id",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d924f044-481d-4987-8936-f304e9ea7d6d",
+          "name": "Extract Agent Session Memory",
+          "request": {
+            "name": "Extract Agent Session Memory",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions",
+                "checkpoints",
+                ":checkpoint_id",
+                "extract-memory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "checkpoint_id",
+                  "description": "(Required) Checkpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a6f82432-2bcf-47af-b922-52269e8ef92d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id",
+                    "extract-memory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"faba4887-7779-c38b-bd32-ee3feef26d9a\",\n    \"uri\": \"string\",\n    \"title\": \"string\",\n    \"content\": \"string\",\n    \"mime_type\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"links_to\": [\n      {\n        \"id\": \"acbaf044-d738-498d-d088-5c42f61c8c5a\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"b5133fac-7f54-7431-fe73-ca8c3bcea3b7\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"linked_from\": [\n      {\n        \"id\": \"48c39aec-424b-5ede-8e26-c464334405d6\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"5ee04b51-9898-a30c-4336-451673eb3261\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"created_at\": \"1982-09-28T00:41:00.965Z\",\n    \"updated_at\": \"1952-05-31T08:05:24.516Z\"\n  },\n  {\n    \"id\": \"4a2024ff-f5f0-c028-f6dc-ce29049e38d5\",\n    \"uri\": \"string\",\n    \"title\": \"string\",\n    \"content\": \"string\",\n    \"mime_type\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"links_to\": [\n      {\n        \"id\": \"73904136-e833-52aa-9ac9-d149dfdf0878\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"7a730294-aa3e-91f6-555b-5279ba92f295\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"linked_from\": [\n      {\n        \"id\": \"7367fc21-e81f-3973-0689-9e1ce77f5d8b\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"8fe7f1f0-ec57-a026-0bba-2d7ed98ff3e3\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"created_at\": \"2025-11-23T14:42:02.902Z\",\n    \"updated_at\": \"2005-12-18T11:41:34.946Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c5ee7ad-a96c-4ce2-a00e-4a3b5574cc9b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id",
+                    "extract-memory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6ae25e8-1ce2-4118-afbd-0e39da9c6b00",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id",
+                    "extract-memory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dd65cb9-ffaf-4d2d-bd84-7b8d253d51ec",
+          "name": "Get User Session Usage Statistics for Dashboard",
+          "request": {
+            "name": "Get User Session Usage Statistics for Dashboard",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7a16ea8f-0988-4c4d-9456-55b507d7a0c9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analysis_period\": \"string\",\n  \"total_sessions\": 8400,\n  \"sessions_with_activity\": 2359,\n  \"tools_usage\": [\n    {\n      \"tool_name\": \"string\",\n      \"display_name\": \"string\",\n      \"usage_counts\": {\n        \"successful\": 4577,\n        \"failed\": 781,\n        \"aborted\": 7651,\n        \"total\": 7421\n      },\n      \"time_saved_per_call\": 8341,\n      \"time_saved_seconds\": 7577\n    },\n    {\n      \"tool_name\": \"string\",\n      \"display_name\": \"string\",\n      \"usage_counts\": {\n        \"successful\": 7666,\n        \"failed\": 3703,\n        \"aborted\": 2195,\n        \"total\": 8712\n      },\n      \"time_saved_per_call\": 93,\n      \"time_saved_seconds\": 2561\n    }\n  ],\n  \"total_tool_calls\": 9435,\n  \"successful_tool_calls\": 1205,\n  \"failed_tool_calls\": 1325,\n  \"aborted_tool_calls\": 6830,\n  \"total_time_saved_seconds\": 9164,\n  \"from_date\": \"string\",\n  \"to_date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa7876d0-edb5-482f-9583-f8f550795657",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9079494d-319e-4f44-a376-20e834748d56",
+          "name": "Update Agent Session Visibility",
+          "request": {
+            "name": "Update Agent Session Visibility",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions",
+                ":id",
+                "visibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visibility\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e60fa9bb-4aab-4eb7-8b74-7bf41041f20c",
+              "name": "Session visibility updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":id",
+                    "visibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e1f1b742-f0d2-41e7-9e8c-01c56e081468",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":id",
+                    "visibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c968c0db-7055-4114-87cf-eca5e754f9d4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":id",
+                    "visibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "407520cf-9242-4097-8a50-8f5b6e58b397",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":id",
+                    "visibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14042951-f29a-4c10-9d15-6eaa2175a722",
+          "name": "Get Agent Session Details",
+          "request": {
+            "name": "Get Agent Session Details",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "60d7bf99-b151-43c0-91c4-3f4454ed6cd6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkpoint\": {\n    \"id\": \"f746131c-a30e-d77b-9901-f7da237fd872\",\n    \"status\": \"COMPLETE\",\n    \"execution_depth\": 5674,\n    \"created_at\": \"1965-04-12T16:29:24.720Z\",\n    \"updated_at\": \"1982-03-01T10:54:46.690Z\",\n    \"parent\": null\n  },\n  \"session\": {\n    \"id\": \"cf568779-188c-96e8-371e-dc42f433188d\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PRIVATE\",\n    \"created_at\": \"2000-12-05T01:47:26.137Z\",\n    \"updated_at\": \"1966-11-08T07:47:00.251Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  },\n  \"output\": {\n    \"messages\": [\n      {\n        \"role\": \"assistant\",\n        \"completed_at\": 2551,\n        \"content\": null,\n        \"cost\": 6727.641256962604,\n        \"created_at\": 4137,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"tool\",\n        \"completed_at\": 4304,\n        \"content\": null,\n        \"cost\": 7559.562020730437,\n        \"created_at\": 8537,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ],\n    \"node_states\": {\n      \"key_0\": {}\n    },\n    \"agent_id\": \"pablo:v1\"\n  },\n  \"token_usage\": {\n    \"prompt_tokens\": 4443,\n    \"completion_tokens\": 5058,\n    \"total_tokens\": 7093,\n    \"prompt_tokens_details\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bf4be72-5c2a-42b8-b4a0-3e5c8055c909",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1af260a9-c98d-4e0b-b5f0-61ccbe05b9ad",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c38b22d-b26e-4a0c-bed1-3b141b6bce3c",
+          "name": "Get Agent Session Latest Checkpoint",
+          "request": {
+            "name": "Get Agent Session Latest Checkpoint",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions",
+                ":session_id",
+                "checkpoints",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a605fe66-986c-4419-bc33-09990e30fc5e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkpoint\": {\n    \"id\": \"f746131c-a30e-d77b-9901-f7da237fd872\",\n    \"status\": \"COMPLETE\",\n    \"execution_depth\": 5674,\n    \"created_at\": \"1965-04-12T16:29:24.720Z\",\n    \"updated_at\": \"1982-03-01T10:54:46.690Z\",\n    \"parent\": null\n  },\n  \"session\": {\n    \"id\": \"cf568779-188c-96e8-371e-dc42f433188d\",\n    \"title\": \"string\",\n    \"agent_id\": \"pablo:v1\",\n    \"visibility\": \"PRIVATE\",\n    \"created_at\": \"2000-12-05T01:47:26.137Z\",\n    \"updated_at\": \"1966-11-08T07:47:00.251Z\",\n    \"flow_ref\": null,\n    \"owner\": null\n  },\n  \"output\": {\n    \"messages\": [\n      {\n        \"role\": \"assistant\",\n        \"completed_at\": 2551,\n        \"content\": null,\n        \"cost\": 6727.641256962604,\n        \"created_at\": 4137,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"tool\",\n        \"completed_at\": 4304,\n        \"content\": null,\n        \"cost\": 7559.562020730437,\n        \"created_at\": 8537,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ],\n    \"node_states\": {\n      \"key_0\": {}\n    },\n    \"agent_id\": \"pablo:v1\"\n  },\n  \"token_usage\": {\n    \"prompt_tokens\": 4443,\n    \"completion_tokens\": 5058,\n    \"total_tokens\": 7093,\n    \"prompt_tokens_details\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91e1938b-3eec-46d5-9cef-ee0e7856f9bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71e18b13-6970-4145-ac89-089e0b286f8a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13e5aa23-2a41-464e-b811-67f9567259f7",
+          "name": "Get Single Session Usage Statistics",
+          "request": {
+            "name": "Get Single Session Usage Statistics",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "sessions",
+                ":session_id",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b913f89a-b444-4475-84f2-676602dcc15c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analysis_period\": \"string\",\n  \"total_sessions\": 8400,\n  \"sessions_with_activity\": 2359,\n  \"tools_usage\": [\n    {\n      \"tool_name\": \"string\",\n      \"display_name\": \"string\",\n      \"usage_counts\": {\n        \"successful\": 4577,\n        \"failed\": 781,\n        \"aborted\": 7651,\n        \"total\": 7421\n      },\n      \"time_saved_per_call\": 8341,\n      \"time_saved_seconds\": 7577\n    },\n    {\n      \"tool_name\": \"string\",\n      \"display_name\": \"string\",\n      \"usage_counts\": {\n        \"successful\": 7666,\n        \"failed\": 3703,\n        \"aborted\": 2195,\n        \"total\": 8712\n      },\n      \"time_saved_per_call\": 93,\n      \"time_saved_seconds\": 2561\n    }\n  ],\n  \"total_tool_calls\": 9435,\n  \"successful_tool_calls\": 1205,\n  \"failed_tool_calls\": 1325,\n  \"aborted_tool_calls\": 6830,\n  \"total_time_saved_seconds\": 9164,\n  \"from_date\": \"string\",\n  \"to_date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7571322a-9cb7-487b-b54d-8f88ee2219b5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1079915a-bb61-4458-9577-53be640f6000",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "sessions",
+                    ":session_id",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9795605-45b4-44ee-9f55-d7832452c7f1",
+          "name": "Extract Agent Session Memory",
+          "request": {
+            "name": "Extract Agent Session Memory",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                ":account",
+                "agents",
+                "sessions",
+                "checkpoints",
+                ":checkpoint_id",
+                "extract-memory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account",
+                  "description": "(Required) Account name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "checkpoint_id",
+                  "description": "(Required) Checkpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "21a5f098-be77-4dc2-b3c6-828afc9a5742",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id",
+                    "extract-memory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) Account name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"faba4887-7779-c38b-bd32-ee3feef26d9a\",\n    \"uri\": \"string\",\n    \"title\": \"string\",\n    \"content\": \"string\",\n    \"mime_type\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"links_to\": [\n      {\n        \"id\": \"acbaf044-d738-498d-d088-5c42f61c8c5a\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"b5133fac-7f54-7431-fe73-ca8c3bcea3b7\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"linked_from\": [\n      {\n        \"id\": \"48c39aec-424b-5ede-8e26-c464334405d6\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"5ee04b51-9898-a30c-4336-451673eb3261\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"created_at\": \"1982-09-28T00:41:00.965Z\",\n    \"updated_at\": \"1952-05-31T08:05:24.516Z\"\n  },\n  {\n    \"id\": \"4a2024ff-f5f0-c028-f6dc-ce29049e38d5\",\n    \"uri\": \"string\",\n    \"title\": \"string\",\n    \"content\": \"string\",\n    \"mime_type\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"links_to\": [\n      {\n        \"id\": \"73904136-e833-52aa-9ac9-d149dfdf0878\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"7a730294-aa3e-91f6-555b-5279ba92f295\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"linked_from\": [\n      {\n        \"id\": \"7367fc21-e81f-3973-0689-9e1ce77f5d8b\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      },\n      {\n        \"id\": \"8fe7f1f0-ec57-a026-0bba-2d7ed98ff3e3\",\n        \"uri\": \"string\",\n        \"title\": \"string\",\n        \"reason\": \"string\",\n        \"type\": null\n      }\n    ],\n    \"created_at\": \"2025-11-23T14:42:02.902Z\",\n    \"updated_at\": \"2005-12-18T11:41:34.946Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3774cf03-6c1f-4178-b429-b7ac86d55d8e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id",
+                    "extract-memory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) Account name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91c940ff-9158-4820-b67f-7bdd0b0b0b73",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":account",
+                    "agents",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id",
+                    "extract-memory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) Account name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv2.stakpak.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d8e31bcd-f7ee-40ae-9657-9965ed48e662",
+    "name": "Stakpak Account Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Stakpak platform",
+      "type": "text/plain"
+    }
+  }
+}

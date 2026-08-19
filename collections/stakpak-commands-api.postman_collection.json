@@ -1,0 +1,191 @@
+{
+  "item": [
+    {
+      "id": "7bc3e5e8-923e-4e0a-b0e0-3d528e36e75d",
+      "name": "Commands",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4663e0a1-be72-4f98-bb43-6d5c9adfb4c4",
+          "name": "Build Index",
+          "request": {
+            "name": "Build Index",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "commands",
+                "build_code_index"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"documents\": [\n    {\n      \"uri\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"uri\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e7775c0-4258-46d6-8f44-b092a6b6db9f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "commands",
+                    "build_code_index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"documents\": [\n    {\n      \"uri\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"uri\": \"string\",\n      \"content\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blocks\": [\n    {\n      \"id\": \"8380adb8-9af9-7cc7-b384-e2206c53c47b\",\n      \"provider\": \"string\",\n      \"provisioner\": \"None\",\n      \"language\": \"string\",\n      \"key\": \"string\",\n      \"digest\": 9345,\n      \"references\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"kind\": \"string\",\n      \"config\": \"\",\n      \"document_uri\": \"string\",\n      \"code\": \"string\",\n      \"start_byte\": 575,\n      \"end_byte\": 1479,\n      \"start_point\": {\n        \"row\": 532,\n        \"column\": 5602\n      },\n      \"end_point\": {\n        \"row\": 771,\n        \"column\": 6325\n      },\n      \"dependents\": [\n        {\n          \"key\": \"string\"\n        },\n        {\n          \"key\": \"string\"\n        }\n      ],\n      \"dependencies\": [\n        {\n          \"satisfied\": false,\n          \"digest\": 8617,\n          \"end_byte\": 900,\n          \"end_point\": null,\n          \"expression\": \"string\",\n          \"from\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"a218b728-d80b-94cd-99f2-15f25ec60141\",\n          \"selectors\": [\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"start_byte\": 7650,\n          \"start_point\": null,\n          \"to_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"to_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"satisfied\": false,\n          \"digest\": 4706,\n          \"end_byte\": 8241,\n          \"end_point\": null,\n          \"expression\": \"string\",\n          \"from\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"19f2691b-0f60-e6a1-5717-e47d3434dc53\",\n          \"selectors\": [\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"start_byte\": 2044,\n          \"start_point\": null,\n          \"to_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"to_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"api_group_version\": null,\n      \"created_at\": \"2014-11-26T16:28:02.666Z\",\n      \"generated_summary\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"\",\n      \"type\": \"string\",\n      \"updated_at\": \"1985-01-28T09:13:01.950Z\"\n    },\n    {\n      \"id\": \"ba3db4f7-19c7-92f1-a9b2-48c83f174312\",\n      \"provider\": \"string\",\n      \"provisioner\": \"GithubActions\",\n      \"language\": \"string\",\n      \"key\": \"string\",\n      \"digest\": 8215,\n      \"references\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"kind\": \"string\",\n      \"config\": \"\",\n      \"document_uri\": \"string\",\n      \"code\": \"string\",\n      \"start_byte\": 4291,\n      \"end_byte\": 3616,\n      \"start_point\": {\n        \"row\": 1050,\n        \"column\": 2857\n      },\n      \"end_point\": {\n        \"row\": 5056,\n        \"column\": 2179\n      },\n      \"dependents\": [\n        {\n          \"key\": \"string\"\n        },\n        {\n          \"key\": \"string\"\n        }\n      ],\n      \"dependencies\": [\n        {\n          \"satisfied\": true,\n          \"digest\": 8143,\n          \"end_byte\": 5032,\n          \"end_point\": null,\n          \"expression\": \"string\",\n          \"from\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"4b70bbcf-2d7a-7e99-4144-d2d02895e454\",\n          \"selectors\": [\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"start_byte\": 3462,\n          \"start_point\": null,\n          \"to_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"to_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"satisfied\": false,\n          \"digest\": 4061,\n          \"end_byte\": 6665,\n          \"end_point\": null,\n          \"expression\": \"string\",\n          \"from\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"from_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"fc157efa-0617-7909-ce43-cdc35e818abf\",\n          \"selectors\": [\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"references\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"operator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"start_byte\": 6173,\n          \"start_point\": null,\n          \"to_field\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"to_path\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"api_group_version\": null,\n      \"created_at\": \"1982-10-25T05:01:03.304Z\",\n      \"generated_summary\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"\",\n      \"type\": \"string\",\n      \"updated_at\": \"1986-07-11T05:50:24.563Z\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"uri\": \"string\",\n      \"message\": \"string\",\n      \"details\": \"\"\n    },\n    {\n      \"uri\": \"string\",\n      \"message\": \"string\",\n      \"details\": \"\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"uri\": \"string\",\n      \"message\": \"string\",\n      \"details\": \"\"\n    },\n    {\n      \"uri\": \"string\",\n      \"message\": \"string\",\n      \"details\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33be3b2b-ed7d-4fb0-857d-1a2b0b922cc9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "commands",
+                    "build_code_index"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"documents\": [\n    {\n      \"uri\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"uri\": \"string\",\n      \"content\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv2.stakpak.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "74191abb-4e7e-4444-b0a9-d948e452424e",
+    "name": "Stakpak Account Commands API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Stakpak platform",
+      "type": "text/plain"
+    }
+  }
+}

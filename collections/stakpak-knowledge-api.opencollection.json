@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Knowledge API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List / search knowledge files.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/knowledge",
+            "params": [
+              {
+                "name": "glob",
+                "value": "",
+                "type": "query",
+                "description": "Glob pattern filtering by path (matched against the full file path)."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Scope the search to a subtree (directory). Empty = whole knowledge store."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List / search knowledge files."
+        },
+        {
+          "info": {
+            "name": "Fetch the raw bytes of a knowledge file. When `peek=true`, the response\nis the short preview extracted at write time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/knowledge/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Store-relative file path"
+              },
+              {
+                "name": "peek",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch the raw bytes of a knowledge file. When `peek=true`, the response\nis the short preview extracted at write time"
+        },
+        {
+          "info": {
+            "name": "Create a new knowledge file. Returns `409 Conflict` if one already\nexists at the target path.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/knowledge/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Store-relative file path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new knowledge file. Returns `409 Conflict` if one already\nexists at the target path."
+        },
+        {
+          "info": {
+            "name": "Create-or-overwrite a knowledge file.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://apiv2.stakpak.dev/v1/knowledge/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Store-relative file path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create-or-overwrite a knowledge file."
+        },
+        {
+          "info": {
+            "name": "Delete a file or directory (recursive).",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/knowledge/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Store-relative file or directory path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a file or directory (recursive)."
+        },
+        {
+          "info": {
+            "name": "Cheap existence check. Returns `200` with an `ETag` header if the file\nexists, or `404` if it does not. Does not transfer the body.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://apiv2.stakpak.dev/v1/knowledge/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Store-relative file path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cheap existence check. Returns `200` with an `ETag` header if the file\nexists, or `404` if it does not. Does not transfer the body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

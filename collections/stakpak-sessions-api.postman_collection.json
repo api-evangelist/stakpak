@@ -1,0 +1,1569 @@
+{
+  "item": [
+    {
+      "id": "d9784762-083c-421a-864a-b24d8411c73f",
+      "name": "Sessions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bee5a98f-4e4d-4a5b-822a-d1b16faa02fb",
+          "name": "List Sessions",
+          "request": {
+            "name": "List Sessions",
+            "description": {
+              "content": "Returns a paginated list of sessions for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>",
+                  "description": "Number of sessions to return (default: 20, max: 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>",
+                  "description": "Offset for pagination (default: 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string,null>",
+                  "description": "Search in session titles"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string,null>",
+                  "description": "Filter by status: ACTIVE, DELETED (default: ACTIVE)"
+                },
+                {
+                  "disabled": false,
+                  "key": "visibility",
+                  "value": "<string,null>",
+                  "description": "Filter by visibility: PRIVATE, PUBLIC"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "30337524-6d12-41bb-9341-8bb35ad1309a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessions\": [\n    {\n      \"id\": \"a71b9ecf-d7ea-8209-5055-1cec9ea01ab4\",\n      \"title\": \"string\",\n      \"visibility\": \"PUBLIC\",\n      \"status\": \"DELETED\",\n      \"created_at\": \"1950-08-13T07:53:34.107Z\",\n      \"updated_at\": \"1971-09-04T02:47:26.380Z\",\n      \"message_count\": 6501,\n      \"active_checkpoint_id\": \"ab24666a-358d-7f61-0258-a35b80a575ae\",\n      \"cwd\": \"string\",\n      \"last_message_at\": \"1960-06-16T12:25:41.341Z\"\n    },\n    {\n      \"id\": \"6f269347-90d6-3259-d749-23c80b897fab\",\n      \"title\": \"string\",\n      \"visibility\": \"PUBLIC\",\n      \"status\": \"ACTIVE\",\n      \"created_at\": \"2013-02-03T02:22:12.679Z\",\n      \"updated_at\": \"1985-09-26T13:31:29.962Z\",\n      \"message_count\": 7128,\n      \"active_checkpoint_id\": \"d04e2e0a-b47e-41c3-6dbb-5960933ea003\",\n      \"cwd\": \"string\",\n      \"last_message_at\": \"2018-10-04T09:52:21.084Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3362d73-ea72-49ba-9d8b-00abab498cf3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8bb5bd9-6312-4363-866b-d820aa1ae452",
+          "name": "Create Session",
+          "request": {
+            "name": "Create Session",
+            "description": {
+              "content": "Creates a new session with an initial checkpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"<string>\",\n        \"completed_at\": \"<integer,null-int64>\",\n        \"content\": \"<null>\",\n        \"cost\": \"<number,null-double>\",\n        \"created_at\": \"<integer,null-int64>\",\n        \"finish_reason\": \"<string,null>\",\n        \"id\": \"<string,null>\",\n        \"metadata\": {},\n        \"model\": \"<null>\",\n        \"name\": \"<string,null>\",\n        \"tool_call_id\": \"<string,null>\",\n        \"tool_calls\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": \"<null>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"completed_at\": \"<integer,null-int64>\",\n        \"content\": \"<null>\",\n        \"cost\": \"<number,null-double>\",\n        \"created_at\": \"<integer,null-int64>\",\n        \"finish_reason\": \"<string,null>\",\n        \"id\": \"<string,null>\",\n        \"metadata\": {},\n        \"model\": \"<null>\",\n        \"name\": \"<string,null>\",\n        \"tool_call_id\": \"<string,null>\",\n        \"tool_calls\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": \"<null>\"\n      }\n    ]\n  },\n  \"cwd\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "febb8111-7dae-49a4-8f53-37b5f2412a23",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"system\",\n        \"completed_at\": 7465,\n        \"content\": null,\n        \"cost\": 6988.124901261943,\n        \"created_at\": 4559,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"developer\",\n        \"completed_at\": 4735,\n        \"content\": null,\n        \"cost\": 9292.406114150175,\n        \"created_at\": 3217,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ]\n  },\n  \"cwd\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"1000776b-eb01-8fee-7bba-08eecb27189e\",\n  \"checkpoint\": {\n    \"id\": \"9c2ffb3d-da2f-9a99-a98d-26b2f42aa5bd\",\n    \"session_id\": \"c704891a-4936-e014-55f4-028435324ddc\",\n    \"state\": {\n      \"messages\": [\n        {\n          \"role\": \"user\",\n          \"completed_at\": 2176,\n          \"content\": null,\n          \"cost\": 2854.7087076715084,\n          \"created_at\": 2493,\n          \"finish_reason\": \"string\",\n          \"id\": \"string\",\n          \"metadata\": {},\n          \"model\": null,\n          \"name\": \"string\",\n          \"tool_call_id\": \"string\",\n          \"tool_calls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"usage\": null\n        },\n        {\n          \"role\": \"tool\",\n          \"completed_at\": 2475,\n          \"content\": null,\n          \"cost\": 2174.2741448359093,\n          \"created_at\": 2039,\n          \"finish_reason\": \"string\",\n          \"id\": \"string\",\n          \"metadata\": {},\n          \"model\": null,\n          \"name\": \"string\",\n          \"tool_call_id\": \"string\",\n          \"tool_calls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"usage\": null\n        }\n      ]\n    },\n    \"created_at\": \"2005-02-21T14:34:04.775Z\",\n    \"updated_at\": \"1991-06-20T13:35:01.103Z\",\n    \"parent_id\": \"c4bf9aca-1780-ecf4-6937-1a4e93939a97\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de25de7e-f9c1-4cff-af83-b310f99e4ff8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"system\",\n        \"completed_at\": 7465,\n        \"content\": null,\n        \"cost\": 6988.124901261943,\n        \"created_at\": 4559,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"developer\",\n        \"completed_at\": 4735,\n        \"content\": null,\n        \"cost\": 9292.406114150175,\n        \"created_at\": 3217,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ]\n  },\n  \"cwd\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b35093d-edb3-4c3f-a410-9701fbac1c70",
+          "name": "Get Checkpoint",
+          "request": {
+            "name": "Get Checkpoint",
+            "description": {
+              "content": "Returns a specific checkpoint by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions",
+                "checkpoints",
+                ":checkpoint_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "checkpoint_id",
+                  "description": "(Required) Checkpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2320622d-c2e8-4e90-89d2-7735201818a2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkpoint\": {\n    \"id\": \"ab4743f7-7897-0d92-9bd1-a863e4e12abe\",\n    \"session_id\": \"bb474b42-c874-2f09-fa1d-54d1226b6107\",\n    \"state\": {\n      \"messages\": [\n        {\n          \"role\": \"assistant\",\n          \"completed_at\": 8968,\n          \"content\": null,\n          \"cost\": 2304.0363955106714,\n          \"created_at\": 7303,\n          \"finish_reason\": \"string\",\n          \"id\": \"string\",\n          \"metadata\": {},\n          \"model\": null,\n          \"name\": \"string\",\n          \"tool_call_id\": \"string\",\n          \"tool_calls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"usage\": null\n        },\n        {\n          \"role\": \"tool\",\n          \"completed_at\": 475,\n          \"content\": null,\n          \"cost\": 3872.0820291102855,\n          \"created_at\": 1645,\n          \"finish_reason\": \"string\",\n          \"id\": \"string\",\n          \"metadata\": {},\n          \"model\": null,\n          \"name\": \"string\",\n          \"tool_call_id\": \"string\",\n          \"tool_calls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"usage\": null\n        }\n      ]\n    },\n    \"created_at\": \"1952-06-06T06:29:23.869Z\",\n    \"updated_at\": \"1972-02-06T01:42:59.206Z\",\n    \"parent_id\": \"61304781-9fce-efd9-8953-832dae23b06b\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e86be4b-5161-4255-84eb-9b9be8d739cc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    "checkpoints",
+                    ":checkpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "checkpoint_id",
+                      "description": "(Required) Checkpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b50bda4-860f-4577-a12a-039136c34f55",
+          "name": "Get Session",
+          "request": {
+            "name": "Get Session",
+            "description": {
+              "content": "Returns a single session with its latest checkpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "94e8877d-0441-4dbc-8020-14dfe36d410d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session\": {\n    \"id\": \"e1263aea-7f4b-ac65-9183-b06973e36d80\",\n    \"title\": \"string\",\n    \"visibility\": \"PUBLIC\",\n    \"status\": \"ACTIVE\",\n    \"created_at\": \"1975-07-22T01:07:47.446Z\",\n    \"updated_at\": \"1960-04-17T17:35:04.821Z\",\n    \"active_checkpoint\": null,\n    \"cwd\": \"string\",\n    \"deleted_at\": \"1990-05-08T01:15:28.745Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0752931f-a263-47bf-9f2b-da5b882cf068",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8340c41c-c151-4396-9913-24830e16e05a",
+          "name": "Delete Session",
+          "request": {
+            "name": "Delete Session",
+            "description": {
+              "content": "Soft deletes a session by setting its status to DELETED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ea40765-5b6c-45d3-993f-cc0b10ecaad1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"deleted_at\": \"1988-07-04T09:54:19.293Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b297b0e3-9cbf-4bdf-bf16-9d72e722c2e6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e81b3aed-3bbe-4688-9ed7-34559953c602",
+          "name": "Update Session",
+          "request": {
+            "name": "Update Session",
+            "description": {
+              "content": "Updates session metadata (title, visibility). Does not modify checkpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9e42726-309b-4371-9e82-8fb126e2721a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session\": {\n    \"id\": \"22b7c35a-8185-dacc-b388-8445b35d34af\",\n    \"title\": \"string\",\n    \"visibility\": \"PUBLIC\",\n    \"status\": \"DELETED\",\n    \"created_at\": \"1974-07-12T13:32:39.043Z\",\n    \"updated_at\": \"2020-06-02T16:35:32.857Z\",\n    \"active_checkpoint\": null,\n    \"cwd\": \"string\",\n    \"deleted_at\": \"1949-02-20T02:35:49.146Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbc6cc10-d268-42ee-ada6-cf1cd990f792",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1910b0e2-2f07-4d66-8bda-c215d9aa8cc3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string,null>\",\n  \"visibility\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a78115a5-7729-4ce6-bf81-c020869988c1",
+          "name": "List Checkpoints",
+          "request": {
+            "name": "List Checkpoints",
+            "description": {
+              "content": "Returns all checkpoints for a session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions",
+                ":session_id",
+                "checkpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null-int32>",
+                  "description": "Number of checkpoints to return (default: 50, max: 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer,null-int32>",
+                  "description": "Offset for pagination (default: 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_state",
+                  "value": "<boolean,null>",
+                  "description": "Include full state in response (default: false)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cefe4b9e-22d5-4ce7-a48b-25c5ffb8e28a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "include_state",
+                      "value": "<boolean,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkpoints\": [\n    {\n      \"id\": \"2427d0d6-4409-aefc-07e9-f93fc69e7e56\",\n      \"session_id\": \"9d8c2f71-3e73-ebdc-4648-dbc40a264f6e\",\n      \"message_count\": 6816,\n      \"created_at\": \"2006-10-18T20:11:16.268Z\",\n      \"updated_at\": \"1990-01-22T02:29:55.640Z\",\n      \"parent_id\": \"704aa879-f06c-aa95-87ee-e83e2cc0a66a\",\n      \"state\": null\n    },\n    {\n      \"id\": \"796b89f4-895f-02d4-ddb4-1e4ad0af6bea\",\n      \"session_id\": \"c075503a-4a0b-ffc0-2b45-71638bff0470\",\n      \"message_count\": 3487,\n      \"created_at\": \"1948-11-23T20:23:03.519Z\",\n      \"updated_at\": \"2001-05-25T13:13:02.162Z\",\n      \"parent_id\": \"b10ac9bf-ea0f-48cf-98db-6566482b60d9\",\n      \"state\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f5e3013-9ead-482c-a260-12e471481274",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer,null-int32>"
+                    },
+                    {
+                      "key": "include_state",
+                      "value": "<boolean,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e3abaf0-226a-4e80-a481-8362f0b97c7e",
+          "name": "Create Checkpoint",
+          "request": {
+            "name": "Create Checkpoint",
+            "description": {
+              "content": "Adds a checkpoint to an existing session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sessions",
+                ":session_id",
+                "checkpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"<string>\",\n        \"completed_at\": \"<integer,null-int64>\",\n        \"content\": \"<null>\",\n        \"cost\": \"<number,null-double>\",\n        \"created_at\": \"<integer,null-int64>\",\n        \"finish_reason\": \"<string,null>\",\n        \"id\": \"<string,null>\",\n        \"metadata\": {},\n        \"model\": \"<null>\",\n        \"name\": \"<string,null>\",\n        \"tool_call_id\": \"<string,null>\",\n        \"tool_calls\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": \"<null>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"completed_at\": \"<integer,null-int64>\",\n        \"content\": \"<null>\",\n        \"cost\": \"<number,null-double>\",\n        \"created_at\": \"<integer,null-int64>\",\n        \"finish_reason\": \"<string,null>\",\n        \"id\": \"<string,null>\",\n        \"metadata\": {},\n        \"model\": \"<null>\",\n        \"name\": \"<string,null>\",\n        \"tool_call_id\": \"<string,null>\",\n        \"tool_calls\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": \"<null>\"\n      }\n    ]\n  },\n  \"parent_id\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73e311e0-72a3-457a-ac3b-8de3e8926dc8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"developer\",\n        \"completed_at\": 8679,\n        \"content\": null,\n        \"cost\": 3956.270884284713,\n        \"created_at\": 9747,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"system\",\n        \"completed_at\": 5543,\n        \"content\": null,\n        \"cost\": 7201.437361355938,\n        \"created_at\": 4348,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ]\n  },\n  \"parent_id\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkpoint\": {\n    \"id\": \"790b2c64-979b-ffbd-7d89-9375fbfa309f\",\n    \"session_id\": \"689cfdb6-50e6-89fd-5b33-faaf65bba23e\",\n    \"state\": {\n      \"messages\": [\n        {\n          \"role\": \"assistant\",\n          \"completed_at\": 207,\n          \"content\": null,\n          \"cost\": 7314.769018208463,\n          \"created_at\": 5412,\n          \"finish_reason\": \"string\",\n          \"id\": \"string\",\n          \"metadata\": {},\n          \"model\": null,\n          \"name\": \"string\",\n          \"tool_call_id\": \"string\",\n          \"tool_calls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"usage\": null\n        },\n        {\n          \"role\": \"assistant\",\n          \"completed_at\": 3916,\n          \"content\": null,\n          \"cost\": 2446.8401012201602,\n          \"created_at\": 570,\n          \"finish_reason\": \"string\",\n          \"id\": \"string\",\n          \"metadata\": {},\n          \"model\": null,\n          \"name\": \"string\",\n          \"tool_call_id\": \"string\",\n          \"tool_calls\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"usage\": null\n        }\n      ]\n    },\n    \"created_at\": \"2013-11-01T03:29:49.112Z\",\n    \"updated_at\": \"1961-01-05T04:05:06.920Z\",\n    \"parent_id\": \"c50f131f-1fbe-d0d3-db8a-9b09eae12ac9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ce3112-fd5d-4525-9184-29c16fcdca98",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"developer\",\n        \"completed_at\": 8679,\n        \"content\": null,\n        \"cost\": 3956.270884284713,\n        \"created_at\": 9747,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"system\",\n        \"completed_at\": 5543,\n        \"content\": null,\n        \"cost\": 7201.437361355938,\n        \"created_at\": 4348,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ]\n  },\n  \"parent_id\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b11f7f2d-3764-4ab4-ac2e-30cb2abd414f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sessions",
+                    ":session_id",
+                    "checkpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"messages\": [\n      {\n        \"role\": \"developer\",\n        \"completed_at\": 8679,\n        \"content\": null,\n        \"cost\": 3956.270884284713,\n        \"created_at\": 9747,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      },\n      {\n        \"role\": \"system\",\n        \"completed_at\": 5543,\n        \"content\": null,\n        \"cost\": 7201.437361355938,\n        \"created_at\": 4348,\n        \"finish_reason\": \"string\",\n        \"id\": \"string\",\n        \"metadata\": {},\n        \"model\": null,\n        \"name\": \"string\",\n        \"tool_call_id\": \"string\",\n        \"tool_calls\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"string\",\n            \"function\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"usage\": null\n      }\n    ]\n  },\n  \"parent_id\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"key\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv2.stakpak.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "daca4fb9-8a40-4d6c-86c6-522ef573a798",
+    "name": "Stakpak Account Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Stakpak platform",
+      "type": "text/plain"
+    }
+  }
+}

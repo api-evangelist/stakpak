@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Upload API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/upload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

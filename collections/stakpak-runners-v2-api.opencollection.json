@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Runners (V2) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Runners (V2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Runners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners"
+          },
+          "docs": "List Runners"
+        },
+        {
+          "info": {
+            "name": "Create Runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Runner"
+        },
+        {
+          "info": {
+            "name": "Get Runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Runner"
+        },
+        {
+          "info": {
+            "name": "Update Runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Runner"
+        },
+        {
+          "info": {
+            "name": "Check Runner Upgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name/check-upgrade",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check Runner Upgrade"
+        },
+        {
+          "info": {
+            "name": "Get Runner Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name/secrets",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Runner Secrets"
+        },
+        {
+          "info": {
+            "name": "Create Runner Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name/secrets",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Runner Secret"
+        },
+        {
+          "info": {
+            "name": "Trigger Runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name/trigger",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger Runner"
+        },
+        {
+          "info": {
+            "name": "Upgrade Runner Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v2/:account/runners/:machine_name/upgrade",
+            "params": [
+              {
+                "name": "machine_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upgrade Runner Version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

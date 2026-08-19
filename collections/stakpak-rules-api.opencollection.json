@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stakpak Account Rules API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Rule Books",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/rules"
+          },
+          "docs": "List Rule Books"
+        },
+        {
+          "info": {
+            "name": "Create or Update Rule Book",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or Update Rule Book"
+        },
+        {
+          "info": {
+            "name": "Create Many Rule Books",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv2.stakpak.dev/v1/rules/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Many Rule Books"
+        },
+        {
+          "info": {
+            "name": "Search Rule Books",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/rules/search",
+            "params": [
+              {
+                "name": "keywords",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Rule Books"
+        },
+        {
+          "info": {
+            "name": "Get Rule Book by URI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv2.stakpak.dev/v1/rules/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Rule Book by URI"
+        },
+        {
+          "info": {
+            "name": "Delete Rule Book",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apiv2.stakpak.dev/v1/rules/:uri",
+            "params": [
+              {
+                "name": "uri",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Rule Book"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
