@@ -274,6 +274,8 @@ apis:
   humanURL: https://apiv2.stakpak.dev/docs
   baseURL: https://apiv2.stakpak.dev
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
