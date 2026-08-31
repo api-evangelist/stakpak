@@ -90,6 +90,8 @@ apis:
   humanURL: https://apiv2.stakpak.dev/docs
   baseURL: https://apiv2.stakpak.dev
   tags:
+  - AccountV2
+  tags_raw:
   - Account (V2)
   properties:
   - type: OpenAPI
