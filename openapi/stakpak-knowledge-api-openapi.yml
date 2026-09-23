@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stakpak Account Knowledge API
+  title: Stakpak Knowledge API
   description: API for the Stakpak platform
   license:
     name: ''
@@ -17,7 +17,7 @@ paths:
     get:
       tags:
       - Knowledge
-      summary: List / search knowledge files.
+      summary: List / search knowledge files
       operationId: search_handler
       parameters:
       - name: glob
@@ -67,9 +67,7 @@ paths:
     get:
       tags:
       - Knowledge
-      summary: 'Fetch the raw bytes of a knowledge file. When `peek=true`, the response
-
-        is the short preview extracted at write time'
+      summary: Fetch the raw bytes of a knowledge file.
       operationId: read_handler
       parameters:
       - name: path
@@ -105,7 +103,7 @@ paths:
     put:
       tags:
       - Knowledge
-      summary: Create-or-overwrite a knowledge file.
+      summary: Create-or-overwrite a knowledge file
       operationId: overwrite_handler
       parameters:
       - name: path
@@ -142,9 +140,7 @@ paths:
     post:
       tags:
       - Knowledge
-      summary: 'Create a new knowledge file. Returns `409 Conflict` if one already
-
-        exists at the target path.'
+      summary: Create a new knowledge file.
       operationId: create_handler
       parameters:
       - name: path
@@ -187,7 +183,7 @@ paths:
     delete:
       tags:
       - Knowledge
-      summary: Delete a file or directory (recursive).
+      summary: Delete a file or directory (recursive)
       operationId: delete_handler
       parameters:
       - name: path
@@ -216,9 +212,7 @@ paths:
     head:
       tags:
       - Knowledge
-      summary: 'Cheap existence check. Returns `200` with an `ETag` header if the file
-
-        exists, or `404` if it does not. Does not transfer the body.'
+      summary: Cheap existence check.
       operationId: head_handler
       parameters:
       - name: path
@@ -246,6 +240,13 @@ paths:
       - Api Key: []
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     SearchKnowledgeResponse:
       type: object
       required:
@@ -255,23 +256,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KnowledgeFile'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+    Scope:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - USER
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - ORGANIZATION
     KnowledgeFile:
       type: object
       required:
@@ -324,32 +332,18 @@ components:
         updated_at:
           type: string
           format: date-time
-    Scope:
-      oneOf:
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - USER
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - ORGANIZATION
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
-    Api Key:
+    Api_Key:
       type: http
       scheme: bearer
       bearerFormat: JWT

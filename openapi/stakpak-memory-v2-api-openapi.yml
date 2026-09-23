@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stakpak Account Memory (V2) API
+  title: Stakpak Memory (V2) API
   description: API for the Stakpak platform
   license:
     name: ''
@@ -121,6 +121,49 @@ paths:
       - Api Key: []
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    CreateOrUpdateMemoryPayload:
+      type: object
+      required:
+      - uri
+      - title
+      - content
+      - mime_type
+      properties:
+        content:
+          type: string
+        mime_type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        uri:
+          type: string
+    ListMemoriesResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListMemoryBlock'
+    GetMemoryByUriResponse:
+      type: object
+      properties:
+        result:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MemoryBlock'
     MemoryBlock:
       type: object
       required:
@@ -173,32 +216,6 @@ components:
       properties:
         id:
           type: string
-    ListMemoriesResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListMemoryBlock'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
     MemoryBlockLinkType:
       type: string
       enum:
@@ -206,26 +223,6 @@ components:
       - LEADS_TO
       - CONTAINS
       - EXPRESS
-    CreateOrUpdateMemoryPayload:
-      type: object
-      required:
-      - uri
-      - title
-      - content
-      - mime_type
-      properties:
-        content:
-          type: string
-        mime_type:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        title:
-          type: string
-        uri:
-          type: string
     MemoryBlockLink:
       type: object
       required:
@@ -280,15 +277,18 @@ components:
           format: date-time
         uri:
           type: string
-    GetMemoryByUriResponse:
+    ErrorBody:
       type: object
+      required:
+      - key
+      - message
       properties:
-        result:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/MemoryBlock'
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
-    Api Key:
+    Api_Key:
       type: http
       scheme: bearer
       bearerFormat: JWT

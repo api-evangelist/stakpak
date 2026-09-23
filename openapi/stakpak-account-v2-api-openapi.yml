@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stakpak Account Account (V2) API
+  title: Stakpak Account (V2) API
   description: API for the Stakpak platform
   license:
     name: ''
@@ -11,12 +11,12 @@ servers:
 - url: http://localhost:4000
   description: Local server
 tags:
-- name: Account (V2)
+- name: Account V2
 paths:
   /v2/{account}/account/integrations:
     get:
       tags:
-      - Account (V2)
+      - Account V2
       summary: Get My Integrations
       operationId: get_my_integrations_handler
       responses:
@@ -37,7 +37,7 @@ paths:
   /v2/{account}/account/integrations/{integration}:
     delete:
       tags:
-      - Account (V2)
+      - Account V2
       summary: Delete Integration
       operationId: delete_integration_handler
       parameters:
@@ -63,6 +63,15 @@ paths:
       - Api Key: []
 components:
   schemas:
+    GetMyIntegrationsResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
     ErrorResponse:
       type: object
       required:
@@ -70,16 +79,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorBody'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
     Integration:
       oneOf:
       - type: object
@@ -104,17 +103,18 @@ components:
             type: string
             enum:
             - SLACK
-    GetMyIntegrationsResponse:
+    ErrorBody:
       type: object
       required:
-      - results
+      - key
+      - message
       properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Integration'
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
-    Api Key:
+    Api_Key:
       type: http
       scheme: bearer
       bearerFormat: JWT

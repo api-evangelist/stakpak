@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Stakpak Account MCP API
+  title: Stakpak MCP API
   description: API for the Stakpak platform
   license:
     name: ''
@@ -42,35 +42,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    JsonRpcError:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-        data: {}
-        message:
-          type: string
     JsonRpcResponse:
       type: object
       required:
@@ -85,6 +56,13 @@ components:
         jsonrpc:
           type: string
         result: {}
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     JsonRpcRequest:
       type: object
       required:
@@ -99,8 +77,30 @@ components:
           type: string
         params: {}
       additionalProperties: false
+    JsonRpcError:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        data: {}
+        message:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
-    Api Key:
+    Api_Key:
       type: http
       scheme: bearer
       bearerFormat: JWT
