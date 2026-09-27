@@ -132,33 +132,11 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UpdateRecoveryActionPayload:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          $ref: '#/components/schemas/UserRecoveryAction'
-        selected_option_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    SessionRef:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
+    UserRecoveryAction:
+      type: string
+      enum:
+      - approve
+      - reject
     CheckpointRef:
       type: object
       required:
@@ -167,6 +145,24 @@ components:
         id:
           type: string
           format: uuid
+    SessionRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
     GetRecoveriesResponse:
       type: object
       properties:
@@ -181,6 +177,18 @@ components:
       - APPROVED
       - REJECTED
       - APPLIED
+    UpdateRecoveryActionPayload:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          $ref: '#/components/schemas/UserRecoveryAction'
+        selected_option_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
     SessionRecoveryResponse:
       type: object
       required:
@@ -219,21 +227,13 @@ components:
           $ref: '#/components/schemas/CheckpointRef'
         updated_at:
           type: string
-    UserRecoveryAction:
-      type: string
-      enum:
-      - approve
-      - reject
-    ErrorBody:
+    ErrorResponse:
       type: object
       required:
-      - key
-      - message
+      - error
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

@@ -42,41 +42,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    JsonRpcResponse:
-      type: object
-      required:
-      - jsonrpc
-      - id
-      properties:
-        error:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/JsonRpcError'
-        id: {}
-        jsonrpc:
-          type: string
-        result: {}
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    JsonRpcRequest:
-      type: object
-      required:
-      - jsonrpc
-      - method
-      - id
-      properties:
-        id: {}
-        jsonrpc:
-          type: string
-        method:
-          type: string
-        params: {}
-      additionalProperties: false
     JsonRpcError:
       type: object
       required:
@@ -99,6 +64,41 @@ components:
           type: string
         message:
           type: string
+    JsonRpcResponse:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/JsonRpcError'
+        id: {}
+        jsonrpc:
+          type: string
+        result: {}
+    JsonRpcRequest:
+      type: object
+      required:
+      - jsonrpc
+      - method
+      - id
+      properties:
+        id: {}
+        jsonrpc:
+          type: string
+        method:
+          type: string
+        params: {}
+      additionalProperties: false
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

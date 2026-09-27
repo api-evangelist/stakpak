@@ -41,6 +41,37 @@ paths:
           description: Rate limit exceeded
 components:
   schemas:
+    TelemetryEventType:
+      oneOf:
+      - type: string
+        enum:
+        - FirstOpen
+      - type: string
+        enum:
+        - UserPrompted
+      - type: object
+        required:
+        - CommandCalled
+        properties:
+          CommandCalled:
+            type: string
+      description: Telemetry event type
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    Provider:
+      type: string
+      description: Provider type for telemetry events
+      enum:
+      - Local
+      - Remote
     TelemetryRequest:
       type: object
       description: Request body for telemetry endpoint
@@ -70,37 +101,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorBody'
-    TelemetryEventType:
-      oneOf:
-      - type: string
-        enum:
-        - FirstOpen
-      - type: string
-        enum:
-        - UserPrompted
-      - type: object
-        required:
-        - CommandCalled
-        properties:
-          CommandCalled:
-            type: string
-      description: Telemetry event type
-    Provider:
-      type: string
-      description: Provider type for telemetry events
-      enum:
-      - Local
-      - Remote
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
   securitySchemes:
     Api_Key:
       type: http

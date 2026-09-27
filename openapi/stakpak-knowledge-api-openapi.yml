@@ -240,13 +240,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
     SearchKnowledgeResponse:
       type: object
       required:
@@ -256,30 +249,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KnowledgeFile'
-    Scope:
-      oneOf:
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - USER
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - ORGANIZATION
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
     KnowledgeFile:
       type: object
       required:
@@ -332,16 +311,37 @@ components:
         updated_at:
           type: string
           format: date-time
-    ErrorBody:
+    Scope:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - USER
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - ORGANIZATION
+    ErrorResponse:
       type: object
       required:
-      - key
-      - message
+      - error
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

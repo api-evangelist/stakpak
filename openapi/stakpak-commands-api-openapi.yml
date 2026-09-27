@@ -42,74 +42,25 @@ paths:
       - Api Key: []
 components:
   schemas:
-    IndexError:
+    BuildCodeIndexOutput:
       type: object
       required:
-      - uri
-      - message
+      - blocks
+      - errors
+      - warnings
       properties:
-        details: {}
-        message:
-          type: string
-        uri:
-          type: string
-    APIGroupVersionStatus:
-      type: string
-      enum:
-      - UNAVAILABLE
-      - PENDING
-      - AVAILABLE
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    Segment:
-      oneOf:
-      - type: string
-      - type: integer
-        minimum: 0
-    DependentBlock:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-    Point:
-      type: object
-      required:
-      - row
-      - column
-      properties:
-        column:
-          type: integer
-          minimum: 0
-        row:
-          type: integer
-          minimum: 0
-    Document:
-      type: object
-      required:
-      - uri
-      - content
-      properties:
-        content:
-          type: string
-        uri:
-          type: string
+        blocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Block'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexError'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexError'
     Dependency:
       type: object
       required:
@@ -182,44 +133,6 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/Segment'
-    BuildCodeIndexInput:
-      type: object
-      description: Build an index of infrastructure configuration blocks from source code
-      required:
-      - documents
-      properties:
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-          description: List of documents to analyze and build an index from
-    ProvisionerType:
-      type: string
-      enum:
-      - Terraform
-      - Kubernetes
-      - Dockerfile
-      - GithubActions
-      - None
-    BuildCodeIndexOutput:
-      type: object
-      required:
-      - blocks
-      - errors
-      - warnings
-      properties:
-        blocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Block'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/IndexError'
-        warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/IndexError'
     DependencySelectorOperator:
       type: string
       enum:
@@ -323,20 +236,16 @@ components:
           - string
           - 'null'
           format: date-time
-    DependencySelector:
+    ErrorBody:
       type: object
       required:
-      - references
-      - operator
+      - key
+      - message
       properties:
-        operator:
-          $ref: '#/components/schemas/DependencySelectorOperator'
-        references:
-          type: array
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/Segment'
+        key:
+          type: string
+        message:
+          type: string
     ApiGroupVersion:
       type: object
       required:
@@ -356,6 +265,97 @@ components:
           $ref: '#/components/schemas/APIGroupVersionStatus'
         version:
           type: string
+    DependencySelector:
+      type: object
+      required:
+      - references
+      - operator
+      properties:
+        operator:
+          $ref: '#/components/schemas/DependencySelectorOperator'
+        references:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Segment'
+    Segment:
+      oneOf:
+      - type: string
+      - type: integer
+        minimum: 0
+    IndexError:
+      type: object
+      required:
+      - uri
+      - message
+      properties:
+        details: {}
+        message:
+          type: string
+        uri:
+          type: string
+    Point:
+      type: object
+      required:
+      - row
+      - column
+      properties:
+        column:
+          type: integer
+          minimum: 0
+        row:
+          type: integer
+          minimum: 0
+    APIGroupVersionStatus:
+      type: string
+      enum:
+      - UNAVAILABLE
+      - PENDING
+      - AVAILABLE
+    DependentBlock:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+    Document:
+      type: object
+      required:
+      - uri
+      - content
+      properties:
+        content:
+          type: string
+        uri:
+          type: string
+    ProvisionerType:
+      type: string
+      enum:
+      - Terraform
+      - Kubernetes
+      - Dockerfile
+      - GithubActions
+      - None
+    BuildCodeIndexInput:
+      type: object
+      description: Build an index of infrastructure configuration blocks from source code
+      required:
+      - documents
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          description: List of documents to analyze and build an index from
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

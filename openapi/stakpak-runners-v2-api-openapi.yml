@@ -251,135 +251,15 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    GithubActionsConfig:
-      type: object
-      properties:
-        providers:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CloudConfiguration'
-    CreateRunnerSecretPayload:
+    GetRunnerSecretsResponse:
       type: object
       required:
-      - name
-      - value
+      - results
       properties:
-        name:
-          type: string
-        value:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    RunnerProvider:
-      oneOf:
-      - allOf:
-        - $ref: '#/components/schemas/GithubActionsRunner'
-        - type: object
-          required:
-          - type
-          properties:
-            type:
-              type: string
-              enum:
-              - GithubActions
-    CreateRunnerPayload:
-      type: object
-      required:
-      - name
-      - machine_name
-      - labels
-      - owner
-      - repo
-      properties:
-        config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/GithubActionsConfig'
-        create_api_key:
-          type: boolean
-        labels:
+        results:
           type: array
           items:
-            type: string
-        machine_name:
-          type: string
-        name:
-          type: string
-        owner:
-          type: string
-        repo:
-          type: string
-    TriggerRunnerPayload:
-      type: object
-      required:
-      - prompt
-      properties:
-        prompt:
-          type: string
-    RunnerSecret:
-      type: object
-      required:
-      - name
-      - created_at
-      - updated_at
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-        updated_at:
-          type: string
-          format: date-time
-    Runner:
-      type: object
-      required:
-      - id
-      - name
-      - machine_name
-      - provider
-      - labels
-      properties:
-        created_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        labels:
-          type: array
-          items:
-            type: string
-        machine_name:
-          type: string
-        name:
-          type: string
-        provider:
-          $ref: '#/components/schemas/RunnerProvider'
-        updated_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    GithubIntegration:
-      type: object
-      required:
-      - app_id
-      - installation_id
-      properties:
-        app_id:
-          type: string
-        installation_id:
-          type: string
+            $ref: '#/components/schemas/RunnerSecret'
     CloudConfiguration:
       oneOf:
       - type: object
@@ -433,21 +313,28 @@ components:
             type: string
           workload_identity_provider:
             type: string
-    GithubActionsRunnerStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - DISABLED
-      - PENDING_MERGE
-    GetRunnerSecretsResponse:
+    ErrorBody:
       type: object
       required:
-      - results
+      - key
+      - message
       properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/RunnerSecret'
+        key:
+          type: string
+        message:
+          type: string
+    RunnerProvider:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/GithubActionsRunner'
+        - type: object
+          required:
+          - type
+          properties:
+            type:
+              type: string
+              enum:
+              - GithubActions
     ListRunnersResponse:
       type: object
       required:
@@ -457,6 +344,61 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Runner'
+    GithubActionsConfig:
+      type: object
+      properties:
+        providers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CloudConfiguration'
+    TriggerRunnerPayload:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+    Runner:
+      type: object
+      required:
+      - id
+      - name
+      - machine_name
+      - provider
+      - labels
+      properties:
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        labels:
+          type: array
+          items:
+            type: string
+        machine_name:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/RunnerProvider'
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     GithubActionsRunner:
       type: object
       required:
@@ -490,22 +432,73 @@ components:
           $ref: '#/components/schemas/GithubActionsRunnerStatus'
         version:
           type: string
-    UpdateRunnerPayload:
+    GithubIntegration:
       type: object
+      required:
+      - app_id
+      - installation_id
+      properties:
+        app_id:
+          type: string
+        installation_id:
+          type: string
+    RunnerSecret:
+      type: object
+      required:
+      - name
+      - created_at
+      - updated_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    GithubActionsRunnerStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      - PENDING_MERGE
+    CreateRunnerSecretPayload:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    CreateRunnerPayload:
+      type: object
+      required:
+      - name
+      - machine_name
+      - labels
+      - owner
+      - repo
       properties:
         config:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/GithubActionsConfig'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
+        create_api_key:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+        machine_name:
           type: string
-        message:
+        name:
+          type: string
+        owner:
+          type: string
+        repo:
           type: string
     CheckRunnerUpgradeResponse:
       type: object
@@ -520,6 +513,13 @@ components:
           type: boolean
         latest_version:
           type: string
+    UpdateRunnerPayload:
+      type: object
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/GithubActionsConfig'
   securitySchemes:
     Api_Key:
       type: http

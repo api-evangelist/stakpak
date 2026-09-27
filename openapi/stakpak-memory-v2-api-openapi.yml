@@ -121,13 +121,38 @@ paths:
       - Api Key: []
 components:
   schemas:
-    ErrorResponse:
+    MemoryBlockLink:
       type: object
       required:
-      - error
+      - id
+      - uri
+      - title
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+        id:
+          type: string
+          format: uuid
+        reason:
+          type:
+          - string
+          - 'null'
+        title:
+          type: string
+        type:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MemoryBlockLinkType'
+        uri:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
     CreateOrUpdateMemoryPayload:
       type: object
       required:
@@ -148,15 +173,52 @@ components:
           type: string
         uri:
           type: string
-    ListMemoriesResponse:
+    MemoryBlockLinkType:
+      type: string
+      enum:
+      - NEAR
+      - LEADS_TO
+      - CONTAINS
+      - EXPRESS
+    ListMemoryBlock:
       type: object
       required:
-      - results
+      - id
+      - uri
+      - title
+      - mime_type
+      - tags
       properties:
-        results:
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        mime_type:
+          type: string
+        tags:
           type: array
           items:
-            $ref: '#/components/schemas/ListMemoryBlock'
+            type: string
+        title:
+          type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+    CreateOrUpdateMemoryResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
     GetMemoryByUriResponse:
       type: object
       properties:
@@ -209,84 +271,22 @@ components:
           format: date-time
         uri:
           type: string
-    CreateOrUpdateMemoryResponse:
+    ListMemoriesResponse:
       type: object
       required:
-      - id
+      - results
       properties:
-        id:
-          type: string
-    MemoryBlockLinkType:
-      type: string
-      enum:
-      - NEAR
-      - LEADS_TO
-      - CONTAINS
-      - EXPRESS
-    MemoryBlockLink:
-      type: object
-      required:
-      - id
-      - uri
-      - title
-      properties:
-        id:
-          type: string
-          format: uuid
-        reason:
-          type:
-          - string
-          - 'null'
-        title:
-          type: string
-        type:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/MemoryBlockLinkType'
-        uri:
-          type: string
-    ListMemoryBlock:
-      type: object
-      required:
-      - id
-      - uri
-      - title
-      - mime_type
-      - tags
-      properties:
-        created_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        mime_type:
-          type: string
-        tags:
+        results:
           type: array
           items:
-            type: string
-        title:
-          type: string
-        updated_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        uri:
-          type: string
-    ErrorBody:
+            $ref: '#/components/schemas/ListMemoryBlock'
+    ErrorResponse:
       type: object
       required:
-      - key
-      - message
+      - error
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

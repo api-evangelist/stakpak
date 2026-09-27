@@ -179,57 +179,11 @@ paths:
       - Api Key: []
 components:
   schemas:
-    CreateRuleBookResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    SearchRuleBooksResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/RuleBook'
-    CreateRuleBookPayload:
-      type: object
-      required:
-      - uri
-      - description
-      - content
-      properties:
-        content:
-          type: string
-        description:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        uri:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/RuleBookVisibility'
-    CreateManyRuleBooksResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateRuleBookResponse'
+    RuleBookVisibility:
+      type: string
+      enum:
+      - PUBLIC
+      - PRIVATE
     RuleBook:
       type: object
       required:
@@ -265,6 +219,35 @@ components:
           type: string
         visibility:
           $ref: '#/components/schemas/RuleBookVisibility'
+    CreateRuleBookPayload:
+      type: object
+      required:
+      - uri
+      - description
+      - content
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        uri:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/RuleBookVisibility'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
     ListRuleBooksResponse:
       type: object
       required:
@@ -306,11 +289,22 @@ components:
           type: string
         visibility:
           $ref: '#/components/schemas/RuleBookVisibility'
-    RuleBookVisibility:
-      type: string
-      enum:
-      - PUBLIC
-      - PRIVATE
+    SearchRuleBooksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleBook'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     CreateManyRuleBooksPayload:
       type: object
       required:
@@ -320,15 +314,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateRuleBookPayload'
-    ErrorBody:
+    CreateManyRuleBooksResponse:
       type: object
       required:
-      - key
-      - message
+      - results
       properties:
-        key:
-          type: string
-        message:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateRuleBookResponse'
+    CreateRuleBookResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
           type: string
   securitySchemes:
     Api_Key:

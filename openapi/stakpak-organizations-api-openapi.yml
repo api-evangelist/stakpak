@@ -496,88 +496,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    OrganizationMemberStatus:
-      type: string
-      enum:
-      - PENDING_INVITE
-      - ACTIVE
-      - DISABLED
-    SendInvitationResponse:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-    UpdateMyOrganizationInvitationStatusPayload:
-      type: object
-      required:
-      - status
-      properties:
-        status:
-          $ref: '#/components/schemas/OrganizationMemberStatus'
-    PublicOrganizationMember:
-      type: object
-      required:
-      - name
-      - first_name
-      - last_name
-      - status
-      - role
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
-          type: string
-        profile_img_url:
-          type:
-          - string
-          - 'null'
-        role:
-          $ref: '#/components/schemas/OrganizationRole'
-        status:
-          $ref: '#/components/schemas/OrganizationMemberStatus'
-    AcceptInvitationResponse:
-      type: object
-      required:
-      - organization
-      properties:
-        organization:
-          $ref: '#/components/schemas/PublicBaseOrganization'
-    CheckOrganizationNameResponse:
-      type: object
-      required:
-      - available
-      properties:
-        available:
-          type: boolean
-    PendingInvitation:
-      type: object
-      description: Invitation for listing in org admin panel
-      required:
-      - id
-      - email
-      - role
-      - invited_by
-      - expires_at
-      - created_at
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        email:
-          type: string
-        expires_at:
-          type: string
-          format: date-time
-        id:
-          type: string
-        invited_by:
-          $ref: '#/components/schemas/InvitedByUser'
-        role:
-          $ref: '#/components/schemas/OrganizationRole'
     PublicBaseOrganization:
       type: object
       required:
@@ -588,21 +506,60 @@ components:
           type: string
         name:
           type: string
-    PublicOrganizationRole:
+    InvitableRole:
       type: string
       enum:
       - ADMIN
       - MEMBER
       - VIEWER
-    GetOrganizationMembersResponse:
+    SendInvitationResponse:
       type: object
       required:
-      - results
+      - message
       properties:
-        results:
+        message:
+          type: string
+    CheckOrganizationNameResponse:
+      type: object
+      required:
+      - available
+      properties:
+        available:
+          type: boolean
+    PublicUser:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      - following
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type: string
+        followers:
           type: array
           items:
-            $ref: '#/components/schemas/PublicOrganizationMember'
+            $ref: '#/components/schemas/User'
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        last_name:
+          type: string
+        name:
+          type: string
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
     User:
       type: object
       required:
@@ -674,13 +631,190 @@ components:
           - string
           - 'null'
           format: date-time
-    ResendInvitationPayload:
+    SendInvitationPayload:
       type: object
       required:
       - email
       properties:
         email:
           type: string
+        role:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/InvitableRole'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    InvitedByUser:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+    OrganizationRole:
+      type: string
+      enum:
+      - OWNER
+      - ADMIN
+      - MEMBER
+      - VIEWER
+    UpdateOrganizationPayload:
+      type: object
+      properties:
+        display_name:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+    InviteOrganizationMemberPayload:
+      type: object
+      required:
+      - username
+      properties:
+        role:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PublicOrganizationRole'
+        username:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    PendingInvitation:
+      type: object
+      description: Invitation for listing in org admin panel
+      required:
+      - id
+      - email
+      - role
+      - invited_by
+      - expires_at
+      - created_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        invited_by:
+          $ref: '#/components/schemas/InvitedByUser'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+    UpdateMyOrganizationInvitationStatusPayload:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          $ref: '#/components/schemas/OrganizationMemberStatus'
+    PublicOrganization:
+      type: object
+      required:
+      - name
+      - display_name
+      - members
+      properties:
+        display_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicUser'
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicOrganizationMember'
+        name:
+          type: string
+    OrganizationMemberStatus:
+      type: string
+      enum:
+      - PENDING_INVITE
+      - ACTIVE
+      - DISABLED
+    PublicOrganizationMember:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      - status
+      - role
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        status:
+          $ref: '#/components/schemas/OrganizationMemberStatus'
+    GetOrganizationMembersResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicOrganizationMember'
+    ListPendingInvitationsResponse:
+      type: object
+      required:
+      - invitations
+      properties:
+        invitations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingInvitation'
+    CreateOrganizationPayload:
+      type: object
+      required:
+      - name
+      - display_name
+      properties:
+        display_name:
+          type: string
+        name:
+          type: string
+    PublicOrganizationRole:
+      type: string
+      enum:
+      - ADMIN
+      - MEMBER
+      - VIEWER
     Account:
       oneOf:
       - type: object
@@ -705,6 +839,20 @@ components:
             type: string
             enum:
             - Organization
+    CheckOrganizationNamePayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    AcceptInvitationResponse:
+      type: object
+      required:
+      - organization
+      properties:
+        organization:
+          $ref: '#/components/schemas/PublicBaseOrganization'
     PublicInvitationDetails:
       type: object
       description: Public invitation details (returned when validating a token)
@@ -729,160 +877,12 @@ components:
           $ref: '#/components/schemas/OrganizationRole'
         user_exists:
           type: boolean
-    InviteOrganizationMemberPayload:
-      type: object
-      required:
-      - username
-      properties:
-        role:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/PublicOrganizationRole'
-        username:
-          type: string
-    ListPendingInvitationsResponse:
-      type: object
-      required:
-      - invitations
-      properties:
-        invitations:
-          type: array
-          items:
-            $ref: '#/components/schemas/PendingInvitation'
-    UpdateOrganizationPayload:
-      type: object
-      properties:
-        display_name:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    PublicUser:
-      type: object
-      required:
-      - name
-      - first_name
-      - last_name
-      - following
-      properties:
-        bio:
-          type:
-          - string
-          - 'null'
-        first_name:
-          type: string
-        followers:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        following:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        last_name:
-          type: string
-        name:
-          type: string
-        profile_img_url:
-          type:
-          - string
-          - 'null'
-        readme:
-          type:
-          - string
-          - 'null'
-    SendInvitationPayload:
+    ResendInvitationPayload:
       type: object
       required:
       - email
       properties:
         email:
-          type: string
-        role:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/InvitableRole'
-    InvitableRole:
-      type: string
-      enum:
-      - ADMIN
-      - MEMBER
-      - VIEWER
-    CheckOrganizationNamePayload:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-    PublicOrganization:
-      type: object
-      required:
-      - name
-      - display_name
-      - members
-      properties:
-        display_name:
-          type: string
-        followers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicUser'
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicOrganizationMember'
-        name:
-          type: string
-    OrganizationRole:
-      type: string
-      enum:
-      - OWNER
-      - ADMIN
-      - MEMBER
-      - VIEWER
-    CreateOrganizationPayload:
-      type: object
-      required:
-      - name
-      - display_name
-      properties:
-        display_name:
-          type: string
-        name:
-          type: string
-    InvitedByUser:
-      type: object
-      required:
-      - name
-      - first_name
-      - last_name
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        name:
           type: string
   securitySchemes:
     Api_Key:
