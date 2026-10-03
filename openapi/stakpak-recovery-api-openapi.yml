@@ -137,58 +137,6 @@ components:
       enum:
       - approve
       - reject
-    CheckpointRef:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-    SessionRef:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    GetRecoveriesResponse:
-      type: object
-      properties:
-        result:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/SessionRecoveryResponse'
-    RecoveryStatus:
-      type: string
-      enum:
-      - PENDING
-      - APPROVED
-      - REJECTED
-      - APPLIED
-    UpdateRecoveryActionPayload:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          $ref: '#/components/schemas/UserRecoveryAction'
-        selected_option_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
     SessionRecoveryResponse:
       type: object
       required:
@@ -227,6 +175,26 @@ components:
           $ref: '#/components/schemas/CheckpointRef'
         updated_at:
           type: string
+    UpdateRecoveryActionPayload:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          $ref: '#/components/schemas/UserRecoveryAction'
+        selected_option_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    CheckpointRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
     ErrorResponse:
       type: object
       required:
@@ -234,6 +202,38 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorBody'
+    SessionRef:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    RecoveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - APPROVED
+      - REJECTED
+      - APPLIED
+    GetRecoveriesResponse:
+      type: object
+      properties:
+        result:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SessionRecoveryResponse'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
     Api_Key:
       type: http

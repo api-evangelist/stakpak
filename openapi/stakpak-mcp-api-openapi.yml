@@ -54,30 +54,6 @@ components:
         data: {}
         message:
           type: string
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    JsonRpcResponse:
-      type: object
-      required:
-      - jsonrpc
-      - id
-      properties:
-        error:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/JsonRpcError'
-        id: {}
-        jsonrpc:
-          type: string
-        result: {}
     JsonRpcRequest:
       type: object
       required:
@@ -99,6 +75,30 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorBody'
+    JsonRpcResponse:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/JsonRpcError'
+        id: {}
+        jsonrpc:
+          type: string
+        result: {}
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
     Api_Key:
       type: http

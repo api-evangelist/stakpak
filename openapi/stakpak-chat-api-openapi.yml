@@ -100,46 +100,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    LLMTokenUsage:
-      type: object
-      required:
-      - prompt_tokens
-      - completion_tokens
-      - total_tokens
-      properties:
-        completion_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        prompt_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        prompt_tokens_details:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/PromptTokensDetails'
-        total_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-    FunctionChoice:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-    FunctionCall:
-      type: object
-      required:
-      - name
-      - arguments
-      properties:
-        arguments:
-          type: string
-        name:
-          type: string
     FlowRef:
       oneOf:
       - type: object
@@ -184,6 +144,199 @@ components:
       - user
       - assistant
       - tool
+    ToolChoice:
+      oneOf:
+      - type: string
+        enum:
+        - Auto
+      - type: string
+        enum:
+        - Required
+      - type: object
+        required:
+        - Object
+        properties:
+          Object:
+            $ref: '#/components/schemas/ToolChoiceObject'
+    FunctionDefinition:
+      type: object
+      required:
+      - name
+      - parameters
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        parameters: {}
+    StopSequence:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+    OpenAIError:
+      type: object
+      description: OpenAI error details
+      required:
+      - message
+      - type
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type: string
+        param:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+    FunctionCall:
+      type: object
+      required:
+      - name
+      - arguments
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    ModelInfo:
+      type: object
+      description: Model information for tracking which model generated a message
+      required:
+      - provider
+      - id
+      properties:
+        id:
+          type: string
+          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
+        provider:
+          type: string
+          description: Provider name (e.g., "anthropic", "openai")
+    Tool:
+      type: object
+      required:
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionDefinition'
+        type:
+          type: string
+    LLMTokenUsage:
+      type: object
+      required:
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens_details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PromptTokensDetails'
+        total_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    ChatMessage:
+      type: object
+      required:
+      - role
+      properties:
+        completed_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when assistant finished generating
+        content:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MessageContent'
+        cost:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Cost in dollars for this message
+        created_at:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Unix timestamp (ms) when message was created/sent
+        finish_reason:
+          type:
+          - string
+          - 'null'
+          description: 'Why the model stopped: "stop", "tool_calls", "length", "error"'
+        id:
+          type:
+          - string
+          - 'null'
+          description: Unique message identifier
+        metadata:
+          description: Plugin extensibility - unstructured metadata
+        model:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ModelInfo'
+            description: Model that generated this message (for assistant messages)
+        name:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        tool_call_id:
+          type:
+          - string
+          - 'null'
+        tool_calls:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ToolCall'
+        usage:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LLMTokenUsage'
+    ToolChoiceObject:
+      type: object
+      required:
+      - type
+      - function
+      properties:
+        function:
+          $ref: '#/components/schemas/FunctionChoice'
+        type:
+          type: string
+    ImageUrl:
+      type: object
+      required:
+      - url
+      properties:
+        detail:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
     ChatCompletionContext:
       type: object
       properties:
@@ -206,12 +359,6 @@ components:
           - string
           - 'null'
         type:
-          type: string
-    StopSequence:
-      oneOf:
-      - type: string
-      - type: array
-        items:
           type: string
     ChatCompletionRequest:
       type: object
@@ -305,65 +452,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/OpenAIError'
-    OpenAIError:
-      type: object
-      description: OpenAI error details
-      required:
-      - message
-      - type
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type: string
-        param:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-    FunctionDefinition:
-      type: object
-      required:
-      - name
-      - parameters
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        parameters: {}
-    ImageUrl:
-      type: object
-      required:
-      - url
-      properties:
-        detail:
-          type:
-          - string
-          - 'null'
-        url:
-          type: string
-    MessageContent:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/ContentPart'
-    ToolChoiceObject:
-      type: object
-      required:
-      - type
-      - function
-      properties:
-        function:
-          $ref: '#/components/schemas/FunctionChoice'
-        type:
-          type: string
     ResponseFormat:
       type: object
       required:
@@ -371,110 +459,6 @@ components:
       properties:
         type:
           type: string
-    ModelInfo:
-      type: object
-      description: Model information for tracking which model generated a message
-      required:
-      - provider
-      - id
-      properties:
-        id:
-          type: string
-          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
-        provider:
-          type: string
-          description: Provider name (e.g., "anthropic", "openai")
-    ChatMessage:
-      type: object
-      required:
-      - role
-      properties:
-        completed_at:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Unix timestamp (ms) when assistant finished generating
-        content:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/MessageContent'
-        cost:
-          type:
-          - number
-          - 'null'
-          format: double
-          description: Cost in dollars for this message
-        created_at:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Unix timestamp (ms) when message was created/sent
-        finish_reason:
-          type:
-          - string
-          - 'null'
-          description: 'Why the model stopped: "stop", "tool_calls", "length", "error"'
-        id:
-          type:
-          - string
-          - 'null'
-          description: Unique message identifier
-        metadata:
-          description: Plugin extensibility - unstructured metadata
-        model:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ModelInfo'
-            description: Model that generated this message (for assistant messages)
-        name:
-          type:
-          - string
-          - 'null'
-        role:
-          $ref: '#/components/schemas/Role'
-        tool_call_id:
-          type:
-          - string
-          - 'null'
-        tool_calls:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ToolCall'
-        usage:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/LLMTokenUsage'
-    ToolCall:
-      type: object
-      required:
-      - id
-      - type
-      - function
-      properties:
-        function:
-          $ref: '#/components/schemas/FunctionCall'
-        id:
-          type: string
-        type:
-          type: string
-    ToolChoice:
-      oneOf:
-      - type: string
-        enum:
-        - Auto
-      - type: string
-        enum:
-        - Required
-      - type: object
-        required:
-        - Object
-        properties:
-          Object:
-            $ref: '#/components/schemas/ToolChoiceObject'
     PromptTokensDetails:
       type: object
       properties:
@@ -494,15 +478,31 @@ components:
           type: integer
           format: int32
           minimum: 0
-    Tool:
+    MessageContent:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/ContentPart'
+    ToolCall:
       type: object
       required:
+      - id
       - type
       - function
       properties:
         function:
-          $ref: '#/components/schemas/FunctionDefinition'
+          $ref: '#/components/schemas/FunctionCall'
+        id:
+          type: string
         type:
+          type: string
+    FunctionChoice:
+      type: object
+      required:
+      - name
+      properties:
+        name:
           type: string
   securitySchemes:
     Api_Key:

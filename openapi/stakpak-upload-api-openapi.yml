@@ -43,6 +43,23 @@ paths:
       - Api Key: []
 components:
   schemas:
+    UploadPayload:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+    UploadResponse:
+      type: object
+      required:
+      - upload_url
+      - img_url
+      properties:
+        img_url:
+          type: string
+        upload_url:
+          type: string
     ErrorResponse:
       type: object
       required:
@@ -59,23 +76,6 @@ components:
         key:
           type: string
         message:
-          type: string
-    UploadResponse:
-      type: object
-      required:
-      - upload_url
-      - img_url
-      properties:
-        img_url:
-          type: string
-        upload_url:
-          type: string
-    UploadPayload:
-      type: object
-      required:
-      - key
-      properties:
-        key:
           type: string
   securitySchemes:
     Api_Key:

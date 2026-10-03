@@ -63,25 +63,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    GetMyIntegrationsResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Integration'
     Integration:
       oneOf:
       - type: object
@@ -113,6 +94,25 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorBody'
+    GetMyIntegrationsResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
     Api_Key:
       type: http

@@ -42,97 +42,35 @@ paths:
       - Api Key: []
 components:
   schemas:
-    BuildCodeIndexOutput:
+    ProvisionerType:
+      type: string
+      enum:
+      - Terraform
+      - Kubernetes
+      - Dockerfile
+      - GithubActions
+      - None
+    Document:
       type: object
       required:
-      - blocks
-      - errors
-      - warnings
+      - uri
+      - content
       properties:
-        blocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Block'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/IndexError'
-        warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/IndexError'
-    Dependency:
+        content:
+          type: string
+        uri:
+          type: string
+    IndexError:
       type: object
       required:
-      - satisfied
+      - uri
+      - message
       properties:
-        digest:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        end_byte:
-          type:
-          - integer
-          - 'null'
-          minimum: 0
-        end_point:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Point'
-        expression:
-          type:
-          - string
-          - 'null'
-        from:
-          type: array
-          items:
-            $ref: '#/components/schemas/Segment'
-        from_field:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Segment'
-        from_path:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Segment'
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        satisfied:
-          type: boolean
-        selectors:
-          type: array
-          items:
-            $ref: '#/components/schemas/DependencySelector'
-        start_byte:
-          type:
-          - integer
-          - 'null'
-          minimum: 0
-        start_point:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Point'
-        to_field:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Segment'
-        to_path:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Segment'
+        details: {}
+        message:
+          type: string
+        uri:
+          type: string
     DependencySelectorOperator:
       type: string
       enum:
@@ -142,6 +80,25 @@ components:
       - NotIn
       - Exists
       - DoesNotExist
+    ApiGroupVersion:
+      type: object
+      required:
+      - alias
+      - group
+      - version
+      - provisioner
+      - status
+      properties:
+        alias:
+          type: string
+        group:
+          type: string
+        provisioner:
+          $ref: '#/components/schemas/ProvisionerType'
+        status:
+          $ref: '#/components/schemas/APIGroupVersionStatus'
+        version:
+          type: string
     Block:
       type: object
       required:
@@ -236,35 +193,11 @@ components:
           - string
           - 'null'
           format: date-time
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    ApiGroupVersion:
-      type: object
-      required:
-      - alias
-      - group
-      - version
-      - provisioner
-      - status
-      properties:
-        alias:
-          type: string
-        group:
-          type: string
-        provisioner:
-          $ref: '#/components/schemas/ProvisionerType'
-        status:
-          $ref: '#/components/schemas/APIGroupVersionStatus'
-        version:
-          type: string
+    Segment:
+      oneOf:
+      - type: string
+      - type: integer
+        minimum: 0
     DependencySelector:
       type: object
       required:
@@ -279,22 +212,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Segment'
-    Segment:
-      oneOf:
-      - type: string
-      - type: integer
-        minimum: 0
-    IndexError:
-      type: object
-      required:
-      - uri
-      - message
-      properties:
-        details: {}
-        message:
-          type: string
-        uri:
-          type: string
     Point:
       type: object
       required:
@@ -307,37 +224,13 @@ components:
         row:
           type: integer
           minimum: 0
-    APIGroupVersionStatus:
-      type: string
-      enum:
-      - UNAVAILABLE
-      - PENDING
-      - AVAILABLE
-    DependentBlock:
+    ErrorResponse:
       type: object
       required:
-      - key
+      - error
       properties:
-        key:
-          type: string
-    Document:
-      type: object
-      required:
-      - uri
-      - content
-      properties:
-        content:
-          type: string
-        uri:
-          type: string
-    ProvisionerType:
-      type: string
-      enum:
-      - Terraform
-      - Kubernetes
-      - Dockerfile
-      - GithubActions
-      - None
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     BuildCodeIndexInput:
       type: object
       description: Build an index of infrastructure configuration blocks from source code
@@ -349,13 +242,120 @@ components:
           items:
             $ref: '#/components/schemas/Document'
           description: List of documents to analyze and build an index from
-    ErrorResponse:
+    DependentBlock:
       type: object
       required:
-      - error
+      - key
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+        key:
+          type: string
+    BuildCodeIndexOutput:
+      type: object
+      required:
+      - blocks
+      - errors
+      - warnings
+      properties:
+        blocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Block'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexError'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexError'
+    APIGroupVersionStatus:
+      type: string
+      enum:
+      - UNAVAILABLE
+      - PENDING
+      - AVAILABLE
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    Dependency:
+      type: object
+      required:
+      - satisfied
+      properties:
+        digest:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        end_byte:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        end_point:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Point'
+        expression:
+          type:
+          - string
+          - 'null'
+        from:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        from_field:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+        from_path:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        satisfied:
+          type: boolean
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependencySelector'
+        start_byte:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        start_point:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Point'
+        to_field:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
+        to_path:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Segment'
   securitySchemes:
     Api_Key:
       type: http

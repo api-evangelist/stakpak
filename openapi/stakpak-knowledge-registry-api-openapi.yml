@@ -258,80 +258,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    PakInstallResponse:
-      type: object
-      description: Response type for pak install endpoint
-      required:
-      - pak
-      - version
-      - repository
-      - install
-      properties:
-        install:
-          $ref: '#/components/schemas/PakInstallDetails'
-        pak:
-          $ref: '#/components/schemas/PakInstallInfo'
-        repository:
-          $ref: '#/components/schemas/PakRepositoryInfo'
-        version:
-          $ref: '#/components/schemas/PakVersionInfo'
-    ListPaksResponse:
-      type: object
-      required:
-      - items
-      - total_count
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PakWithLatestVersion'
-          description: List of paks for the current page.
-        total_count:
-          type: integer
-          format: int64
-          description: Total number of paks matching the query (before pagination).
-          minimum: 0
-    PakTimeWindow:
-      type: string
-      enum:
-      - DAILY
-      - WEEKLY
-      - MONTHLY
-      - ALL_TIME
-    PakRepositoryInfo:
-      type: object
-      description: Repository info for install response
-      required:
-      - url
-      - clone_url
-      - ssh_url
-      - default_branch
-      properties:
-        clone_url:
-          type: string
-        default_branch:
-          type: string
-        ssh_url:
-          type: string
-        url:
-          type: string
-    PakContentResponse:
-      type: object
-      description: Response type for pak content
-      required:
-      - uri
-      - content
-      properties:
-        content:
-          $ref: '#/components/schemas/PakContent'
-        pak_version_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The pak version ID for tracking purposes
-        uri:
-          type: string
     ContentItem:
       type: object
       description: Represents a content item from a GitHub repository (file or directory)
@@ -347,118 +273,6 @@ components:
           type: string
         uri:
           type: string
-    SearchPaksResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PakWithLatestVersion'
-    PakSortBy:
-      type: string
-      enum:
-      - TRENDING
-      - MOST_POPULAR
-      - RECENT
-    PakVersionInfo:
-      type: object
-      description: Version info for install response
-      required:
-      - version
-      - tag
-      - commit_hash
-      - published_at
-      properties:
-        commit_hash:
-          type: string
-        published_at:
-          type: string
-          format: date-time
-        tag:
-          type: string
-        version:
-          type: string
-    PakVersion:
-      type: object
-      required:
-      - id
-      - version
-      - git_tag
-      - checksum
-      - manifest
-      - review_status
-      - downloads
-      - usages
-      - published_at
-      - created_at
-      - updated_at
-      properties:
-        checksum:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        downloads:
-          type: integer
-          format: int64
-        git_tag:
-          type: string
-        id:
-          type: string
-          format: uuid
-        manifest:
-          type: string
-        published_at:
-          type: string
-          format: date-time
-        review_comment:
-          type:
-          - string
-          - 'null'
-        review_status:
-          $ref: '#/components/schemas/PakVersionReviewStatus'
-        size_bytes:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        updated_at:
-          type: string
-          format: date-time
-        usages:
-          type: integer
-          format: int64
-        version:
-          type: string
-    PakContent:
-      oneOf:
-      - type: object
-        required:
-        - content
-        - type
-        properties:
-          content:
-            type: string
-          type:
-            type: string
-            enum:
-            - File
-      - type: object
-        required:
-        - items
-        - type
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/ContentItem'
-          type:
-            type: string
-            enum:
-            - Directory
-      description: Content type enum - either a file or directory
     PublishPakBody:
       type: object
       description: Request body for publishing a pak (API layer with validation)
@@ -481,75 +295,6 @@ components:
         tag:
           type: string
           description: Git tag name (must start with `v`)
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    PakInstallDetails:
-      type: object
-      description: Install details for install response
-      required:
-      - path
-      - files
-      properties:
-        files:
-          type: array
-          items:
-            type: string
-        path:
-          type: string
-    PakVersionReviewStatus:
-      type: string
-      enum:
-      - PENDING_REVIEW
-      - APPROVED
-      - REJECTED
-      - CHANGES_REQUESTED
-    PakInstallInfo:
-      type: object
-      description: Pak metadata for install response
-      required:
-      - id
-      - owner
-      - name
-      - visibility
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        id:
-          type: string
-        name:
-          type: string
-        owner:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/PakVisibility'
-    PakStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - DEPRECATED
-    PakVisibility:
-      type: string
-      enum:
-      - PUBLIC
-      - UNLISTED
-      - PRIVATE
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
     PakWithLatestVersion:
       allOf:
       - $ref: '#/components/schemas/Pak'
@@ -626,6 +371,261 @@ components:
           format: int64
         visibility:
           $ref: '#/components/schemas/PakVisibility'
+    ListPaksResponse:
+      type: object
+      required:
+      - items
+      - total_count
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PakWithLatestVersion'
+          description: List of paks for the current page.
+        total_count:
+          type: integer
+          format: int64
+          description: Total number of paks matching the query (before pagination).
+          minimum: 0
+    PakVersionInfo:
+      type: object
+      description: Version info for install response
+      required:
+      - version
+      - tag
+      - commit_hash
+      - published_at
+      properties:
+        commit_hash:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+        tag:
+          type: string
+        version:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    PakVersionReviewStatus:
+      type: string
+      enum:
+      - PENDING_REVIEW
+      - APPROVED
+      - REJECTED
+      - CHANGES_REQUESTED
+    PakContent:
+      oneOf:
+      - type: object
+        required:
+        - content
+        - type
+        properties:
+          content:
+            type: string
+          type:
+            type: string
+            enum:
+            - File
+      - type: object
+        required:
+        - items
+        - type
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/ContentItem'
+          type:
+            type: string
+            enum:
+            - Directory
+      description: Content type enum - either a file or directory
+    PakRepositoryInfo:
+      type: object
+      description: Repository info for install response
+      required:
+      - url
+      - clone_url
+      - ssh_url
+      - default_branch
+      properties:
+        clone_url:
+          type: string
+        default_branch:
+          type: string
+        ssh_url:
+          type: string
+        url:
+          type: string
+    PakStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DEPRECATED
+    PakVersion:
+      type: object
+      required:
+      - id
+      - version
+      - git_tag
+      - checksum
+      - manifest
+      - review_status
+      - downloads
+      - usages
+      - published_at
+      - created_at
+      - updated_at
+      properties:
+        checksum:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+          format: int64
+        git_tag:
+          type: string
+        id:
+          type: string
+          format: uuid
+        manifest:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+        review_comment:
+          type:
+          - string
+          - 'null'
+        review_status:
+          $ref: '#/components/schemas/PakVersionReviewStatus'
+        size_bytes:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+        usages:
+          type: integer
+          format: int64
+        version:
+          type: string
+    PakInstallResponse:
+      type: object
+      description: Response type for pak install endpoint
+      required:
+      - pak
+      - version
+      - repository
+      - install
+      properties:
+        install:
+          $ref: '#/components/schemas/PakInstallDetails'
+        pak:
+          $ref: '#/components/schemas/PakInstallInfo'
+        repository:
+          $ref: '#/components/schemas/PakRepositoryInfo'
+        version:
+          $ref: '#/components/schemas/PakVersionInfo'
+    PakTimeWindow:
+      type: string
+      enum:
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - ALL_TIME
+    PakInstallInfo:
+      type: object
+      description: Pak metadata for install response
+      required:
+      - id
+      - owner
+      - name
+      - visibility
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/PakVisibility'
+    PakVisibility:
+      type: string
+      enum:
+      - PUBLIC
+      - UNLISTED
+      - PRIVATE
+    PakInstallDetails:
+      type: object
+      description: Install details for install response
+      required:
+      - path
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+        path:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    PakSortBy:
+      type: string
+      enum:
+      - TRENDING
+      - MOST_POPULAR
+      - RECENT
+    SearchPaksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PakWithLatestVersion'
+    PakContentResponse:
+      type: object
+      description: Response type for pak content
+      required:
+      - uri
+      - content
+      properties:
+        content:
+          $ref: '#/components/schemas/PakContent'
+        pak_version_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The pak version ID for tracking purposes
+        uri:
+          type: string
   securitySchemes:
     Api_Key:
       type: http

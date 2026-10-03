@@ -412,68 +412,6 @@ paths:
       x-operation-id-original: post_agent_session_extract_memory_handler
 components:
   schemas:
-    LLMTokenUsage:
-      type: object
-      required:
-      - prompt_tokens
-      - completion_tokens
-      - total_tokens
-      properties:
-        completion_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        prompt_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        prompt_tokens_details:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/PromptTokensDetails'
-        total_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-    MemoryBlockLink:
-      type: object
-      required:
-      - id
-      - uri
-      - title
-      properties:
-        id:
-          type: string
-          format: uuid
-        reason:
-          type:
-          - string
-          - 'null'
-        title:
-          type: string
-        type:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/MemoryBlockLinkType'
-        uri:
-          type: string
-    FunctionCall:
-      type: object
-      required:
-      - name
-      - arguments
-      properties:
-        arguments:
-          type: string
-        name:
-          type: string
-    AgentStatus:
-      type: string
-      enum:
-      - RUNNING
-      - COMPLETE
-      - BLOCKED
-      - FAILED
     FlowRef:
       oneOf:
       - type: object
@@ -510,46 +448,6 @@ components:
             type: string
             enum:
             - Tag
-    MemoryBlockLinkType:
-      type: string
-      enum:
-      - NEAR
-      - LEADS_TO
-      - CONTAINS
-      - EXPRESS
-    AgentSessionListItem:
-      type: object
-      required:
-      - id
-      - title
-      - agent_id
-      - visibility
-      - created_at
-      - updated_at
-      properties:
-        agent_id:
-          $ref: '#/components/schemas/AgentID'
-        created_at:
-          type: string
-          format: date-time
-        flow_ref:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/FlowRef'
-        id:
-          type: string
-          format: uuid
-        owner:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/AgentSessionOwner'
-        title:
-          type: string
-        updated_at:
-          type: string
-          format: date-time
-        visibility:
-          $ref: '#/components/schemas/AgentSessionVisibility'
     Role:
       type: string
       enum:
@@ -558,42 +456,6 @@ components:
       - user
       - assistant
       - tool
-    AgentOutput:
-      oneOf:
-      - type: object
-        required:
-        - messages
-        - node_states
-        - agent_id
-        properties:
-          agent_id:
-            type: string
-            enum:
-            - pablo:v1
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatMessage'
-          node_states:
-            type: object
-            additionalProperties: {}
-            propertyNames:
-              type: string
-    ContentPart:
-      type: object
-      required:
-      - type
-      properties:
-        image_url:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ImageUrl'
-        text:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
     SessionUsageAnalysis:
       type: object
       required:
@@ -649,6 +511,28 @@ components:
           type: integer
           format: int32
           minimum: 0
+    MemoryBlockLinkType:
+      type: string
+      enum:
+      - NEAR
+      - LEADS_TO
+      - CONTAINS
+      - EXPRESS
+    AgentParentCheckpoint:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+    UpdateSessionVisibilityPayload:
+      type: object
+      required:
+      - visibility
+      properties:
+        visibility:
+          $ref: '#/components/schemas/AgentSessionVisibility'
     AgentSessionOwner:
       type: object
       required:
@@ -660,6 +544,117 @@ components:
       type: string
       enum:
       - pablo:v1
+    AgentSessionListItem:
+      type: object
+      required:
+      - id
+      - title
+      - agent_id
+      - visibility
+      - created_at
+      - updated_at
+      properties:
+        agent_id:
+          $ref: '#/components/schemas/AgentID'
+        created_at:
+          type: string
+          format: date-time
+        flow_ref:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FlowRef'
+        id:
+          type: string
+          format: uuid
+        owner:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AgentSessionOwner'
+        title:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/AgentSessionVisibility'
+    RunAgentOutput:
+      type: object
+      required:
+      - checkpoint
+      - session
+      - output
+      - token_usage
+      properties:
+        checkpoint:
+          $ref: '#/components/schemas/AgentCheckpointListItem'
+        output:
+          $ref: '#/components/schemas/AgentOutput'
+        session:
+          $ref: '#/components/schemas/AgentSessionListItem'
+        token_usage:
+          $ref: '#/components/schemas/LLMTokenUsage'
+    GetAgentMemoriesResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlock'
+    FunctionCall:
+      type: object
+      required:
+      - name
+      - arguments
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    ModelInfo:
+      type: object
+      description: Model information for tracking which model generated a message
+      required:
+      - provider
+      - id
+      properties:
+        id:
+          type: string
+          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
+        provider:
+          type: string
+          description: Provider name (e.g., "anthropic", "openai")
+    AgentSessionVisibility:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    ToolUsageStats:
+      type: object
+      required:
+      - tool_name
+      - display_name
+      - usage_counts
+      properties:
+        display_name:
+          type: string
+        time_saved_per_call:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        time_saved_seconds:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        tool_name:
+          type: string
+        usage_counts:
+          $ref: '#/components/schemas/ToolCallCounts'
     AgentCheckpointListItem:
       type: object
       required:
@@ -687,24 +682,112 @@ components:
         updated_at:
           type: string
           format: date-time
-    UpdateSessionVisibilityPayload:
+    MemoryBlock:
       type: object
       required:
-      - visibility
+      - id
+      - uri
+      - title
+      - content
+      - mime_type
+      - tags
+      - links_to
+      - linked_from
       properties:
-        visibility:
-          $ref: '#/components/schemas/AgentSessionVisibility'
-    ImageUrl:
-      type: object
-      required:
-      - url
-      properties:
-        detail:
+        content:
+          type: string
+        created_at:
           type:
           - string
           - 'null'
-        url:
+          format: date-time
+        id:
           type: string
+          format: uuid
+        linked_from:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlockLink'
+        links_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoryBlockLink'
+        mime_type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+    AgentSession:
+      type: object
+      required:
+      - id
+      - title
+      - agent_id
+      - visibility
+      - checkpoints
+      - created_at
+      - updated_at
+      properties:
+        agent_id:
+          $ref: '#/components/schemas/AgentID'
+        checkpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCheckpointListItem'
+        created_at:
+          type: string
+          format: date-time
+        flow_ref:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FlowRef'
+        id:
+          type: string
+          format: uuid
+        owner:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AgentSessionOwner'
+        title:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/AgentSessionVisibility'
+    LLMTokenUsage:
+      type: object
+      required:
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        prompt_tokens_details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PromptTokensDetails'
+        total_tokens:
+          type: integer
+          format: int32
+          minimum: 0
     ErrorBody:
       type: object
       required:
@@ -715,66 +798,6 @@ components:
           type: string
         message:
           type: string
-    MessageContent:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/ContentPart'
-    ModelInfo:
-      type: object
-      description: Model information for tracking which model generated a message
-      required:
-      - provider
-      - id
-      properties:
-        id:
-          type: string
-          description: Model identifier (e.g., "claude-sonnet-4-20250514", "gpt-4")
-        provider:
-          type: string
-          description: Provider name (e.g., "anthropic", "openai")
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    GetAgentMemoriesResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MemoryBlock'
-    ToolUsageStats:
-      type: object
-      required:
-      - tool_name
-      - display_name
-      - usage_counts
-      properties:
-        display_name:
-          type: string
-        time_saved_per_call:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-        time_saved_seconds:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-        tool_name:
-          type: string
-        usage_counts:
-          $ref: '#/components/schemas/ToolCallCounts'
     ChatMessage:
       type: object
       required:
@@ -839,112 +862,54 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/LLMTokenUsage'
-    RunAgentOutput:
+    ImageUrl:
       type: object
       required:
-      - checkpoint
-      - session
-      - output
-      - token_usage
+      - url
       properties:
-        checkpoint:
-          $ref: '#/components/schemas/AgentCheckpointListItem'
-        output:
-          $ref: '#/components/schemas/AgentOutput'
-        session:
-          $ref: '#/components/schemas/AgentSessionListItem'
-        token_usage:
-          $ref: '#/components/schemas/LLMTokenUsage'
-    ToolCall:
-      type: object
-      required:
-      - id
-      - type
-      - function
-      properties:
-        function:
-          $ref: '#/components/schemas/FunctionCall'
-        id:
+        detail:
+          type:
+          - string
+          - 'null'
+        url:
           type: string
+    ContentPart:
+      type: object
+      required:
+      - type
+      properties:
+        image_url:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ImageUrl'
+        text:
+          type:
+          - string
+          - 'null'
         type:
           type: string
-    AgentParentCheckpoint:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-    AgentSessionVisibility:
-      type: string
-      enum:
-      - PRIVATE
-      - PUBLIC
-    MemoryBlock:
+    MemoryBlockLink:
       type: object
       required:
       - id
       - uri
       - title
-      - content
-      - mime_type
-      - tags
-      - links_to
-      - linked_from
       properties:
-        content:
-          type: string
-        created_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
         id:
           type: string
           format: uuid
-        linked_from:
-          type: array
-          items:
-            $ref: '#/components/schemas/MemoryBlockLink'
-        links_to:
-          type: array
-          items:
-            $ref: '#/components/schemas/MemoryBlockLink'
-        mime_type:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        title:
-          type: string
-        updated_at:
+        reason:
           type:
           - string
           - 'null'
-          format: date-time
+        title:
+          type: string
+        type:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/MemoryBlockLinkType'
         uri:
           type: string
-    PromptTokensDetails:
-      type: object
-      properties:
-        cache_read_input_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        cache_write_input_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        input_tokens:
-          type: integer
-          format: int32
-          minimum: 0
-        output_tokens:
-          type: integer
-          format: int32
-          minimum: 0
     ToolCallCounts:
       type: object
       required:
@@ -969,44 +934,79 @@ components:
           type: integer
           format: int32
           minimum: 0
-    AgentSession:
+    AgentStatus:
+      type: string
+      enum:
+      - RUNNING
+      - COMPLETE
+      - BLOCKED
+      - FAILED
+    ToolCall:
       type: object
       required:
       - id
-      - title
-      - agent_id
-      - visibility
-      - checkpoints
-      - created_at
-      - updated_at
+      - type
+      - function
       properties:
-        agent_id:
-          $ref: '#/components/schemas/AgentID'
-        checkpoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentCheckpointListItem'
-        created_at:
-          type: string
-          format: date-time
-        flow_ref:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/FlowRef'
+        function:
+          $ref: '#/components/schemas/FunctionCall'
         id:
           type: string
-          format: uuid
-        owner:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/AgentSessionOwner'
-        title:
+        type:
           type: string
-        updated_at:
-          type: string
-          format: date-time
-        visibility:
-          $ref: '#/components/schemas/AgentSessionVisibility'
+    PromptTokensDetails:
+      type: object
+      properties:
+        cache_read_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        cache_write_input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        input_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+        output_tokens:
+          type: integer
+          format: int32
+          minimum: 0
+    MessageContent:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/ContentPart'
+    AgentOutput:
+      oneOf:
+      - type: object
+        required:
+        - messages
+        - node_states
+        - agent_id
+        properties:
+          agent_id:
+            type: string
+            enum:
+            - pablo:v1
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatMessage'
+          node_states:
+            type: object
+            additionalProperties: {}
+            propertyNames:
+              type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

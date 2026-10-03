@@ -228,6 +228,191 @@ components:
     GetProductResponse:
       allOf:
       - {}
+    CheckoutOption:
+      type: object
+      required:
+      - feature_id
+      - quantity
+      properties:
+        feature_id:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+    PostBillingPortalResponse:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    PostBillingPortalPayload:
+      type: object
+      properties:
+        return_url:
+          type:
+          - string
+          - 'null'
+    PostAttachProductResponse:
+      type: object
+      required:
+      - customer_id
+      - product_ids
+      - code
+      properties:
+        checkout_url:
+          type:
+          - string
+          - 'null'
+        code:
+          type: string
+        customer_id:
+          type: string
+        message:
+          type:
+          - string
+          - 'null'
+        product_ids:
+          type: array
+          items:
+            type: string
+        success:
+          type:
+          - boolean
+          - 'null'
+    PostCheckoutResponse:
+      type: object
+      required:
+      - url
+      - customer_id
+      - lines
+      - product
+      properties:
+        customer_id:
+          type: string
+        lines:
+          type: array
+          items: {}
+        product: {}
+        url:
+          type: string
+    BillingFeatureInfo:
+      type: object
+      description: Minimal feature info returned for billing
+      required:
+      - id
+      - name
+      - type
+      - balance
+      - usage
+      - included_usage
+      - unlimited
+      properties:
+        balance:
+          type: number
+          format: double
+        id:
+          type: string
+        included_usage:
+          type: number
+          format: double
+        interval:
+          type:
+          - string
+          - 'null'
+        interval_count:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type: string
+        next_reset_at:
+          type:
+          - number
+          - 'null'
+          format: double
+        overage_allowed:
+          type:
+          - boolean
+          - 'null'
+        type:
+          type: string
+        unlimited:
+          type: boolean
+        usage:
+          type: number
+          format: double
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    PostCancelProductPayload:
+      type: object
+      required:
+      - product_id
+      properties:
+        cancel_immediately:
+          type:
+          - boolean
+          - 'null'
+        entity_id:
+          type:
+          - string
+          - 'null'
+        product_id:
+          type: string
+    PostCheckoutPayload:
+      type: object
+      required:
+      - product_id
+      properties:
+        checkout_session_params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          propertyNames:
+            type: string
+        entity_id:
+          type:
+          - string
+          - 'null'
+        options:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CheckoutOption'
+        product_id:
+          type: string
+        product_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        reward:
+          type:
+          - string
+          - 'null'
+        success_url:
+          type:
+          - string
+          - 'null'
     PostAttachProductPayload:
       type: object
       required:
@@ -277,73 +462,6 @@ components:
           type:
           - string
           - 'null'
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    PostAttachProductResponse:
-      type: object
-      required:
-      - customer_id
-      - product_ids
-      - code
-      properties:
-        checkout_url:
-          type:
-          - string
-          - 'null'
-        code:
-          type: string
-        customer_id:
-          type: string
-        message:
-          type:
-          - string
-          - 'null'
-        product_ids:
-          type: array
-          items:
-            type: string
-        success:
-          type:
-          - boolean
-          - 'null'
-    PostBillingPortalResponse:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-    PostCheckoutResponse:
-      type: object
-      required:
-      - url
-      - customer_id
-      - lines
-      - product
-      properties:
-        customer_id:
-          type: string
-        lines:
-          type: array
-          items: {}
-        product: {}
-        url:
-          type: string
-    PostBillingPortalPayload:
-      type: object
-      properties:
-        return_url:
-          type:
-          - string
-          - 'null'
     GetBillingCustomerResponse:
       type: object
       required:
@@ -371,124 +489,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BillingProductInfo'
-    PostCancelProductPayload:
-      type: object
-      required:
-      - product_id
-      properties:
-        cancel_immediately:
-          type:
-          - boolean
-          - 'null'
-        entity_id:
-          type:
-          - string
-          - 'null'
-        product_id:
-          type: string
-    BillingFeatureInfo:
-      type: object
-      description: Minimal feature info returned for billing
-      required:
-      - id
-      - name
-      - type
-      - balance
-      - usage
-      - included_usage
-      - unlimited
-      properties:
-        balance:
-          type: number
-          format: double
-        id:
-          type: string
-        included_usage:
-          type: number
-          format: double
-        interval:
-          type:
-          - string
-          - 'null'
-        interval_count:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        name:
-          type: string
-        next_reset_at:
-          type:
-          - number
-          - 'null'
-          format: double
-        overage_allowed:
-          type:
-          - boolean
-          - 'null'
-        type:
-          type: string
-        unlimited:
-          type: boolean
-        usage:
-          type: number
-          format: double
-    CheckoutOption:
-      type: object
-      required:
-      - feature_id
-      - quantity
-      properties:
-        feature_id:
-          type: string
-        quantity:
-          type: integer
-          format: int32
-    PostCheckoutPayload:
-      type: object
-      required:
-      - product_id
-      properties:
-        checkout_session_params:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          propertyNames:
-            type: string
-        entity_id:
-          type:
-          - string
-          - 'null'
-        options:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CheckoutOption'
-        product_id:
-          type: string
-        product_ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        reward:
-          type:
-          - string
-          - 'null'
-        success_url:
-          type:
-          - string
-          - 'null'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

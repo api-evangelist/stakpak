@@ -125,99 +125,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    AgentCheckpointListItem:
-      type: object
-      required:
-      - id
-      - status
-      - execution_depth
-      - created_at
-      - updated_at
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        execution_depth:
-          type: integer
-          minimum: 0
-        id:
-          type: string
-          format: uuid
-        parent:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/AgentParentCheckpoint'
-        status:
-          $ref: '#/components/schemas/AgentStatus'
-        updated_at:
-          type: string
-          format: date-time
-    ToolUsageStats:
-      type: object
-      required:
-      - tool_name
-      - display_name
-      - usage_counts
-      properties:
-        display_name:
-          type: string
-        time_saved_per_call:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-        time_saved_seconds:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-        tool_name:
-          type: string
-        usage_counts:
-          $ref: '#/components/schemas/ToolCallCounts'
-    ToolCallCounts:
-      type: object
-      required:
-      - successful
-      - failed
-      - aborted
-      - total
-      properties:
-        aborted:
-          type: integer
-          format: int32
-          minimum: 0
-        failed:
-          type: integer
-          format: int32
-          minimum: 0
-        successful:
-          type: integer
-          format: int32
-          minimum: 0
-        total:
-          type: integer
-          format: int32
-          minimum: 0
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    AgentStatus:
-      type: string
-      enum:
-      - RUNNING
-      - COMPLETE
-      - BLOCKED
-      - FAILED
     FlowRef:
       oneOf:
       - type: object
@@ -254,6 +161,36 @@ components:
             type: string
             enum:
             - Tag
+    AgentSessionVisibility:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    ToolUsageStats:
+      type: object
+      required:
+      - tool_name
+      - display_name
+      - usage_counts
+      properties:
+        display_name:
+          type: string
+        time_saved_per_call:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        time_saved_seconds:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        tool_name:
+          type: string
+        usage_counts:
+          $ref: '#/components/schemas/ToolCallCounts'
     SessionUsageAnalysis:
       type: object
       required:
@@ -309,30 +246,71 @@ components:
           type: integer
           format: int32
           minimum: 0
-    AgentParentCheckpoint:
+    AgentStatus:
+      type: string
+      enum:
+      - RUNNING
+      - COMPLETE
+      - BLOCKED
+      - FAILED
+    ToolCallCounts:
+      type: object
+      required:
+      - successful
+      - failed
+      - aborted
+      - total
+      properties:
+        aborted:
+          type: integer
+          format: int32
+          minimum: 0
+        failed:
+          type: integer
+          format: int32
+          minimum: 0
+        successful:
+          type: integer
+          format: int32
+          minimum: 0
+        total:
+          type: integer
+          format: int32
+          minimum: 0
+    AgentCheckpointListItem:
       type: object
       required:
       - id
+      - status
+      - execution_depth
+      - created_at
+      - updated_at
       properties:
+        created_at:
+          type: string
+          format: date-time
+        execution_depth:
+          type: integer
+          minimum: 0
         id:
           type: string
           format: uuid
-    AgentSessionVisibility:
-      type: string
-      enum:
-      - PRIVATE
-      - PUBLIC
-    AgentSessionOwner:
+        parent:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AgentParentCheckpoint'
+        status:
+          $ref: '#/components/schemas/AgentStatus'
+        updated_at:
+          type: string
+          format: date-time
+    ErrorResponse:
       type: object
       required:
-      - name
+      - error
       properties:
-        name:
-          type: string
-    AgentID:
-      type: string
-      enum:
-      - pablo:v1
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     AgentSession:
       type: object
       required:
@@ -371,13 +349,35 @@ components:
           format: date-time
         visibility:
           $ref: '#/components/schemas/AgentSessionVisibility'
-    ErrorResponse:
+    AgentParentCheckpoint:
       type: object
       required:
-      - error
+      - id
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+        id:
+          type: string
+          format: uuid
+    AgentSessionOwner:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    AgentID:
+      type: string
+      enum:
+      - pablo:v1
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
   securitySchemes:
     Api_Key:
       type: http
