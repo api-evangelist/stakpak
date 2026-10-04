@@ -63,6 +63,15 @@ paths:
       - Api Key: []
 components:
   schemas:
+    GetMyIntegrationsResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
     Integration:
       oneOf:
       - type: object
@@ -87,22 +96,6 @@ components:
             type: string
             enum:
             - SLACK
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    GetMyIntegrationsResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Integration'
     ErrorBody:
       type: object
       required:
@@ -113,6 +106,13 @@ components:
           type: string
         message:
           type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

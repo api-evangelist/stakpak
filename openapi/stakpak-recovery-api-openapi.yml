@@ -132,11 +132,35 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserRecoveryAction:
-      type: string
-      enum:
-      - approve
-      - reject
+    UpdateRecoveryActionPayload:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          $ref: '#/components/schemas/UserRecoveryAction'
+        selected_option_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+    GetRecoveriesResponse:
+      type: object
+      properties:
+        result:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SessionRecoveryResponse'
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
     SessionRecoveryResponse:
       type: object
       required:
@@ -175,33 +199,11 @@ components:
           $ref: '#/components/schemas/CheckpointRef'
         updated_at:
           type: string
-    UpdateRecoveryActionPayload:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          $ref: '#/components/schemas/UserRecoveryAction'
-        selected_option_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-    CheckpointRef:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+    UserRecoveryAction:
+      type: string
+      enum:
+      - approve
+      - reject
     SessionRef:
       type: object
       required:
@@ -217,23 +219,21 @@ components:
       - APPROVED
       - REJECTED
       - APPLIED
-    GetRecoveriesResponse:
-      type: object
-      properties:
-        result:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/SessionRecoveryResponse'
-    ErrorBody:
+    CheckpointRef:
       type: object
       required:
-      - key
-      - message
+      - id
       properties:
-        key:
+        id:
           type: string
-        message:
-          type: string
+          format: uuid
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

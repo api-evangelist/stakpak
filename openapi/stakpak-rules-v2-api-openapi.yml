@@ -218,98 +218,18 @@ components:
           type: string
         message:
           type: string
-    SearchRuleBooksResponse:
+    TransferOwnershipPayload:
       type: object
       required:
-      - results
+      - owner
       properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/RuleBook'
-    CreateRuleBookPayload:
-      type: object
-      required:
-      - uri
-      - description
-      - content
-      properties:
-        content:
+        owner:
           type: string
-        description:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        uri:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/RuleBookVisibility'
-    CreateRuleBookResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-    ListRuleBooksResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListRuleBook'
-    ListRuleBook:
-      type: object
-      required:
-      - id
-      - uri
-      - description
-      - visibility
-      - tags
-      properties:
-        created_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        description:
-          type: string
-        id:
-          type: string
-          format: uuid
-        tags:
-          type: array
-          items:
-            type: string
-        updated_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        uri:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/RuleBookVisibility'
-    CreateManyRuleBooksPayload:
-      type: object
-      required:
-      - books
-      properties:
-        books:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateRuleBookPayload'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+    RuleBookVisibility:
+      type: string
+      enum:
+      - PUBLIC
+      - PRIVATE
     RuleBook:
       type: object
       required:
@@ -345,13 +265,6 @@ components:
           type: string
         visibility:
           $ref: '#/components/schemas/RuleBookVisibility'
-    TransferOwnershipPayload:
-      type: object
-      required:
-      - owner
-      properties:
-        owner:
-          type: string
     CreateManyRuleBooksResponse:
       type: object
       required:
@@ -361,11 +274,98 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateRuleBookResponse'
-    RuleBookVisibility:
-      type: string
-      enum:
-      - PUBLIC
-      - PRIVATE
+    SearchRuleBooksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleBook'
+    CreateRuleBookResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+    CreateRuleBookPayload:
+      type: object
+      required:
+      - uri
+      - description
+      - content
+      properties:
+        content:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        uri:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/RuleBookVisibility'
+    CreateManyRuleBooksPayload:
+      type: object
+      required:
+      - books
+      properties:
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateRuleBookPayload'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    ListRuleBook:
+      type: object
+      required:
+      - id
+      - uri
+      - description
+      - visibility
+      - tags
+      properties:
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+          format: uuid
+        tags:
+          type: array
+          items:
+            type: string
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        uri:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/RuleBookVisibility'
+    ListRuleBooksResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListRuleBook'
   securitySchemes:
     Api_Key:
       type: http

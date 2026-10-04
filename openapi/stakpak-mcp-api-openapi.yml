@@ -68,13 +68,16 @@ components:
           type: string
         params: {}
       additionalProperties: false
-    ErrorResponse:
+    ErrorBody:
       type: object
       required:
-      - error
+      - key
+      - message
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+        key:
+          type: string
+        message:
+          type: string
     JsonRpcResponse:
       type: object
       required:
@@ -89,16 +92,13 @@ components:
         jsonrpc:
           type: string
         result: {}
-    ErrorBody:
+    ErrorResponse:
       type: object
       required:
-      - key
-      - message
+      - error
       properties:
-        key:
-          type: string
-        message:
-          type: string
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http

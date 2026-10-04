@@ -240,6 +240,40 @@ paths:
       - Api Key: []
 components:
   schemas:
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    Scope:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - USER
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - ORGANIZATION
     SearchKnowledgeResponse:
       type: object
       required:
@@ -249,6 +283,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KnowledgeFile'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
     KnowledgeFile:
       type: object
       required:
@@ -301,47 +342,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    Scope:
-      oneOf:
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - USER
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - ORGANIZATION
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
   securitySchemes:
     Api_Key:
       type: http

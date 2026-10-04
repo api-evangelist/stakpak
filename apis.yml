@@ -159,24 +159,6 @@ apis:
     url: conventions/stakpak-conventions.yml
   - type: DataModel
     url: data-model/stakpak-data-model.yml
-- aid: stakpak:stakpak-chat-api
-  name: StakPak Chat API
-  description: The Chat API from StakPak — 2 operation(s) for chat.
-  humanURL: https://apiv2.stakpak.dev/docs
-  baseURL: https://apiv2.stakpak.dev
-  tags:
-  - Chat
-  properties:
-  - type: OpenAPI
-    url: openapi/stakpak-chat-api-openapi.yml
-  - type: Authentication
-    url: authentication/stakpak-authentication.yml
-  - type: ErrorCatalog
-    url: errors/stakpak-problem-types.yml
-  - type: Conventions
-    url: conventions/stakpak-conventions.yml
-  - type: DataModel
-    url: data-model/stakpak-data-model.yml
 - aid: stakpak:stakpak-commands-api
   name: StakPak Commands API
   description: The Commands API from StakPak — 1 operation(s) for commands.
@@ -423,6 +405,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stakpak-upload-api-openapi.yml
+  - type: Authentication
+    url: authentication/stakpak-authentication.yml
+  - type: ErrorCatalog
+    url: errors/stakpak-problem-types.yml
+  - type: Conventions
+    url: conventions/stakpak-conventions.yml
+  - type: DataModel
+    url: data-model/stakpak-data-model.yml
+- aid: stakpak:stakpak-chat-completions-api
+  name: StakPak Chat Completions API
+  description: The Chat Completions API from StakPak — 2 operation(s) for chat completions.
+  humanURL: https://apiv2.stakpak.dev/docs
+  baseURL: https://apiv2.stakpak.dev
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/stakpak-chat-completions-api-openapi.yml
   - type: Authentication
     url: authentication/stakpak-authentication.yml
   - type: ErrorCatalog

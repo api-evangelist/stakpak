@@ -206,6 +206,43 @@ paths:
       - Api Key: []
 components:
   schemas:
+    ErrorBody:
+      type: object
+      required:
+      - key
+      - message
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+    MemberOrganization:
+      type: object
+      required:
+      - organization
+      - role
+      - status
+      properties:
+        organization:
+          $ref: '#/components/schemas/PublicBaseOrganization'
+        role:
+          $ref: '#/components/schemas/OrganizationRole'
+        status:
+          $ref: '#/components/schemas/OrganizationMemberStatus'
+    GetInvitationsResponse:
+      type: object
+      required:
+      - flows
+      - organizations
+      properties:
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicFlow'
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicBaseOrganization'
     GetMyDetailsResponse:
       type: object
       required:
@@ -259,6 +296,181 @@ components:
           format: date-time
         username:
           type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+    GetMyOrganizationsResponse:
+      type: object
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberOrganization'
+    PatchMyDetailsPayload:
+      type: object
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        job_role:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        pp_consent:
+          type:
+          - boolean
+          - 'null'
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+        tos_consent:
+          type:
+          - boolean
+          - 'null'
+    OrganizationRole:
+      type: string
+      enum:
+      - OWNER
+      - ADMIN
+      - MEMBER
+      - VIEWER
+    Scope:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - USER
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - ORGANIZATION
+    PublicUser:
+      type: object
+      required:
+      - name
+      - first_name
+      - last_name
+      - following
+      properties:
+        bio:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type: string
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        last_name:
+          type: string
+        name:
+          type: string
+        profile_img_url:
+          type:
+          - string
+          - 'null'
+        readme:
+          type:
+          - string
+          - 'null'
+    PublicBaseOrganization:
+      type: object
+      required:
+      - name
+      - display_name
+      properties:
+        display_name:
+          type: string
+        name:
+          type: string
+    OrganizationMemberStatus:
+      type: string
+      enum:
+      - PENDING_INVITE
+      - ACTIVE
+      - DISABLED
+    PostCreateApiKeyPayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        scope:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Scope'
+    Account:
+      oneOf:
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - User
+      - type: object
+        required:
+        - name
+        - type
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+            enum:
+            - Organization
     PublicApiKey:
       type: object
       required:
@@ -283,20 +495,13 @@ components:
           type: string
         scope:
           $ref: '#/components/schemas/Scope'
-    GetInvitationsResponse:
+    PostCreateApiKeyResponse:
       type: object
       required:
-      - flows
-      - organizations
+      - key
       properties:
-        flows:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicFlow'
-        organizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicBaseOrganization'
+        key:
+          type: string
     GetApiKeysResponse:
       type: object
       required:
@@ -306,6 +511,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublicApiKey'
+    PublicFlow:
+      type: object
+      required:
+      - name
+      - owner_name
+      properties:
+        name:
+          type: string
+        owner_name:
+          type: string
     User:
       type: object
       required:
@@ -377,221 +592,6 @@ components:
           - string
           - 'null'
           format: date-time
-    OrganizationRole:
-      type: string
-      enum:
-      - OWNER
-      - ADMIN
-      - MEMBER
-      - VIEWER
-    PostCreateApiKeyPayload:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        scope:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Scope'
-    PatchMyDetailsPayload:
-      type: object
-      properties:
-        bio:
-          type:
-          - string
-          - 'null'
-        company:
-          type:
-          - string
-          - 'null'
-        first_name:
-          type:
-          - string
-          - 'null'
-        job_role:
-          type:
-          - string
-          - 'null'
-        last_name:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        pp_consent:
-          type:
-          - boolean
-          - 'null'
-        profile_img_url:
-          type:
-          - string
-          - 'null'
-        readme:
-          type:
-          - string
-          - 'null'
-        tos_consent:
-          type:
-          - boolean
-          - 'null'
-    Scope:
-      oneOf:
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - USER
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - ORGANIZATION
-    ErrorBody:
-      type: object
-      required:
-      - key
-      - message
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-    OrganizationMemberStatus:
-      type: string
-      enum:
-      - PENDING_INVITE
-      - ACTIVE
-      - DISABLED
-    MemberOrganization:
-      type: object
-      required:
-      - organization
-      - role
-      - status
-      properties:
-        organization:
-          $ref: '#/components/schemas/PublicBaseOrganization'
-        role:
-          $ref: '#/components/schemas/OrganizationRole'
-        status:
-          $ref: '#/components/schemas/OrganizationMemberStatus'
-    PublicFlow:
-      type: object
-      required:
-      - name
-      - owner_name
-      properties:
-        name:
-          type: string
-        owner_name:
-          type: string
-    GetMyOrganizationsResponse:
-      type: object
-      required:
-      - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MemberOrganization'
-    PublicUser:
-      type: object
-      required:
-      - name
-      - first_name
-      - last_name
-      - following
-      properties:
-        bio:
-          type:
-          - string
-          - 'null'
-        first_name:
-          type: string
-        followers:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        following:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        last_name:
-          type: string
-        name:
-          type: string
-        profile_img_url:
-          type:
-          - string
-          - 'null'
-        readme:
-          type:
-          - string
-          - 'null'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
-    PublicBaseOrganization:
-      type: object
-      required:
-      - name
-      - display_name
-      properties:
-        display_name:
-          type: string
-        name:
-          type: string
-    PostCreateApiKeyResponse:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-    Account:
-      oneOf:
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - User
-      - type: object
-        required:
-        - name
-        - type
-        properties:
-          name:
-            type: string
-          type:
-            type: string
-            enum:
-            - Organization
   securitySchemes:
     Api_Key:
       type: http

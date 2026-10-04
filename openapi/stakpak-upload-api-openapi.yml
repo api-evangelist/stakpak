@@ -43,13 +43,6 @@ paths:
       - Api Key: []
 components:
   schemas:
-    UploadPayload:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
     UploadResponse:
       type: object
       required:
@@ -60,13 +53,13 @@ components:
           type: string
         upload_url:
           type: string
-    ErrorResponse:
+    UploadPayload:
       type: object
       required:
-      - error
+      - key
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorBody'
+        key:
+          type: string
     ErrorBody:
       type: object
       required:
@@ -77,6 +70,13 @@ components:
           type: string
         message:
           type: string
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
   securitySchemes:
     Api_Key:
       type: http
