@@ -432,6 +432,9 @@ apis:
   - type: DataModel
     url: data-model/stakpak-data-model.yml
 common:
+- type: CapabilityMap
+  url: capabilities/stakpak-capability-edges.yml
+  name: StakPak Business Capability Map
 - type: IssueTracker
   url: https://github.com/stakpak/agent/issues
 - type: Releases
