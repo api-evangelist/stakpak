@@ -67,7 +67,7 @@ paths:
     get:
       tags:
       - Knowledge
-      summary: Fetch the raw bytes of a knowledge file.
+      summary: Fetch the raw bytes of a knowledge file
       operationId: read_handler
       parameters:
       - name: path
@@ -140,7 +140,7 @@ paths:
     post:
       tags:
       - Knowledge
-      summary: Create a new knowledge file.
+      summary: Create a new knowledge file
       operationId: create_handler
       parameters:
       - name: path
@@ -212,7 +212,7 @@ paths:
     head:
       tags:
       - Knowledge
-      summary: Cheap existence check.
+      summary: Cheap existence check
       operationId: head_handler
       parameters:
       - name: path
